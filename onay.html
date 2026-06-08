@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Eonarya — Yaşam Durumu Teyidi</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem}
+    .sayfa{width:100%;max-width:460px;display:flex;flex-direction:column;gap:1.5rem}
+    .kart{background:#fff;border-radius:12px;padding:2rem;box-shadow:0 2px 12px rgba(0,0,0,.08)}
+    .marka{font-size:.78rem;font-weight:700;color:#bbb;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.75rem}
+    h2{font-size:1.1rem;font-weight:600;margin-bottom:.85rem;color:#1a1a1a}
+    p{color:#444;line-height:1.6;margin-bottom:.85rem}
+    .bilgi-blok{background:#fafafa;border-left:3px solid #e0e0e0;padding:.75rem 1rem;border-radius:0 6px 6px 0;font-size:.88rem;color:#555;margin-bottom:1rem}
+    .not{font-size:.83rem;color:#888}
+    .butonlar{display:flex;flex-direction:column;gap:.65rem;margin-top:1.25rem}
+    .btn{padding:.85rem 1.5rem;border:none;border-radius:8px;font-size:.95rem;font-weight:500;cursor:pointer;transition:opacity .15s;width:100%;text-align:center}
+    .btn-onay{background:#c0392b;color:#fff}
+    .btn-red{background:#ebebeb;color:#444}
+    .btn:active{opacity:.75}
+    .btn:disabled{opacity:.5;cursor:default}
+    .yanlis-alici{font-size:.78rem;color:#bbb;margin-top:1.5rem;border-top:1px solid #f0f0f0;padding-top:1rem;line-height:1.5}
+    .yanlis-alici a{color:#bbb;text-decoration:underline}
+    .hata-mesaj{color:#c0392b;font-weight:500}
+    .basarili{color:#27ae60;font-weight:500}
+    .footer{text-align:center;font-size:.78rem;color:#ccc;line-height:2}
+    .footer a{color:#bbb;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="sayfa">
+    <div class="kart">
+      <div class="marka">Eonarya</div>
+
+      <div id="yukleniyor">
+        <p>Yükleniyor...</p>
+      </div>
+
+      <div id="e1" style="display:none">
+        <h2>Yaşam Durumu Teyidi</h2>
+        <p class="bilgi-blok">Tanıdığınız bir kişi, Hayattayım protokolü kapsamında sizi güvenilir doğrulayıcı olarak belirledi. Bu bildirim yalnızca size özeldir ve başkasıyla paylaşılmamalıdır.</p>
+        <p>Hayattayım protokolü onay aşamasına geçmiştir. Bu protokolün koşullarını teyit ediyor musunuz?</p>
+        <p class="not">Emin değilseniz <strong>Doğrulayamıyorum</strong> seçeneğini kullanın. Yanıtınız kaydedildikten sonra değiştirilemez.</p>
+        <div class="butonlar">
+          <button class="btn btn-onay" onclick="adim2()">Evet, teyit ediyorum</button>
+          <button class="btn btn-red" onclick="gonder('not_approved')">Doğrulayamıyorum</button>
+        </div>
+        <p class="yanlis-alici">Bu bildirimin size yanlışlıkla ulaştığını düşünüyorsanız herhangi bir işlem yapmayın ve <a href="mailto:destek@eonarya.com">destek@eonarya.com</a> adresiyle iletişime geçin.</p>
+      </div>
+
+      <div id="e2" style="display:none">
+        <h2>Yanıtınızı Onaylayın</h2>
+        <p>Bu onay kaydedildikten sonra geri alınamaz. Devam etmek istiyor musunuz?</p>
+        <div class="butonlar">
+          <button class="btn btn-onay" onclick="gonder('approved')">Evet, kesin onaylıyorum</button>
+          <button class="btn btn-red" onclick="adim1()">Geri dön</button>
+        </div>
+      </div>
+
+      <div id="sonuc" style="display:none">
+        <p id="sonucMesaj"></p>
+      </div>
+
+      <div id="hata" style="display:none">
+        <p id="hataMesaj" class="hata-mesaj"></p>
+        <p class="yanlis-alici">Sorularınız için <a href="mailto:destek@eonarya.com">destek@eonarya.com</a> adresiyle iletişime geçin.</p>
+      </div>
+    </div>
+
+    <div class="footer">
+      <a href="https://eonarya.com">eonarya.com</a> · destek@eonarya.com<br>
+      © <span id="yil"></span> Eonarya. Tüm hakları saklıdır.
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('yil').textContent = new Date().getFullYear();
+
+    const EDGE = 'https://jvakvxaadntxzrbxrzcx.supabase.co/functions/v1/approval-response';
+    const token = new URLSearchParams(window.location.search).get('token') || '';
+
+    const HATALAR = {
+      token_eksik:         'Link eksik ya da hatalı. Lütfen orijinal linki kullanın.',
+      gecersiz_token:      'Bu link geçersiz.',
+      kullanilmis_link:    'Bu link daha önce kullanılmıştır. Yanıtınız zaten kaydedilmiş.',
+      suresi_dolmus:       'Bu linkin süresi dolmuştur.',
+      protokol_bulunamadi: 'Protokol bulunamadı.',
+      yanlis_adim:         'Bu link artık geçerli değil.',
+      tur_uyusmuyor:       'Bu link güncel onay turuna ait değil.',
+      baglanti_hatasi:     'Bağlantı hatası. Lütfen tekrar deneyin.',
+    };
+
+    function goster(id) {
+      ['yukleniyor','e1','e2','sonuc','hata'].forEach(x => {
+        document.getElementById(x).style.display = x === id ? 'block' : 'none';
+      });
+    }
+
+    async function init() {
+      if (!token) { gosterHata('token_eksik'); return; }
+      try {
+        const res = await fetch(EDGE + '?token=' + encodeURIComponent(token));
+        const d   = await res.json();
+        d.ok ? goster('e1') : gosterHata(d.hata);
+      } catch {
+        gosterHata('baglanti_hatasi');
+      }
+    }
+
+    function gosterHata(hata) {
+      document.getElementById('hataMesaj').textContent = HATALAR[hata] || 'Bir hata oluştu.';
+      goster('hata');
+    }
+
+    function adim2() { goster('e2'); }
+    function adim1() { goster('e1'); }
+
+    async function gonder(response) {
+      const btns = document.querySelectorAll('.btn');
+      btns.forEach(b => b.disabled = true);
+      try {
+        const res = await fetch(EDGE, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ token, response }),
+        });
+        const d = await res.json();
+        const el = document.getElementById('sonucMesaj');
+        goster('sonuc');
+        if (d.ok) {
+          el.className   = 'basarili';
+          el.textContent = response === 'approved'
+            ? 'Yanıtınız alındı. Teşekkür ederiz. Katkınız bu sürecin güvenilir şekilde yürütülmesini sağlamaktadır.'
+            : 'Yanıtınız alındı. Herhangi bir işlem yapmanız gerekmiyor.';
+        } else if (d.hata === 'zaten_oy_verdi') {
+          el.textContent = 'Bu tur için yanıtınız zaten kaydedilmiş.';
+        } else {
+          el.className   = 'hata-mesaj';
+          el.textContent = HATALAR[d.hata] || 'Bir hata oluştu. Lütfen tekrar deneyin.';
+          btns.forEach(b => b.disabled = false);
+        }
+      } catch {
+        const el = document.getElementById('sonucMesaj');
+        goster('sonuc');
+        el.className   = 'hata-mesaj';
+        el.textContent = 'Bağlantı hatası. Lütfen tekrar deneyin.';
+        btns.forEach(b => b.disabled = false);
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
