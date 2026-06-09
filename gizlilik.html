@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gizlilik Politikası — Eonarya</title>
+  <meta name="description" content="Eonarya gizlilik politikası — kişisel verilerinizin nasıl işlendiği, saklandığı ve korunduğu hakkında bilgi.">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    a{text-decoration:none;color:inherit}
+
+    :root{
+      --lav-300:#B9A4F2;
+      --bg:#FBFAFE;
+      --surface:#FFFFFF;
+      --ink:#16121F;
+      --ink-soft:#534E61;
+      --ink-faint:#938DA6;
+      --line:#ECE6F7;
+      --d-bg:#0A0713;
+      --d-ink:#F4EFFF;
+      --d-ink-soft:#BCB1D8;
+      --d-ink-faint:#8479A6;
+      --d-line:rgba(180,150,255,.16);
+      --accent:#6D4CFF;
+      --font-head:'Manrope';
+      --font-body:'Manrope',-apple-system,system-ui,sans-serif;
+      --wrap:1180px;
+    }
+
+    body{font-family:var(--font-body);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+    .wrap{max-width:var(--wrap);margin:0 auto;padding:0 40px}
+
+    /* Nav */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(251,250,254,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+    .nav-inner{max-width:var(--wrap);margin:0 auto;padding:18px 40px;display:flex;align-items:center;gap:32px}
+    .brand{display:flex;align-items:center;gap:11px}
+    .brand-word{font-family:'Jost',sans-serif;font-weight:400;letter-spacing:.42em;font-size:16px;text-indent:.42em;color:var(--ink)}
+    .nav-links{display:flex;gap:30px;margin-left:auto}
+    .nav-links a{font-size:14.5px;font-weight:500;color:var(--ink-soft);transition:color .25s}
+    .nav-links a:hover{color:var(--ink)}
+
+    /* Hero */
+    .page-hero{padding:130px 40px 56px;background:var(--d-bg);text-align:center}
+    .page-hero-label{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--lav-300);margin-bottom:14px}
+    .page-hero h1{font-family:var(--font-head),sans-serif;font-size:clamp(26px,4vw,40px);font-weight:700;color:var(--d-ink);letter-spacing:-.02em;line-height:1.2}
+    .page-hero-meta{margin-top:14px;font-size:13.5px;color:var(--d-ink-faint)}
+
+    /* Content */
+    .content{max-width:720px;margin:0 auto;padding:64px 40px 100px}
+    .doc-section{margin-top:44px}
+    .doc-section:first-child{margin-top:0}
+    .doc-section-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:18px}
+    .doc-body{font-size:15px;line-height:1.8;color:var(--ink-soft);margin-bottom:10px}
+    .doc-lead{font-size:15px;line-height:1.8;color:var(--ink-soft);margin-bottom:6px}
+    .doc-bullets{list-style:none;padding:0;margin-bottom:10px}
+    .doc-bullets li{display:flex;gap:12px;font-size:15px;line-height:1.8;color:var(--ink-soft);margin-bottom:4px}
+    .doc-bullets li::before{content:'';display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--ink-faint);margin-top:13px;flex-shrink:0}
+
+    /* Footer */
+    .footer{background:#070411;color:var(--d-ink);padding:80px 0 40px}
+    .footer-inner{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap;padding-bottom:48px;border-bottom:1px solid var(--d-line)}
+    .footer-brand .brand-word{color:#fff;font-size:22px;letter-spacing:.46em;text-indent:.46em}
+    .footer-tagline{margin-top:16px;font-family:'Jost',sans-serif;font-weight:300;font-size:15px;letter-spacing:.06em;color:var(--lav-300)}
+    .footer-links{display:flex;flex-wrap:wrap;gap:14px 34px}
+    .footer-links a{font-size:14.5px;color:var(--d-ink-soft);transition:color .25s}
+    .footer-links a:hover{color:#fff}
+    .footer-base{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding-top:30px}
+    .footer-mail{font-size:14.5px;color:var(--d-ink-soft);transition:color .25s}
+    .footer-mail:hover{color:var(--lav-300)}
+    .footer-copy{font-size:13.5px;color:var(--d-ink-faint)}
+
+    @media(max-width:700px){
+      .nav-inner{padding:16px 20px}
+      .nav-links{display:none}
+      .page-hero{padding:120px 20px 48px}
+      .content{padding:48px 20px 80px}
+      .wrap{padding:0 20px}
+      .footer-inner{flex-direction:column}
+      .footer-base{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/" aria-label="Eonarya ana sayfa">
+      <svg viewBox="0 0 40 40" width="26" height="26" aria-hidden="true">
+        <circle cx="20" cy="20" r="14" fill="none" stroke="url(#navRing)" stroke-width="2" stroke-linecap="round" stroke-dasharray="78 10" transform="rotate(-12 20 20)"/>
+        <circle cx="33.2" cy="20" r="3.1" fill="var(--accent)"/>
+        <defs>
+          <linearGradient id="navRing" x1="20" y1="6" x2="20" y2="34">
+            <stop offset="0" stop-color="#EFE7FF"/>
+            <stop offset="0.5" stop-color="#9C82F0"/>
+            <stop offset="1" stop-color="#4A28DF"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <span class="brand-word">EONARYA</span>
+    </a>
+    <nav class="nav-links" aria-label="Ana bölümler">
+      <a href="/#nedir">Eonarya Nedir</a>
+      <a href="/#nasil">Nasıl Çalışır</a>
+      <a href="/#guven">Güven</a>
+      <a href="/#sss">Sıkça Sorulanlar</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <p class="page-hero-label">Yasal</p>
+  <h1>Gizlilik Politikası</h1>
+  <p class="page-hero-meta">Son güncelleme: Haziran 2026</p>
+</section>
+
+<main class="content">
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">1. Politikanın Amacı ve Kapsamı</h2>
+    <p class="doc-body">Bu Gizlilik Politikası, mobil uygulamayı kullanan kullanıcıların kişisel verilerinin nasıl işlendiği, saklandığı ve korunduğu konusunda kullanıcıları bilgilendirmek amacıyla hazırlanmıştır.</p>
+    <p class="doc-body">Hizmet Sağlayıcı, kullanıcıların kişisel verilerinin gizliliğine önem verir ve kullanıcılar tarafından paylaşılan bilgilerin gizli olduğunu kabul eder.</p>
+    <p class="doc-body">Uygulama yalnızca kullanıcıların belirledikleri kişilere mesaj iletmelerine yardımcı olan bir dijital ileti aracıdır.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">2. Hizmetin Niteliği</h2>
+    <p class="doc-body">Uygulama kullanıcıların mesajlarını saklamalarına ve belirlenen koşullar gerçekleştiğinde iletilmesine yardımcı olan deneysel nitelikte bir dijital araçtır.</p>
+    <p class="doc-lead">Uygulama:</p>
+    <ul class="doc-bullets">
+      <li>Resmi vasiyetname oluşturma hizmeti sunmaz</li>
+      <li>Hukuki danışmanlık sağlamaz</li>
+      <li>Resmi ölüm doğrulaması yapmaz</li>
+      <li>Resmi bildirim veya hukuki belge hizmeti sunmaz</li>
+    </ul>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">3. Toplanan Veriler</h2>
+    <p class="doc-body">Uygulamanın kullanımı sırasında aşağıdaki veriler kullanıcı tarafından sağlanabilir:</p>
+    <ul class="doc-bullets">
+      <li>Ad ve soyad</li>
+      <li>E-posta adresleri</li>
+      <li>Telefon numaraları</li>
+      <li>Kullanıcı tarafından oluşturulan mesaj içerikleri</li>
+      <li>Kullanıcı tarafından eklenen kişi bilgileri</li>
+      <li>Uygulama ayarları</li>
+      <li>Cihaz ve uygulama kullanım bilgileri</li>
+    </ul>
+    <p class="doc-body">Bu veriler yalnızca uygulamanın çalışmasını sağlamak amacıyla işlenir.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">4. Mesaj İçeriklerinin Gizliliği</h2>
+    <p class="doc-body">Kullanıcı tarafından oluşturulan mesaj içerikleri kişisel ve özel nitelikte olabilir.</p>
+    <p class="doc-lead">Hizmet Sağlayıcı:</p>
+    <ul class="doc-bullets">
+      <li>Mesaj içeriklerini incelemez</li>
+      <li>Mesaj içeriklerini kontrol etmez</li>
+      <li>Mesaj içeriklerinin doğruluğunu garanti etmez</li>
+    </ul>
+    <p class="doc-body">Mesaj içerikleri mümkün olan durumlarda şifrelenmiş veya erişimi kısıtlı şekilde saklanır.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">5. Verilerin İşlenme Amaçları</h2>
+    <p class="doc-body">Toplanan veriler aşağıdaki amaçlarla kullanılabilir:</p>
+    <ul class="doc-bullets">
+      <li>Uygulamanın çalışmasını sağlamak</li>
+      <li>Kullanıcı tarafından oluşturulan mesajları saklamak</li>
+      <li>Kullanıcı tarafından belirlenen kişilere mesaj gönderimini gerçekleştirmek</li>
+      <li>Uygulama güvenliğini sağlamak</li>
+      <li>Teknik sorunları tespit etmek</li>
+      <li>Kullanıcı taleplerine cevap vermek</li>
+    </ul>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">6. Mesaj Gönderim Sistemi</h2>
+    <p class="doc-body">Uygulama kullanıcı tarafından belirlenen koşullar gerçekleştiğinde mesaj gönderimini tetikleyebilir.</p>
+    <p class="doc-lead">Hizmet Sağlayıcı:</p>
+    <ul class="doc-bullets">
+      <li>Kullanıcının hayatta olup olmadığını doğrulamaz</li>
+      <li>Resmi ölüm kayıtlarını kontrol etmez</li>
+      <li>Kullanıcı tarafından belirlenen kişilerin verdiği bilgilerin doğruluğunu garanti etmez</li>
+    </ul>
+    <p class="doc-body">Mesajların belirli bir zamanda gönderileceği veya kesin olarak alıcılara ulaşacağı garanti edilmez.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">7. Kullanıcı Tarafından Eklenen Kişiler</h2>
+    <p class="doc-body">Kullanıcı uygulamaya üçüncü kişilere ait iletişim bilgileri ekleyebilir. Bu bilgiler tamamen kullanıcı tarafından sağlanır.</p>
+    <p class="doc-lead">Hizmet Sağlayıcı:</p>
+    <ul class="doc-bullets">
+      <li>Eklenen kişilerin kimliğini doğrulamaz</li>
+      <li>İletişim bilgilerinin doğruluğunu garanti etmez</li>
+      <li>Kullanıcı tarafından girilen bilgilerin doğruluğundan sorumlu değildir</li>
+    </ul>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">8. Veri Güvenliği</h2>
+    <p class="doc-body">Hizmet Sağlayıcı kişisel verilerin korunması için makul teknik ve idari önlemler almaya çalışır. Ancak aşağıdaki riskler tamamen ortadan kaldırılamaz:</p>
+    <ul class="doc-bullets">
+      <li>Teknik arızalar</li>
+      <li>Yazılım hataları</li>
+      <li>Veri kaybı</li>
+      <li>Altyapı kesintileri</li>
+      <li>Üçüncü taraf servis kesintileri</li>
+      <li>Siber saldırılar</li>
+    </ul>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">9. Veri Saklama Süresi</h2>
+    <p class="doc-body">Kişisel veriler yalnızca hizmetin sağlanması için gerekli süre boyunca saklanır.</p>
+    <p class="doc-body">Aşağıdaki durumlarda veriler silinebilir veya anonim hale getirilebilir:</p>
+    <ul class="doc-bullets">
+      <li>Kullanıcı hesabının silinmesi</li>
+      <li>Veri işleme amacının ortadan kalkması</li>
+      <li>Yasal saklama sürelerinin sona ermesi</li>
+    </ul>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">10. Veri Paylaşımı</h2>
+    <p class="doc-body">Kişisel veriler aşağıdaki durumlar dışında üçüncü kişilerle paylaşılmaz:</p>
+    <ul class="doc-bullets">
+      <li>Yasal yükümlülüklerin yerine getirilmesi</li>
+      <li>Yetkili kamu kurumlarının talebi</li>
+      <li>Teknik hizmet sağlayıcılar aracılığıyla hizmetin yürütülmesi</li>
+    </ul>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">11. Üçüncü Taraf Hizmetler</h2>
+    <p class="doc-body">Uygulama bazı teknik hizmetleri sağlamak amacıyla üçüncü taraf servis sağlayıcıları kullanabilir:</p>
+    <ul class="doc-bullets">
+      <li>E-posta gönderim hizmetleri</li>
+      <li>SMS veya mesaj servisleri</li>
+      <li>Altyapı sağlayıcıları</li>
+    </ul>
+    <p class="doc-body">Bu servislerin veri işleme süreçleri kendi gizlilik politikalarına tabidir.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">12. Duygusal ve Sosyal Etki Sorumluluğu</h2>
+    <p class="doc-body">Uygulama aracılığıyla gönderilen mesajlar alıcı kişiler üzerinde duygusal veya sosyal etkiler oluşturabilir. Bu etkiler tamamen mesajı oluşturan kullanıcıya bağlıdır. Hizmet Sağlayıcı bu etkilerden sorumlu tutulamaz.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">13. Kullanıcı Hakları</h2>
+    <p class="doc-body">Kullanıcılar aşağıdaki haklara sahiptir:</p>
+    <ul class="doc-bullets">
+      <li>Kişisel verilerinin işlenip işlenmediğini öğrenme</li>
+      <li>Verilerine erişim talep etme</li>
+      <li>Verilerinin düzeltilmesini isteme</li>
+      <li>Verilerinin silinmesini talep etme</li>
+      <li>Veri işleme faaliyetlerine itiraz etme</li>
+    </ul>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">14. Politika Değişiklikleri</h2>
+    <p class="doc-body">Hizmet Sağlayıcı bu Gizlilik Politikası'nda değişiklik yapma hakkını saklı tutar. Değişiklikler uygulama içerisinde yayımlandığı tarihten itibaren geçerli olur.</p>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <span class="brand-word">EONARYA</span>
+      <p class="footer-tagline">Zaman geçer. İz kalır.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="/gizlilik.html">Gizlilik Politikası</a>
+      <a href="/kullanim-sartlari.html">Kullanım Şartları</a>
+      <a href="/kvkk.html">KVKK</a>
+      <a href="mailto:destek@eonarya.com">İletişim</a>
+    </nav>
+  </div>
+  <div class="wrap footer-base">
+    <a href="mailto:destek@eonarya.com" class="footer-mail">destek@eonarya.com</a>
+    <span class="footer-copy">© Eonarya</span>
+  </div>
+</footer>
+
+</body>
+</html>
