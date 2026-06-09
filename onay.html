@@ -4,57 +4,254 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Eonarya — Yaşam Durumu Teyidi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f5f5;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem}
-    .sayfa{width:100%;max-width:460px;display:flex;flex-direction:column;gap:1.5rem}
-    .kart{background:#fff;border-radius:12px;padding:2rem;box-shadow:0 2px 12px rgba(0,0,0,.08)}
-    .marka{font-size:.78rem;font-weight:700;color:#bbb;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.75rem}
-    h2{font-size:1.1rem;font-weight:600;margin-bottom:.85rem;color:#1a1a1a}
-    p{color:#444;line-height:1.6;margin-bottom:.85rem}
-    .bilgi-blok{background:#fafafa;border-left:3px solid #e0e0e0;padding:.75rem 1rem;border-radius:0 6px 6px 0;font-size:.88rem;color:#555;margin-bottom:1rem}
-    .not{font-size:.83rem;color:#888}
-    .butonlar{display:flex;flex-direction:column;gap:.65rem;margin-top:1.25rem}
-    .btn{padding:.85rem 1.5rem;border:none;border-radius:8px;font-size:.95rem;font-weight:500;cursor:pointer;transition:opacity .15s;width:100%;text-align:center}
-    .btn-onay{background:#c0392b;color:#fff}
-    .btn-red{background:#ebebeb;color:#444}
-    .btn:active{opacity:.75}
-    .btn:disabled{opacity:.5;cursor:default}
-    .yanlis-alici{font-size:.78rem;color:#bbb;margin-top:1.5rem;border-top:1px solid #f0f0f0;padding-top:1rem;line-height:1.5}
-    .yanlis-alici a{color:#bbb;text-decoration:underline}
-    .hata-mesaj{color:#c0392b;font-weight:500}
-    .basarili{color:#27ae60;font-weight:500}
-    .footer{text-align:center;font-size:.78rem;color:#ccc;line-height:2}
-    .footer a{color:#bbb;text-decoration:none}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    a{text-decoration:none;color:inherit}
+
+    :root{
+      --lav-300:#B9A4F2;
+      --lav-100:#EFE7FF;
+      --bg:#FBFAFE;
+      --bg-soft:#F4F1FC;
+      --surface:#FFFFFF;
+      --ink:#16121F;
+      --ink-soft:#534E61;
+      --ink-faint:#938DA6;
+      --line:#ECE6F7;
+      --line-strong:#E0D8F2;
+      --d-bg:#0A0713;
+      --d-ink:#F4EFFF;
+      --d-ink-soft:#BCB1D8;
+      --d-ink-faint:#8479A6;
+      --d-line:rgba(180,150,255,.16);
+      --accent:#6D4CFF;
+      --accent-soft:#8E72F2;
+      --font-body:'Manrope',-apple-system,system-ui,sans-serif;
+      --wrap:1180px;
+    }
+
+    html,body{height:100%}
+    body{
+      font-family:var(--font-body);
+      background:var(--bg);
+      color:var(--ink);
+      -webkit-font-smoothing:antialiased;
+      display:flex;
+      flex-direction:column;
+      min-height:100vh;
+    }
+
+    /* Nav */
+    .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(251,250,254,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+    .nav-inner{max-width:var(--wrap);margin:0 auto;padding:18px 40px;display:flex;align-items:center}
+    .brand{display:flex;align-items:center;gap:11px}
+    .brand-word{font-family:'Jost',sans-serif;font-weight:400;letter-spacing:.42em;font-size:16px;text-indent:.42em;color:var(--ink)}
+
+    /* Main */
+    .main{
+      flex:1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:100px 20px 60px;
+    }
+
+    .kart-wrap{width:100%;max-width:480px;display:flex;flex-direction:column;gap:0}
+
+    /* Card */
+    .kart{
+      background:var(--surface);
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:36px 32px;
+      box-shadow:0 4px 24px rgba(109,76,255,.06);
+    }
+
+    .kart-logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:28px;
+      padding-bottom:22px;
+      border-bottom:1px solid var(--line);
+    }
+
+    /* Durum paneli */
+    .yukleniyor-ic{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--ink-faint);
+      font-size:14px;
+    }
+    .dot-spin{
+      width:8px;height:8px;border-radius:50%;
+      background:var(--accent);
+      animation:pulse 1.2s ease-in-out infinite;
+    }
+    @keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+    /* Sections */
+    h2{font-size:17px;font-weight:700;color:var(--ink);margin-bottom:14px;letter-spacing:-.01em}
+
+    .bilgi-blok{
+      background:var(--bg-soft);
+      border-left:3px solid var(--line-strong);
+      border-radius:0 8px 8px 0;
+      padding:12px 16px;
+      font-size:13.5px;
+      color:var(--ink-soft);
+      line-height:1.65;
+      margin-bottom:14px;
+    }
+
+    .aciklama{font-size:14.5px;color:var(--ink-soft);line-height:1.7;margin-bottom:12px}
+
+    .not{
+      font-size:13px;
+      color:var(--ink-faint);
+      line-height:1.6;
+      margin-bottom:0;
+    }
+    .not strong{color:var(--ink-soft);font-weight:600}
+
+    /* Buttons */
+    .butonlar{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+
+    .btn{
+      padding:13px 20px;
+      border:none;
+      border-radius:10px;
+      font-family:var(--font-body);
+      font-size:14.5px;
+      font-weight:600;
+      cursor:pointer;
+      transition:opacity .15s,transform .1s;
+      width:100%;
+      text-align:center;
+    }
+    .btn:active{transform:scale(.98)}
+    .btn:disabled{opacity:.45;cursor:default;transform:none}
+
+    .btn-onay{background:var(--accent);color:#fff}
+    .btn-onay:hover:not(:disabled){opacity:.88}
+
+    .btn-ikincil{
+      background:transparent;
+      color:var(--ink-soft);
+      border:1px solid var(--line-strong);
+    }
+    .btn-ikincil:hover:not(:disabled){background:var(--bg-soft)}
+
+    /* Yanlış alıcı */
+    .yanlis-alici{
+      font-size:12.5px;
+      color:var(--ink-faint);
+      margin-top:20px;
+      padding-top:16px;
+      border-top:1px solid var(--line);
+      line-height:1.6;
+    }
+    .yanlis-alici a{color:var(--accent-soft)}
+    .yanlis-alici a:hover{color:var(--accent)}
+
+    /* Sonuç mesajları */
+    .basarili{
+      display:flex;flex-direction:column;gap:8px;
+      font-size:15px;line-height:1.7;color:var(--ink-soft);
+    }
+    .basarili-baslik{font-size:17px;font-weight:700;color:var(--ink);letter-spacing:-.01em}
+
+    .hata-blok{display:flex;flex-direction:column;gap:8px}
+    .hata-mesaj{font-size:15px;font-weight:600;color:#C0392B;line-height:1.6}
+
+    /* Footer */
+    .footer{background:#070411;color:var(--d-ink);padding:40px 0}
+    .footer-inner{
+      max-width:var(--wrap);margin:0 auto;padding:0 40px;
+      display:flex;justify-content:space-between;align-items:center;
+      flex-wrap:wrap;gap:16px;
+    }
+    .footer-brand-word{font-family:'Jost',sans-serif;font-weight:400;letter-spacing:.42em;font-size:14px;text-indent:.42em;color:var(--d-ink-soft)}
+    .footer-links{display:flex;gap:24px;flex-wrap:wrap}
+    .footer-links a{font-size:13.5px;color:var(--d-ink-faint);transition:color .2s}
+    .footer-links a:hover{color:var(--d-ink-soft)}
+    .footer-copy{font-size:12.5px;color:var(--d-ink-faint)}
+
+    @media(max-width:600px){
+      .nav-inner{padding:16px 20px}
+      .main{padding:90px 16px 48px}
+      .kart{padding:28px 22px}
+      .footer-inner{padding:0 20px;flex-direction:column;align-items:flex-start;gap:20px}
+    }
   </style>
 </head>
 <body>
-  <div class="sayfa">
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/" aria-label="Eonarya ana sayfa">
+      <svg viewBox="0 0 40 40" width="24" height="24" aria-hidden="true">
+        <circle cx="20" cy="20" r="14" fill="none" stroke="url(#navRing)" stroke-width="2" stroke-linecap="round" stroke-dasharray="78 10" transform="rotate(-12 20 20)"/>
+        <circle cx="33.2" cy="20" r="3.1" fill="var(--accent)"/>
+        <defs>
+          <linearGradient id="navRing" x1="20" y1="6" x2="20" y2="34">
+            <stop offset="0" stop-color="#EFE7FF"/>
+            <stop offset="0.5" stop-color="#9C82F0"/>
+            <stop offset="1" stop-color="#4A28DF"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <span class="brand-word">EONARYA</span>
+    </a>
+  </div>
+</header>
+
+<main class="main">
+  <div class="kart-wrap">
     <div class="kart">
-      <div class="marka">Eonarya</div>
+
+      <div class="kart-logo">
+        <svg viewBox="0 0 40 40" width="22" height="22" aria-hidden="true">
+          <circle cx="20" cy="20" r="14" fill="none" stroke="url(#cardRing)" stroke-width="2" stroke-linecap="round" stroke-dasharray="78 10" transform="rotate(-12 20 20)"/>
+          <circle cx="33.2" cy="20" r="3.1" fill="var(--accent)"/>
+          <defs>
+            <linearGradient id="cardRing" x1="20" y1="6" x2="20" y2="34">
+              <stop offset="0" stop-color="#EFE7FF"/>
+              <stop offset="0.5" stop-color="#9C82F0"/>
+              <stop offset="1" stop-color="#4A28DF"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <span style="font-family:'Jost',sans-serif;font-weight:400;letter-spacing:.38em;font-size:13px;text-indent:.38em;color:var(--ink-faint)">EONARYA</span>
+      </div>
 
       <div id="yukleniyor">
-        <p>Yükleniyor...</p>
+        <div class="yukleniyor-ic">
+          <div class="dot-spin"></div>
+          Yükleniyor…
+        </div>
       </div>
 
       <div id="e1" style="display:none">
         <h2>Yaşam Durumu Teyidi</h2>
         <p class="bilgi-blok">Tanıdığınız bir kişi, Hayattayım protokolü kapsamında sizi güvenilir doğrulayıcı olarak belirledi. Bu bildirim yalnızca size özeldir ve başkasıyla paylaşılmamalıdır.</p>
-        <p>Hayattayım protokolü onay aşamasına geçmiştir. Bu protokolün koşullarını teyit ediyor musunuz?</p>
+        <p class="aciklama">Hayattayım protokolü onay aşamasına geçmiştir. Bu protokolün koşullarını teyit ediyor musunuz?</p>
         <p class="not">Emin değilseniz <strong>Doğrulayamıyorum</strong> seçeneğini kullanın. Yanıtınız kaydedildikten sonra değiştirilemez.</p>
         <div class="butonlar">
           <button class="btn btn-onay" onclick="adim2()">Evet, teyit ediyorum</button>
-          <button class="btn btn-red" onclick="gonder('not_approved')">Doğrulayamıyorum</button>
+          <button class="btn btn-ikincil" onclick="gonder('not_approved')">Doğrulayamıyorum</button>
         </div>
         <p class="yanlis-alici">Bu bildirimin size yanlışlıkla ulaştığını düşünüyorsanız herhangi bir işlem yapmayın ve <a href="mailto:destek@eonarya.com">destek@eonarya.com</a> adresiyle iletişime geçin.</p>
       </div>
 
       <div id="e2" style="display:none">
         <h2>Yanıtınızı Onaylayın</h2>
-        <p>Bu onay kaydedildikten sonra geri alınamaz. Devam etmek istiyor musunuz?</p>
+        <p class="aciklama">Bu onay kaydedildikten sonra geri alınamaz. Devam etmek istiyor musunuz?</p>
         <div class="butonlar">
           <button class="btn btn-onay" onclick="gonder('approved')">Evet, kesin onaylıyorum</button>
-          <button class="btn btn-red" onclick="adim1()">Geri dön</button>
+          <button class="btn btn-ikincil" onclick="adim1()">Geri dön</button>
         </div>
       </div>
 
@@ -63,93 +260,103 @@
       </div>
 
       <div id="hata" style="display:none">
-        <p id="hataMesaj" class="hata-mesaj"></p>
-        <p class="yanlis-alici">Sorularınız için <a href="mailto:destek@eonarya.com">destek@eonarya.com</a> adresiyle iletişime geçin.</p>
+        <div class="hata-blok">
+          <p id="hataMesaj" class="hata-mesaj"></p>
+          <p class="yanlis-alici" style="margin-top:12px;padding-top:12px">Sorularınız için <a href="mailto:destek@eonarya.com">destek@eonarya.com</a> adresiyle iletişime geçin.</p>
+        </div>
       </div>
-    </div>
 
-    <div class="footer">
-      <a href="https://eonarya.com">eonarya.com</a> · destek@eonarya.com<br>
-      © <span id="yil"></span> Eonarya. Tüm hakları saklıdır.
     </div>
   </div>
+</main>
 
-  <script>
-    document.getElementById('yil').textContent = new Date().getFullYear();
+<footer class="footer">
+  <div class="footer-inner">
+    <span class="footer-brand-word">EONARYA</span>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="/gizlilik.html">Gizlilik Politikası</a>
+      <a href="/kullanim-sartlari.html">Kullanım Şartları</a>
+      <a href="mailto:destek@eonarya.com">İletişim</a>
+    </nav>
+    <span class="footer-copy">© <span id="yil"></span> Eonarya</span>
+  </div>
+</footer>
 
-    const EDGE = 'https://jvakvxaadntxzrbxrzcx.supabase.co/functions/v1/approval-response';
-    const token = new URLSearchParams(window.location.search).get('token') || '';
+<script>
+  document.getElementById('yil').textContent = new Date().getFullYear();
 
-    const HATALAR = {
-      token_eksik:         'Link eksik ya da hatalı. Lütfen orijinal linki kullanın.',
-      gecersiz_token:      'Bu link geçersiz.',
-      kullanilmis_link:    'Bu link daha önce kullanılmıştır. Yanıtınız zaten kaydedilmiş.',
-      suresi_dolmus:       'Bu linkin süresi dolmuştur.',
-      protokol_bulunamadi: 'Protokol bulunamadı.',
-      yanlis_adim:         'Bu link artık geçerli değil.',
-      tur_uyusmuyor:       'Bu link güncel onay turuna ait değil.',
-      baglanti_hatasi:     'Bağlantı hatası. Lütfen tekrar deneyin.',
-    };
+  const EDGE  = 'https://jvakvxaadntxzrbxrzcx.supabase.co/functions/v1/approval-response';
+  const token = new URLSearchParams(window.location.search).get('token') || '';
 
-    function goster(id) {
-      ['yukleniyor','e1','e2','sonuc','hata'].forEach(x => {
-        document.getElementById(x).style.display = x === id ? 'block' : 'none';
+  const HATALAR = {
+    token_eksik:         'Link eksik ya da hatalı. Lütfen orijinal linki kullanın.',
+    gecersiz_token:      'Bu link geçersiz.',
+    kullanilmis_link:    'Bu link daha önce kullanılmıştır. Yanıtınız zaten kaydedilmiş.',
+    suresi_dolmus:       'Bu linkin süresi dolmuştur.',
+    protokol_bulunamadi: 'Protokol bulunamadı.',
+    yanlis_adim:         'Bu link artık geçerli değil.',
+    tur_uyusmuyor:       'Bu link güncel onay turuna ait değil.',
+    baglanti_hatasi:     'Bağlantı hatası. Lütfen tekrar deneyin.',
+  };
+
+  function goster(id) {
+    ['yukleniyor','e1','e2','sonuc','hata'].forEach(x => {
+      document.getElementById(x).style.display = x === id ? 'block' : 'none';
+    });
+  }
+
+  async function init() {
+    if (!token) { gosterHata('token_eksik'); return; }
+    try {
+      const res = await fetch(EDGE + '?token=' + encodeURIComponent(token));
+      const d   = await res.json();
+      d.ok ? goster('e1') : gosterHata(d.hata);
+    } catch {
+      gosterHata('baglanti_hatasi');
+    }
+  }
+
+  function gosterHata(hata) {
+    document.getElementById('hataMesaj').textContent = HATALAR[hata] || 'Bir hata oluştu.';
+    goster('hata');
+  }
+
+  function adim2() { goster('e2'); }
+  function adim1() { goster('e1'); }
+
+  async function gonder(response) {
+    const btns = document.querySelectorAll('.btn');
+    btns.forEach(b => b.disabled = true);
+    try {
+      const res = await fetch(EDGE, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ token, response }),
       });
-    }
-
-    async function init() {
-      if (!token) { gosterHata('token_eksik'); return; }
-      try {
-        const res = await fetch(EDGE + '?token=' + encodeURIComponent(token));
-        const d   = await res.json();
-        d.ok ? goster('e1') : gosterHata(d.hata);
-      } catch {
-        gosterHata('baglanti_hatasi');
-      }
-    }
-
-    function gosterHata(hata) {
-      document.getElementById('hataMesaj').textContent = HATALAR[hata] || 'Bir hata oluştu.';
-      goster('hata');
-    }
-
-    function adim2() { goster('e2'); }
-    function adim1() { goster('e1'); }
-
-    async function gonder(response) {
-      const btns = document.querySelectorAll('.btn');
-      btns.forEach(b => b.disabled = true);
-      try {
-        const res = await fetch(EDGE, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ token, response }),
-        });
-        const d = await res.json();
-        const el = document.getElementById('sonucMesaj');
-        goster('sonuc');
-        if (d.ok) {
-          el.className   = 'basarili';
-          el.textContent = response === 'approved'
-            ? 'Yanıtınız alındı. Teşekkür ederiz. Katkınız bu sürecin güvenilir şekilde yürütülmesini sağlamaktadır.'
-            : 'Yanıtınız alındı. Herhangi bir işlem yapmanız gerekmiyor.';
-        } else if (d.hata === 'zaten_oy_verdi') {
-          el.textContent = 'Bu tur için yanıtınız zaten kaydedilmiş.';
-        } else {
-          el.className   = 'hata-mesaj';
-          el.textContent = HATALAR[d.hata] || 'Bir hata oluştu. Lütfen tekrar deneyin.';
-          btns.forEach(b => b.disabled = false);
-        }
-      } catch {
-        const el = document.getElementById('sonucMesaj');
-        goster('sonuc');
+      const d  = await res.json();
+      const el = document.getElementById('sonucMesaj');
+      goster('sonuc');
+      if (d.ok) {
+        el.innerHTML = response === 'approved'
+          ? '<span class="basarili"><span class="basarili-baslik">Yanıtınız alındı.</span>Teşekkür ederiz. Katkınız bu sürecin güvenilir şekilde yürütülmesini sağlamaktadır.</span>'
+          : '<span class="basarili"><span class="basarili-baslik">Yanıtınız alındı.</span>Herhangi bir işlem yapmanız gerekmiyor.</span>';
+      } else if (d.hata === 'zaten_oy_verdi') {
+        el.textContent = 'Bu tur için yanıtınız zaten kaydedilmiş.';
+      } else {
         el.className   = 'hata-mesaj';
-        el.textContent = 'Bağlantı hatası. Lütfen tekrar deneyin.';
+        el.textContent = HATALAR[d.hata] || 'Bir hata oluştu. Lütfen tekrar deneyin.';
         btns.forEach(b => b.disabled = false);
       }
+    } catch {
+      const el = document.getElementById('sonucMesaj');
+      goster('sonuc');
+      el.className   = 'hata-mesaj';
+      el.textContent = 'Bağlantı hatası. Lütfen tekrar deneyin.';
+      btns.forEach(b => b.disabled = false);
     }
+  }
 
-    init();
-  </script>
+  init();
+</script>
 </body>
 </html>
