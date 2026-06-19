@@ -160,6 +160,13 @@
       line-height: 22px;
     }
 
+    .footer-optout {
+      margin-top: 8px;
+      font-size: 11.5px;
+      color: #B3B1C2;
+    }
+    .footer-optout a { color: #938DA6; text-decoration: underline; }
+
     /* Evet / Hayir cevap butonlari */
     .cevap-butonlar {
       display: flex;
@@ -313,6 +320,7 @@
     <footer class="footer">
       <img class="footer-logo" src="assets/email/footer-logo.png" width="110" height="26" alt="Eonarya">
       <strong>Eonarya</strong>, insanların mesajlarını, anılarını, planlarını ve dijital emanetlerini doğru zamanda doğru kişilere ulaştırabilmesini sağlayan teslimat sistemidir.
+      <p class="footer-optout" id="footerOptOut"></p>
       <div class="footer-links">
         <a href="https://eonarya.com">eonarya.com</a>
         <a href="/gizlilik.html">Gizlilik Politikası</a>
@@ -331,6 +339,13 @@
 <script>
   const EDGE  = 'https://jvakvxaadntxzrbxrzcx.supabase.co/functions/v1/approval-response';
   const token = new URLSearchParams(window.location.search).get('token') || '';
+
+  // MESSAGE-OPT-OUT-01: e-postadaki ile aynı konum (footer) — ot= varsa link gösterilir.
+  const optOutToken = new URLSearchParams(window.location.search).get('ot') || '';
+  if (optOutToken) {
+    document.getElementById('footerOptOut').innerHTML =
+      'Bu kişiden Eonarya üzerinden mesaj almak istemiyorsanız <a href="opt-out.html?token=' + encodeURIComponent(optOutToken) + '">buradan çıkabilirsiniz</a>.';
+  }
 
   const HATALAR = {
     token_eksik:         'Link eksik veya hatalı. Lütfen orijinal linki kullanın.',
