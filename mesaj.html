@@ -161,6 +161,21 @@
       line-height: 22px;
     }
 
+    /* Opt-out / iletisim guncelleme linkleri — gorsel olarak ikincil, dikkat cekmemeli */
+    .secondary-links {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 13px;
+      line-height: 20px;
+      color: var(--soft);
+    }
+    .secondary-links a {
+      color: var(--soft);
+      text-decoration: underline;
+      text-decoration-color: var(--border);
+    }
+    .secondary-links a + a { margin-left: 14px; }
+
     /* Mesaj icerigi karti */
     #icerik.card { overflow: hidden; }
 
@@ -335,6 +350,7 @@
 
       <button class="cta" id="acBtn" type="button">Mesajı Aç</button>
       <p class="note">Bu içerik yalnızca sizin görüntülemeniz için hazırlanmıştır.</p>
+      <p class="secondary-links" id="secondaryLinksKarsilama"></p>
     </section>
 
     <!-- Mesaj icerigi ekrani -->
@@ -367,6 +383,8 @@
           <p><strong>Bu teslimat Eonarya ile gerçekleştirildi.</strong></p>
           <p style="margin-top:8px">Bu içerik Eonarya tarafından oluşturulmamıştır. Gönderen tarafından hazırlanmış ve belirli bir koşul gerçekleştiğinde iletilmek üzere sisteme yüklenmiştir. Eonarya yalnızca teslimatı gerçekleştirmektedir.</p>
         </div>
+
+        <p class="secondary-links" id="secondaryLinksIcerik"></p>
       </section>
     </article>
 
@@ -423,6 +441,18 @@
     document.getElementById(prefix + 'Date').textContent   = data.delivery_date || '';
   }
 
+  // MESSAGE-OPT-OUT-01 / POST-DEATH-CONTACT-UPDATE-01: opt-out her teslimatta
+  // gösterilir; iletişim güncelleme yalnızca ölüm sonrası (death_after) teslimatlarda.
+  function secondaryLinkleriDoldur(elId, data) {
+    const el = document.getElementById(elId);
+    if (!el) return;
+    let html = '<a href="opt-out.html?token=' + encodeURIComponent(token) + '">Bu kişiden mesaj almak istemiyorum</a>';
+    if (data.is_death_after) {
+      html += '<a href="iletisim-guncelle.html?token=' + encodeURIComponent(token) + '">İletişim bilgilerim değişti</a>';
+    }
+    el.innerHTML = html;
+  }
+
   async function karsilamaGetir() {
     if (!token) { gosterHata('token_eksik'); return; }
     try {
@@ -434,6 +464,7 @@
       document.getElementById('badge').textContent          = data.delivery_badge || '';
       document.getElementById('karsilamaBaslik').textContent = (data.sender_name || 'Eonarya') + ' size bir mesaj bıraktı';
       dolduRBilgi('info', data);
+      secondaryLinkleriDoldur('secondaryLinksKarsilama', data);
 
       goster('karsilama');
     } catch {
@@ -453,6 +484,7 @@
       if (!data.ok) { gosterHata(data.hata); return; }
 
       dolduRBilgi('meta', data);
+      secondaryLinkleriDoldur('secondaryLinksIcerik', data);
       document.getElementById('mesajBaslik').textContent = data.message_title || '';
       document.getElementById('mesajIcerik').textContent = data.message_body  || '';
 

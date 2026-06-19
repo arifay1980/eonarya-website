@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eonarya — İletişim Bilgilerimi Güncelle</title>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f7fb;
+      --card: #ffffff;
+      --text: #171821;
+      --muted: #5f6472;
+      --soft: #747b8b;
+      --border: #e8e5f2;
+      --purple: #5f35f5;
+      --purple2: #704dff;
+      --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    a { text-decoration: none; color: inherit; }
+
+    body {
+      background: var(--bg);
+      font-family: var(--font-body);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 32px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wrap { width: 100%; max-width: 680px; }
+
+    .brand { text-align: center; margin-bottom: 24px; }
+
+    .yukleniyor {
+      text-align: center;
+      color: var(--soft);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 60px 0;
+    }
+    .dot-spin {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--purple);
+      animation: pulse 1.2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      box-shadow: 0 18px 60px rgba(32,22,84,.08);
+    }
+
+    .center-card { padding: 42px; text-align: center; }
+
+    .center-card h1 {
+      margin: 0 0 16px;
+      font-size: 30px;
+      line-height: 1.2;
+      letter-spacing: -.6px;
+      font-weight: 800;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: #f1eff8;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 700;
+      letter-spacing: .7px;
+      margin-bottom: 26px;
+    }
+
+    .lead {
+      margin: 0 0 24px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 27px;
+    }
+
+    .form { text-align: left; margin: 0 0 8px; }
+    .field { margin-bottom: 16px; }
+    .field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .field input {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #faf9fd;
+      font-family: inherit;
+      font-size: 16px;
+      color: var(--text);
+      outline: none;
+      transition: border-color .15s;
+    }
+    .field input:focus { border-color: var(--purple); }
+    .field-hint { font-size: 12.5px; color: var(--soft); margin-top: 14px; }
+
+    .cta {
+      display: block;
+      width: 100%;
+      max-width: 320px;
+      margin: 8px auto 16px;
+      text-align: center;
+      padding: 18px 22px;
+      border: none;
+      border-radius: 14px;
+      background: linear-gradient(90deg, var(--purple2), #4e20e8);
+      color: #fff;
+      font-family: inherit;
+      font-size: 17px;
+      font-weight: 750;
+      cursor: pointer;
+      box-shadow: 0 10px 28px rgba(95,53,245,.24);
+      transition: opacity .2s;
+    }
+    .cta:disabled { opacity: .6; cursor: default; }
+
+    .note { text-align: center; color: var(--soft); font-size: 14px; line-height: 22px; }
+    .hata-mesaj { font-size: 17px; font-weight: 700; color: #C0392B; line-height: 1.6; }
+    .hata-form { font-size: 13.5px; color: #C0392B; margin: -6px 0 14px; display: none; }
+
+    .footer {
+      margin-top: 26px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 22px;
+      text-align: center;
+    }
+    .footer a { color: var(--purple); font-weight: 650; }
+    .footer-links { margin-top: 10px; }
+    .footer-links a { margin: 0 8px; }
+
+    .store-badges { margin-top: 18px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .store-badges img { display: block; height: 36px; width: auto; }
+    .footer-logo { display: block; margin: 0 auto 14px; }
+
+    @media (max-width: 620px) {
+      .page { padding: 22px 14px; align-items: flex-start; }
+      .card { border-radius: 22px; }
+      .center-card { padding: 30px 22px; }
+      .center-card h1 { font-size: 24px; }
+      .cta { max-width: none; }
+    }
+  </style>
+</head>
+<body>
+
+<main class="page">
+  <div class="wrap">
+
+    <header class="brand">
+      <a href="https://eonarya.com" aria-label="Eonarya ana sayfa">
+        <img src="assets/email/header-logo.png" width="220" height="51" alt="Eonarya — Zamanın Ötesine Bırak">
+      </a>
+    </header>
+
+    <div id="yukleniyor" class="yukleniyor">
+      <div class="dot-spin"></div>
+      Yükleniyor…
+    </div>
+
+    <!-- Asama 1: Form -->
+    <section id="karsilama" class="card center-card" style="display:none">
+      <div class="badge">İLETİŞİM GÜNCELLEME</div>
+      <h1>İletişim bilgilerinizi güncelleyin</h1>
+      <p class="lead" id="karsilamaMetin"></p>
+
+      <form class="form" id="form">
+        <p class="hata-form" id="formHata"></p>
+        <div class="field">
+          <label for="email">E-posta adresi</label>
+          <input type="email" id="email" placeholder="ornek@eposta.com" autocomplete="email">
+        </div>
+        <div class="field">
+          <label for="phone">Telefon numarası</label>
+          <input type="tel" id="phone" placeholder="05XX XXX XX XX" autocomplete="tel">
+        </div>
+        <p class="field-hint">En az birini doldurmanız yeterlidir. Bu değişiklik yalnızca bu göndericiden gelecek ölüm sonrası mesajları etkiler.</p>
+        <button class="cta" id="kaydetBtn" type="submit">Bilgilerimi Güncelle</button>
+      </form>
+      <p class="note">Bu işlem sizin orijinal kişi kaydınızı değiştirmez, yalnızca bu teslimat kanalı için geçerli olur.</p>
+    </section>
+
+    <!-- Asama 2: Tesekkur -->
+    <section id="tesekkur" class="card center-card" style="display:none">
+      <div class="badge">KAYDEDİLDİ</div>
+      <h1>İletişim bilgileriniz güncellendi</h1>
+      <p class="lead">Bundan sonraki teslimatlar yeni bilgilerinizi kullanacaktır.</p>
+
+      <button class="cta" id="kapatBtn" type="button">Ekranı Kapat</button>
+    </section>
+
+    <!-- Hata -->
+    <div id="hata" class="card center-card" style="display:none">
+      <p class="hata-mesaj" id="hataMesaj"></p>
+    </div>
+
+    <footer class="footer">
+      <img class="footer-logo" src="assets/email/footer-logo.png" width="110" height="26" alt="Eonarya">
+      <strong>Eonarya</strong>, insanların mesajlarını, anılarını, planlarını ve dijital emanetlerini doğru zamanda doğru kişilere ulaştırabilmesini sağlayan teslimat sistemidir.
+      <div class="footer-links">
+        <a href="https://eonarya.com">eonarya.com</a>
+        <a href="/gizlilik.html">Gizlilik Politikası</a>
+        <a href="/kullanim-sartlari.html">Kullanım Şartları</a>
+        <a href="mailto:destek@eonarya.com">destek@eonarya.com</a>
+      </div>
+      <div class="store-badges">
+        <a href="https://eonarya.com"><img src="assets/email/appstore-badge.png" width="107" height="36" alt="App Store"></a>
+        <a href="https://eonarya.com"><img src="assets/email/googleplay-badge.png" width="120" height="36" alt="Google Play"></a>
+      </div>
+    </footer>
+
+  </div>
+</main>
+
+<script>
+  const EDGE  = 'https://jvakvxaadntxzrbxrzcx.supabase.co/functions/v1/recipient-contact-update';
+  const token = new URLSearchParams(window.location.search).get('token') || '';
+
+  const HATALAR = {
+    token_eksik:             'Link eksik veya hatalı. Lütfen orijinal linki kullanın.',
+    gecersiz_token:          'Bu link geçersiz.',
+    kapsam_disi:             'Bu işlem yalnızca ölüm sonrası teslimatlar için geçerlidir.',
+    dogrulama_tamamlanmamis: 'Bu işlem yalnızca doğrulama tamamlandıktan sonra kullanılabilir.',
+    bilgi_eksik:             'E-posta veya telefon numarasından en az birini girmelisiniz.',
+    gecersiz_email:          'Girdiğiniz e-posta adresi geçerli değil.',
+    gecersiz_telefon:        'Girdiğiniz telefon numarası geçerli değil.',
+    gecersiz_alici:          'Bu link bir alıcıya bağlı değil.',
+    kayit_hatasi:            'Bilgileriniz kaydedilemedi. Lütfen tekrar deneyin.',
+    baglanti_hatasi:         'Bağlantı hatası. Lütfen sayfayı yenileyin.',
+  };
+
+  function goster(id) {
+    ['yukleniyor', 'karsilama', 'tesekkur', 'hata'].forEach(x => {
+      document.getElementById(x).style.display = (x === id) ? '' : 'none';
+    });
+  }
+
+  function gosterHata(kod) {
+    document.getElementById('hataMesaj').textContent = HATALAR[kod] || 'Bir hata oluştu.';
+    goster('hata');
+  }
+
+  async function init() {
+    if (!token) { gosterHata('token_eksik'); return; }
+    try {
+      const res  = await fetch(EDGE + '?token=' + encodeURIComponent(token));
+      const data = await res.json();
+
+      if (!data.ok) { gosterHata(data.hata); return; }
+
+      const senderName = data.sender_name || 'Eonarya';
+      document.getElementById('karsilamaMetin').textContent =
+        senderName + ' tarafından bırakılan ölüm sonrası mesajları almaya devam etmek istiyorsanız, güncel iletişim bilginizi girebilirsiniz.';
+
+      goster('karsilama');
+    } catch {
+      gosterHata('baglanti_hatasi');
+    }
+  }
+
+  async function kaydet(e) {
+    e.preventDefault();
+    const formHata = document.getElementById('formHata');
+    formHata.style.display = 'none';
+
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+
+    if (!email && !phone) {
+      formHata.textContent = HATALAR.bilgi_eksik;
+      formHata.style.display = 'block';
+      return;
+    }
+
+    const btn = document.getElementById('kaydetBtn');
+    btn.disabled = true;
+    btn.textContent = 'Kaydediliyor…';
+
+    try {
+      const res  = await fetch(EDGE, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ token, email, phone }),
+      });
+      const data = await res.json();
+
+      if (data.ok) {
+        goster('tesekkur');
+      } else {
+        formHata.textContent = HATALAR[data.hata] || 'Bir hata oluştu.';
+        formHata.style.display = 'block';
+      }
+    } catch {
+      formHata.textContent = HATALAR.baglanti_hatasi;
+      formHata.style.display = 'block';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Bilgilerimi Güncelle';
+    }
+  }
+
+  document.getElementById('form').addEventListener('submit', kaydet);
+  document.getElementById('kapatBtn').addEventListener('click', () => window.close());
+
+  init();
+</script>
+</body>
+</html>
