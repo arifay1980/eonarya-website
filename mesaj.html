@@ -428,15 +428,12 @@
     document.getElementById(prefix + 'Date').textContent   = data.delivery_date || '';
   }
 
-  // MESSAGE-OPT-OUT-01 / POST-DEATH-CONTACT-UPDATE-01: footer'da, onay.html/e-posta
-  // ile AYNI konumda — opt-out her teslimatta gösterilir, iletişim güncelleme
-  // yalnızca ölüm sonrası (death_after) teslimatlarda.
+  // MESAJ-TERCIHLERI-01: footer'da, onay.html/e-posta ile AYNI konumda — opt-out
+  // ve iletişim güncelleme (death_after teslimatlarda) artık tek sayfada
+  // (tercihler.html) birleşti, tek link gösteriliyor.
   function footerLinkleriDoldur(data) {
-    let html = 'Bu kişiden Eonarya üzerinden mesaj almak istemiyorsanız <a href="opt-out.html?token=' + encodeURIComponent(token) + '">buradan çıkabilirsiniz</a>.';
-    if (data.is_death_after) {
-      html += ' İletişim bilgileriniz değiştiyse <a href="iletisim-guncelle.html?token=' + encodeURIComponent(token) + '">buradan güncelleyebilirsiniz</a>.';
-    }
-    document.getElementById('footerOptOut').innerHTML = html;
+    document.getElementById('footerOptOut').innerHTML =
+      'Mesaj tercihlerinizi <a href="tercihler.html?token=' + encodeURIComponent(token) + '">buradan yönetebilirsiniz</a>.';
   }
 
   async function karsilamaGetir() {

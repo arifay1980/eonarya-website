@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Eonarya — İletişim Bilgilerimi Güncelle</title>
+  <title>Eonarya — Mesaj Tercihleri</title>
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -94,6 +94,73 @@
       line-height: 27px;
     }
 
+    /* ── Hub — aksiyon kartları ── */
+    .aksiyon-kart {
+      text-align: left;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .aksiyon-kart h2 {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -.3px;
+      margin-bottom: 8px;
+    }
+    .aksiyon-kart p {
+      color: var(--muted);
+      font-size: 14.5px;
+      line-height: 22px;
+      margin-bottom: 16px;
+    }
+    .not-satiri {
+      font-size: 12.5px;
+      color: var(--soft);
+      margin: -8px 0 16px;
+    }
+    .aksiyon-kart .cevap-btn { max-width: none; width: auto; padding: 13px 22px; font-size: 14.5px; }
+
+    .geri-link {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: var(--soft);
+      font-size: 13.5px;
+      font-weight: 600;
+    }
+
+    .cevap-butonlar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin: 4px 0 20px;
+    }
+    .cevap-btn {
+      width: 100%;
+      max-width: 320px;
+      padding: 20px 22px;
+      border-radius: 14px;
+      border: none;
+      font-family: inherit;
+      font-size: 17px;
+      font-weight: 750;
+      cursor: pointer;
+      transition: opacity .2s, transform .1s;
+    }
+    .cevap-btn:active { transform: scale(.98); }
+    .cevap-btn:disabled { opacity: .5; cursor: default; transform: none; }
+    .cevap-evet {
+      background: linear-gradient(90deg, var(--purple2), #4e20e8);
+      color: #fff;
+      box-shadow: 0 10px 28px rgba(95,53,245,.24);
+    }
+    .cevap-hayir {
+      border: 1px solid var(--border);
+      background: #f1eff8;
+      color: var(--text);
+    }
+
     .form { text-align: left; margin: 0 0 8px; }
     .field { margin-bottom: 16px; }
     .field label {
@@ -164,7 +231,7 @@
       .card { border-radius: 22px; }
       .center-card { padding: 30px 22px; }
       .center-card h1 { font-size: 24px; }
-      .cta { max-width: none; }
+      .cevap-btn, .cta { max-width: none; }
     }
   </style>
 </head>
@@ -184,11 +251,62 @@
       Yükleniyor…
     </div>
 
-    <!-- Asama 1: Form -->
-    <section id="karsilama" class="card center-card" style="display:none">
+    <!-- Hub: 2 aksiyon kartı -->
+    <section id="hub" class="card center-card" style="display:none">
+      <div class="badge">MESAJ TERCİHLERİ</div>
+      <h1>Mesaj Tercihleri</h1>
+      <p class="lead" id="hubMetin"></p>
+
+      <div class="aksiyon-kart">
+        <h2>Mesaj Almayı Durdur</h2>
+        <p>Bu kişiden Eonarya üzerinden gönderilen mesajları almak istemiyorsanız teslimatları durdurabilirsiniz.</p>
+        <button class="cevap-btn cevap-hayir" id="optOutAcBtn" type="button">Mesaj Almayı Durdur</button>
+      </div>
+
+      <div class="aksiyon-kart" id="iletisimKart" style="display:none">
+        <h2>İletişim Bilgilerimi Güncelle</h2>
+        <p>Bu kişiden gelecekte mesaj almak istiyorsanız ancak iletişim bilgileriniz değiştiyse güncelleyebilirsiniz.</p>
+        <p class="not-satiri">İletişim bilgilerinizi güncelleme seçeneği yalnızca ölüm sonrası mesajlar için kullanılabilir.</p>
+        <button class="cevap-btn cevap-hayir" id="iletisimAcBtn" type="button">İletişim Bilgilerimi Güncelle</button>
+      </div>
+    </section>
+
+    <!-- Opt-out: onay ekranı -->
+    <section id="optOutOnay" class="card center-card" style="display:none">
+      <a href="#" class="geri-link" id="optOutGeriLink">‹ Mesaj Tercihlerine Dön</a>
+      <div class="badge">İLETİŞİM TERCİHİ</div>
+      <h1>Bu kişiden mesaj almak istemiyor musunuz?</h1>
+      <p class="lead" id="optOutMetin"></p>
+      <p class="lead">Bu işlemden sonra bu kişiden Eonarya üzerinden yeni mesaj almayacaksınız. Daha önce gönderilmiş mesajlara ait kayıtlar korunabilir.</p>
+
+      <div class="cevap-butonlar">
+        <button class="cevap-btn cevap-hayir" id="optOutBtn" type="button">Mesaj almak istemiyorum</button>
+        <button class="cevap-btn cevap-evet" id="vazgecBtn" type="button">Vazgeç</button>
+      </div>
+    </section>
+
+    <!-- Opt-out: tesekkur -->
+    <section id="optOutTesekkur" class="card center-card" style="display:none">
+      <div class="badge">KAYDEDİLDİ</div>
+      <h1>Tercihiniz kaydedildi</h1>
+      <p class="lead" id="optOutTesekkurMetin"></p>
+      <button class="cevap-btn cevap-evet" id="optOutKapatBtn" type="button" style="max-width:320px;margin:0 auto">Ekranı Kapat</button>
+    </section>
+
+    <!-- Opt-out: vazgecildi -->
+    <section id="vazgecildi" class="card center-card" style="display:none">
+      <div class="badge">İŞLEM YAPILMADI</div>
+      <h1>Hiçbir değişiklik yapılmadı</h1>
+      <p class="lead">Mesajlarınızı almaya devam edeceksiniz.</p>
+      <a href="#" class="geri-link" id="vazgecGeriLink">‹ Mesaj Tercihlerine Dön</a>
+    </section>
+
+    <!-- İletişim güncelleme: form -->
+    <section id="iletisimForm" class="card center-card" style="display:none">
+      <a href="#" class="geri-link" id="iletisimGeriLink">‹ Mesaj Tercihlerine Dön</a>
       <div class="badge">İLETİŞİM GÜNCELLEME</div>
       <h1>İletişim bilgilerinizi güncelleyin</h1>
-      <p class="lead" id="karsilamaMetin"></p>
+      <p class="lead" id="iletisimMetin"></p>
 
       <form class="form" id="form">
         <p class="hata-form" id="formHata"></p>
@@ -206,13 +324,12 @@
       <p class="note">Bu işlem sizin orijinal kişi kaydınızı değiştirmez, yalnızca bu teslimat kanalı için geçerli olur.</p>
     </section>
 
-    <!-- Asama 2: Tesekkur -->
-    <section id="tesekkur" class="card center-card" style="display:none">
+    <!-- İletişim güncelleme: tesekkur -->
+    <section id="iletisimTesekkur" class="card center-card" style="display:none">
       <div class="badge">KAYDEDİLDİ</div>
       <h1>İletişim bilgileriniz güncellendi</h1>
       <p class="lead">Bundan sonraki teslimatlar yeni bilgilerinizi kullanacaktır.</p>
-
-      <button class="cta" id="kapatBtn" type="button">Ekranı Kapat</button>
+      <button class="cta" id="iletisimKapatBtn" type="button">Ekranı Kapat</button>
     </section>
 
     <!-- Hata -->
@@ -239,7 +356,8 @@
 </main>
 
 <script>
-  const EDGE  = 'https://jvakvxaadntxzrbxrzcx.supabase.co/functions/v1/recipient-contact-update';
+  const OPT_OUT_EDGE = 'https://jvakvxaadntxzrbxrzcx.supabase.co/functions/v1/message-opt-out';
+  const CONTACT_EDGE = 'https://jvakvxaadntxzrbxrzcx.supabase.co/functions/v1/recipient-contact-update';
   const token = new URLSearchParams(window.location.search).get('token') || '';
 
   const HATALAR = {
@@ -251,14 +369,13 @@
     gecersiz_email:          'Girdiğiniz e-posta adresi geçerli değil.',
     gecersiz_telefon:        'Girdiğiniz telefon numarası geçerli değil.',
     gecersiz_alici:          'Bu link bir alıcıya bağlı değil.',
-    kayit_hatasi:            'Bilgileriniz kaydedilemedi. Lütfen tekrar deneyin.',
+    kayit_hatasi:            'İşleminiz kaydedilemedi. Lütfen tekrar deneyin.',
     baglanti_hatasi:         'Bağlantı hatası. Lütfen sayfayı yenileyin.',
   };
 
+  const TUM_EKRANLAR = ['yukleniyor', 'hub', 'optOutOnay', 'optOutTesekkur', 'vazgecildi', 'iletisimForm', 'iletisimTesekkur', 'hata'];
   function goster(id) {
-    ['yukleniyor', 'karsilama', 'tesekkur', 'hata'].forEach(x => {
-      document.getElementById(x).style.display = (x === id) ? '' : 'none';
-    });
+    TUM_EKRANLAR.forEach(x => { document.getElementById(x).style.display = (x === id) ? '' : 'none'; });
   }
 
   function gosterHata(kod) {
@@ -266,25 +383,70 @@
     goster('hata');
   }
 
+  let senderName = 'Eonarya';
+
   async function init() {
     if (!token) { gosterHata('token_eksik'); return; }
     try {
-      const res  = await fetch(EDGE + '?token=' + encodeURIComponent(token));
+      const res  = await fetch(OPT_OUT_EDGE + '?token=' + encodeURIComponent(token));
       const data = await res.json();
 
       if (!data.ok) { gosterHata(data.hata); return; }
 
-      const senderName = data.sender_name || 'Eonarya';
-      document.getElementById('karsilamaMetin').textContent =
-        senderName + ' tarafından bırakılan ölüm sonrası mesajları almaya devam etmek istiyorsanız, güncel iletişim bilginizi girebilirsiniz.';
+      senderName = data.sender_name || 'Eonarya';
+      document.getElementById('hubMetin').textContent =
+        'Bu sayfadan ' + senderName + ' tarafından Eonarya üzerinden gönderilen mesajlarla ilgili tercihlerinizi yönetebilirsiniz.';
 
-      goster('karsilama');
+      if (data.iletisim_guncelleme_uygun) {
+        document.getElementById('iletisimKart').style.display = '';
+      }
+
+      goster('hub');
     } catch {
       gosterHata('baglanti_hatasi');
     }
   }
 
-  async function kaydet(e) {
+  // ── Opt-out alt akışı ──────────────────────────────────────────────────────
+  function optOutAc() {
+    document.getElementById('optOutMetin').textContent =
+      senderName + ' tarafından Eonarya üzerinden gönderilen mesajları artık almak istemediğinizi belirtebilirsiniz.';
+    goster('optOutOnay');
+  }
+
+  async function optOutGonder() {
+    const btns = document.querySelectorAll('#optOutOnay .cevap-btn');
+    btns.forEach(b => b.disabled = true);
+    try {
+      const res  = await fetch(OPT_OUT_EDGE, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ token }),
+      });
+      const data = await res.json();
+
+      if (data.ok) {
+        document.getElementById('optOutTesekkurMetin').textContent =
+          'Artık ' + senderName + ' tarafından Eonarya üzerinden gönderilen mesajları almayacaksınız.';
+        goster('optOutTesekkur');
+      } else {
+        gosterHata(data.hata);
+        btns.forEach(b => b.disabled = false);
+      }
+    } catch {
+      gosterHata('baglanti_hatasi');
+      btns.forEach(b => b.disabled = false);
+    }
+  }
+
+  // ── İletişim güncelleme alt akışı ────────────────────────────────────────────
+  function iletisimAc() {
+    document.getElementById('iletisimMetin').textContent =
+      senderName + ' tarafından bırakılan ölüm sonrası mesajları almaya devam etmek istiyorsanız, güncel iletişim bilginizi girebilirsiniz.';
+    goster('iletisimForm');
+  }
+
+  async function iletisimKaydet(e) {
     e.preventDefault();
     const formHata = document.getElementById('formHata');
     formHata.style.display = 'none';
@@ -303,7 +465,7 @@
     btn.textContent = 'Kaydediliyor…';
 
     try {
-      const res  = await fetch(EDGE, {
+      const res  = await fetch(CONTACT_EDGE, {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
         body:    JSON.stringify({ token, email, phone }),
@@ -311,7 +473,7 @@
       const data = await res.json();
 
       if (data.ok) {
-        goster('tesekkur');
+        goster('iletisimTesekkur');
       } else {
         formHata.textContent = HATALAR[data.hata] || 'Bir hata oluştu.';
         formHata.style.display = 'block';
@@ -325,8 +487,17 @@
     }
   }
 
-  document.getElementById('form').addEventListener('submit', kaydet);
-  document.getElementById('kapatBtn').addEventListener('click', () => window.close());
+  document.getElementById('optOutAcBtn').addEventListener('click', optOutAc);
+  document.getElementById('optOutBtn').addEventListener('click', optOutGonder);
+  document.getElementById('vazgecBtn').addEventListener('click', () => goster('vazgecildi'));
+  document.getElementById('optOutKapatBtn').addEventListener('click', () => window.close());
+  document.getElementById('optOutGeriLink').addEventListener('click', (e) => { e.preventDefault(); goster('hub'); });
+  document.getElementById('vazgecGeriLink').addEventListener('click', (e) => { e.preventDefault(); goster('hub'); });
+
+  document.getElementById('iletisimAcBtn').addEventListener('click', iletisimAc);
+  document.getElementById('form').addEventListener('submit', iletisimKaydet);
+  document.getElementById('iletisimKapatBtn').addEventListener('click', () => window.close());
+  document.getElementById('iletisimGeriLink').addEventListener('click', (e) => { e.preventDefault(); goster('hub'); });
 
   init();
 </script>

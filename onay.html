@@ -340,11 +340,11 @@
   const EDGE  = 'https://jvakvxaadntxzrbxrzcx.supabase.co/functions/v1/approval-response';
   const token = new URLSearchParams(window.location.search).get('token') || '';
 
-  // MESSAGE-OPT-OUT-01: e-postadaki ile aynı konum (footer) — ot= varsa link gösterilir.
+  // MESAJ-TERCIHLERI-01: e-postadaki ile aynı konum (footer) — ot= varsa link gösterilir.
   const optOutToken = new URLSearchParams(window.location.search).get('ot') || '';
   if (optOutToken) {
     document.getElementById('footerOptOut').innerHTML =
-      'Bu kişiden Eonarya üzerinden mesaj almak istemiyorsanız <a href="opt-out.html?token=' + encodeURIComponent(optOutToken) + '">buradan çıkabilirsiniz</a>.';
+      'Mesaj tercihlerinizi <a href="tercihler.html?token=' + encodeURIComponent(optOutToken) + '">buradan yönetebilirsiniz</a>.';
   }
 
   const HATALAR = {
