@@ -439,19 +439,7 @@
     document.getElementById('footerOptOut').innerHTML = html;
   }
 
-  // GEÇİCİ ÖNİZLEME MODU — sadece link kontrolü için, doğrulandıktan sonra kaldırılacak.
-  const PREVIEW_MOCK = new URLSearchParams(window.location.search).get('preview') === '1';
-
   async function karsilamaGetir() {
-    if (PREVIEW_MOCK) {
-      const mock = { sender_name: 'Arif Ay', delivery_type: 'Planlanmış Mesaj', delivery_date: '9 Haziran 2026', delivery_badge: 'Özel Teslimat', is_death_after: true };
-      document.getElementById('badge').textContent = mock.delivery_badge;
-      document.getElementById('karsilamaBaslik').textContent = mock.sender_name + ' size bir mesaj bıraktı';
-      dolduRBilgi('info', mock);
-      footerLinkleriDoldur(mock);
-      goster('karsilama');
-      return;
-    }
     if (!token) { gosterHata('token_eksik'); return; }
     try {
       const res  = await fetch(EDGE + '?token=' + encodeURIComponent(token));
@@ -471,15 +459,6 @@
   }
 
   async function mesajiAc() {
-    if (PREVIEW_MOCK) {
-      const mock = { sender_name: 'Arif Ay', delivery_type: 'Planlanmış Mesaj', delivery_date: '9 Haziran 2026', is_death_after: true, message_title: 'Örnek Mesaj Başlığı', message_body: 'Bu, önizleme amaçlı örnek mesaj içeriğidir.', message_maddeler: [] };
-      dolduRBilgi('meta', mock);
-      footerLinkleriDoldur(mock);
-      document.getElementById('mesajBaslik').textContent = mock.message_title;
-      document.getElementById('mesajIcerik').textContent = mock.message_body;
-      goster('icerik');
-      return;
-    }
     const btn = document.getElementById('acBtn');
     btn.disabled = true;
     btn.textContent = 'Açılıyor…';
