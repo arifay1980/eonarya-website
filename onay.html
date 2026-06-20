@@ -344,7 +344,7 @@
   const optOutToken = new URLSearchParams(window.location.search).get('ot') || '';
   if (optOutToken) {
     document.getElementById('footerOptOut').innerHTML =
-      'Mesaj tercihlerinizi <a href="tercihler.html?token=' + encodeURIComponent(optOutToken) + '">buradan yönetebilirsiniz</a>.';
+      '<a href="tercihler.html?token=' + encodeURIComponent(optOutToken) + '">Mesaj Tercihleri</a>';
   }
 
   const HATALAR = {
