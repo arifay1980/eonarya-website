@@ -134,6 +134,38 @@
       font-weight: 650;
     }
 
+    /* Bilgilendirme + okudum onayı (ALICI-ONAY-01) */
+    .onay-blok {
+      background: #faf9fd;
+      border: 1px solid #eeeaf7;
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin: 0 0 20px;
+      text-align: left;
+    }
+    .onay-metin {
+      font-size: 14px;
+      line-height: 22px;
+      color: var(--muted);
+      margin: 0 0 14px;
+    }
+    .onay-checkbox {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .onay-checkbox input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--purple2);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
     .cta {
       display: block;
       width: 100%;
@@ -337,7 +369,18 @@
         </div>
       </div>
 
-      <button class="cta" id="acBtn" type="button">Mesajı Aç</button>
+      <div class="onay-blok">
+        <p class="onay-metin">
+          Bu içerik bir Eonarya kullanıcısı tarafından sizinle paylaşılmıştır.<br>
+          İçeriğin sorumluluğu gönderen kişiye aittir.
+        </p>
+        <label class="onay-checkbox">
+          <input type="checkbox" id="okuduOnay">
+          <span>Bilgilendirmeyi okudum</span>
+        </label>
+      </div>
+
+      <button class="cta" id="acBtn" type="button" disabled>Mesajı Görüntüle</button>
       <p class="note">Bu içerik yalnızca sizin görüntülemeniz için hazırlanmıştır.</p>
     </section>
 
@@ -421,6 +464,11 @@
     document.getElementById('hataAciklama').textContent = aciklama || '';
     goster('hata');
   }
+
+  // ALICI-ONAY-01: bilgilendirme okunmadan "Mesajı Görüntüle" aktif olmaz (UI kilidi — kayıt tutulmaz).
+  document.getElementById('okuduOnay').addEventListener('change', function () {
+    document.getElementById('acBtn').disabled = !this.checked;
+  });
 
   function dolduRBilgi(prefix, data) {
     document.getElementById(prefix + 'Sender').textContent = data.sender_name || 'Eonarya';
