@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eonarya — Güvenilir Kişi Bilgilendirmesi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f7fb;
+      --card: #ffffff;
+      --text: #171821;
+      --muted: #5f6472;
+      --soft: #747b8b;
+      --border: #e8e5f2;
+      --purple: #5f35f5;
+      --purple2: #704dff;
+      --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    a { text-decoration: none; color: inherit; }
+
+    body {
+      background: var(--bg);
+      font-family: var(--font-body);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      min-height: 100vh;
+      padding: 32px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 680px;
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .yukleniyor {
+      text-align: center;
+      color: var(--soft);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 60px 0;
+    }
+    .dot-spin {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--purple);
+      animation: pulse 1.2s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: .25; } 50% { opacity: 1; } }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      box-shadow: 0 18px 60px rgba(32,22,84,.08);
+    }
+
+    #icerik.card {
+      padding: 42px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 7px 14px;
+      border-radius: 999px;
+      background: #f1eff8;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 16px;
+      font-weight: 700;
+      letter-spacing: .7px;
+      margin-bottom: 26px;
+    }
+
+    #icerik h1 {
+      margin: 0 0 20px;
+      font-size: 28px;
+      line-height: 1.25;
+      letter-spacing: -.5px;
+      font-weight: 800;
+    }
+
+    .lead {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 27px;
+    }
+
+    .bilgi-blok {
+      background: #faf9fd;
+      border: 1px solid #eeeaf7;
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin: 24px 0 0;
+      text-align: left;
+    }
+    .bilgi-blok p {
+      font-size: 14px;
+      line-height: 22px;
+      color: var(--muted);
+    }
+    .bilgi-blok p + p { margin-top: 10px; }
+
+    /* Hata */
+    #hata.card { padding: 42px; text-align: center; }
+    .hata-mesaj { font-size: 17px; font-weight: 700; color: #C0392B; line-height: 1.6; }
+    .hata-aciklama { font-size: 14px; color: var(--soft); margin-top: 10px; line-height: 1.6; }
+
+    /* Footer */
+    .footer {
+      margin-top: 26px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13.5px;
+      line-height: 22px;
+      text-align: center;
+    }
+    .footer a { color: var(--purple); font-weight: 650; }
+    .footer-links { margin-top: 10px; }
+    .footer-links a { margin: 0 8px; }
+
+    .footer-optout { margin-top: 8px; font-size: 11.5px; color: #B3B1C2; }
+    .footer-optout a { color: #938DA6; text-decoration: underline; }
+
+    .store-badges {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .store-badges img {
+      display: block;
+      height: 36px;
+      width: auto;
+    }
+
+    .footer-logo {
+      display: block;
+      margin: 0 auto 14px;
+    }
+
+    @media (max-width: 620px) {
+      .page { padding: 22px 14px; align-items: flex-start; }
+      .card { border-radius: 22px; }
+      #icerik.card { padding: 30px 22px; }
+      #icerik h1 { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<main class="page">
+  <div class="wrap">
+
+    <header class="brand">
+      <a href="https://eonarya.com" aria-label="Eonarya ana sayfa">
+        <img src="assets/email/header-logo.png" width="220" height="51" alt="Eonarya — Zamanın Ötesine Bırak">
+      </a>
+    </header>
+
+    <div id="yukleniyor" class="yukleniyor">
+      <div class="dot-spin"></div>
+      Yükleniyor…
+    </div>
+
+    <!-- Bilgilendirme icerigi -->
+    <article id="icerik" class="card" style="display:none">
+      <div class="badge">Bilgilendirme</div>
+      <h1 id="baslik"></h1>
+
+      <p class="lead" id="metin1"></p>
+      <p class="lead">Bu protokol, kullanıcıyla uzun süre iletişim kurulamadığında önceden belirlenen kişilerden bilgi alınmasını sağlayan bir güvenlik mekanizmasıdır.</p>
+      <p class="lead"><strong>Bu bildirim yalnızca bilgilendirme amaçlıdır. Şu anda sizden herhangi bir işlem yapmanız beklenmemektedir.</strong></p>
+      <p class="lead" id="metin2"></p>
+
+      <div class="bilgi-blok">
+        <p id="bilgiMetin1"></p>
+        <p id="bilgiMetin2"></p>
+      </div>
+    </article>
+
+    <!-- Hata -->
+    <div id="hata" class="card" style="display:none">
+      <p class="hata-mesaj" id="hataMesaj"></p>
+    </div>
+
+    <footer class="footer">
+      <img class="footer-logo" src="assets/email/footer-logo.png" width="110" height="26" alt="Eonarya">
+      <strong>Eonarya</strong>, insanların mesajlarını, anılarını, planlarını ve dijital emanetlerini doğru zamanda doğru kişilere ulaştırabilmesini sağlayan teslimat sistemidir.
+      <p class="footer-optout" id="footerOptOut"></p>
+      <div class="footer-links">
+        <a href="https://eonarya.com">eonarya.com</a>
+        <a href="/gizlilik.html">Gizlilik Politikası</a>
+        <a href="/kullanim-sartlari.html">Kullanım Şartları</a>
+        <a href="mailto:destek@eonarya.com">destek@eonarya.com</a>
+      </div>
+      <div class="store-badges">
+        <a href="https://eonarya.com"><img src="assets/email/appstore-badge.png" width="107" height="36" alt="App Store"></a>
+        <a href="https://eonarya.com"><img src="assets/email/googleplay-badge.png" width="120" height="36" alt="Google Play"></a>
+      </div>
+    </footer>
+
+  </div>
+</main>
+
+<script>
+  const EDGE  = 'https://jvakvxaadntxzrbxrzcx.supabase.co/functions/v1/get-approval-intro';
+  const token = new URLSearchParams(window.location.search).get('token') || '';
+
+  const HATALAR = {
+    token_eksik:         'Link eksik veya hatalı. Lütfen orijinal linki kullanın.',
+    bildirim_bulunamadi: 'Bu bildirim bulunamadı. Link geçersiz olabilir.',
+    icerik_bulunamadi:   'İçerik yüklenemedi.',
+    baglanti_hatasi:     'Bağlantı hatası. Lütfen sayfayı yenileyin.',
+  };
+
+  function goster(id) {
+    ['yukleniyor', 'icerik', 'hata'].forEach(x => {
+      document.getElementById(x).style.display = (x === id) ? '' : 'none';
+    });
+  }
+
+  function gosterHata(kod) {
+    document.getElementById('hataMesaj').textContent = HATALAR[kod] || 'Bir hata oluştu.';
+    goster('hata');
+  }
+
+  async function bilgiGetir() {
+    if (!token) { gosterHata('token_eksik'); return; }
+    try {
+      const res  = await fetch(EDGE + '?token=' + encodeURIComponent(token));
+      const data = await res.json();
+
+      if (!data.ok) { gosterHata(data.hata); return; }
+
+      const sender = data.sender_name || 'Eonarya';
+      document.getElementById('baslik').textContent = sender + ' sizi Eonarya\'da güvenilir kişi olarak belirledi';
+      document.getElementById('metin1').textContent = sender + ', Eonarya\'daki Hayattayım Protokolü kapsamında sizi güvenilir kişilerinden biri olarak belirledi.';
+      document.getElementById('metin2').textContent = 'İleride protokol koşulları gerçekleşirse, ' + sender + ' hakkındaki bilginize başvurulabilmesi için size özel bir bağlantı gönderilebilir.';
+      document.getElementById('bilgiMetin1').textContent = 'Bu iletiyi almanızın nedeni, ' + sender + ' tarafından Eonarya içerisinde ilgili kişi olarak belirlenmiş olmanızdır.';
+      document.getElementById('bilgiMetin2').textContent = 'Süreçle ilgili sorularınız varsa öncelikle ' + sender + ' ile iletişime geçebilirsiniz.';
+
+      document.getElementById('footerOptOut').innerHTML =
+        '<a href="tercihler.html?token=' + encodeURIComponent(token) + '">Mesaj Tercihleri</a>';
+
+      goster('icerik');
+    } catch {
+      gosterHata('baglanti_hatasi');
+    }
+  }
+
+  bilgiGetir();
+</script>
+</body>
+</html>
