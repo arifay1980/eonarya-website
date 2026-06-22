@@ -74,19 +74,6 @@
       padding: 42px;
     }
 
-    .badge {
-      display: inline-block;
-      padding: 7px 14px;
-      border-radius: 999px;
-      background: #f1eff8;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 16px;
-      font-weight: 700;
-      letter-spacing: .7px;
-      margin-bottom: 26px;
-    }
-
     #icerik h1 {
       margin: 0 0 20px;
       font-size: 28px;
@@ -116,6 +103,13 @@
       color: var(--muted);
     }
     .bilgi-blok p + p { margin-top: 10px; }
+    .bilgi-blok + .bilgi-blok { margin-top: 16px; }
+    .bilgi-baslik {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px !important;
+    }
 
     /* Hata */
     #hata.card { padding: 42px; text-align: center; }
@@ -181,19 +175,28 @@
       Yükleniyor…
     </div>
 
-    <!-- Bilgilendirme icerigi -->
+    <!-- Bilgilendirme icerigi — APPROVAL_INTRO e-postasıyla birebir aynı metin
+         (supabase/functions/_shared/templates.ts) -->
     <article id="icerik" class="card" style="display:none">
-      <div class="badge">Bilgilendirme</div>
       <h1 id="baslik"></h1>
 
       <p class="lead" id="metin1"></p>
       <p class="lead">Bu protokol, kullanıcıyla uzun süre iletişim kurulamadığında önceden belirlenen kişilerden bilgi alınmasını sağlayan bir güvenlik mekanizmasıdır.</p>
-      <p class="lead"><strong>Bu bildirim yalnızca bilgilendirme amaçlıdır. Şu anda sizden herhangi bir işlem yapmanız beklenmemektedir.</strong></p>
+      <p class="lead">Bu bildirim yalnızca bilgilendirme amaçlıdır. Şu anda sizden herhangi bir işlem yapmanız beklenmemektedir.</p>
       <p class="lead" id="metin2"></p>
 
       <div class="bilgi-blok">
+        <p class="bilgi-baslik">Bu iletiyi neden aldım?</p>
         <p id="bilgiMetin1"></p>
         <p id="bilgiMetin2"></p>
+        <p>Bu iletinin size yanlışlıkla ulaştığını düşünüyorsanız herhangi bir işlem yapmanız gerekmez. Teknik bir hata olduğunu düşünüyorsanız <a href="mailto:destek@eonarya.com" style="color:var(--purple);text-decoration:underline;">destek@eonarya.com</a> adresinden bizimle iletişime geçebilirsiniz.</p>
+      </div>
+
+      <div class="bilgi-blok">
+        <p class="bilgi-baslik">Eonarya Nedir?</p>
+        <p>Eonarya, insanların geleceğe bırakmak istedikleri mesajları, anıları ve önemli bilgileri doğru zamanda doğru kişilere ulaştırabilmesini sağlayan bir teslimat sistemidir.</p>
+        <p>Eonarya teslimat ve doğrulama süreçlerinde herhangi bir yönlendirme yapmaz. Sistem yalnızca verilen yanıtları kaydeder ve önceden tanımlanmış kuralları uygular.</p>
+        <p>Eonarya, kullanıcılar tarafından oluşturulan içeriklerin veya verilen yanıtların doğruluğunu değerlendirmez; yalnızca teslimat ve doğrulama sürecinin işletilmesini sağlar.</p>
       </div>
     </article>
 
