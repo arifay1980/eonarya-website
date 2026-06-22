@@ -131,7 +131,9 @@
     .footer-links a { margin: 0 8px; }
 
     .footer-optout { margin-top: 8px; font-size: 11.5px; color: #B3B1C2; }
-    .footer-optout a { color: #938DA6; text-decoration: underline; }
+    /* CSS-FOOTER-OPTOUT-ORDER-01: .footer a ile aynı özgüllükte olduğu için kaynak
+       sırası önemli olmasın diye .footer .footer-optout a (üç parça) kullanıldı. */
+    .footer .footer-optout a { color: #938DA6; font-weight: 400; text-decoration: underline; }
 
     .store-badges {
       margin-top: 18px;
@@ -178,17 +180,17 @@
     <!-- Bilgilendirme icerigi — APPROVAL_INTRO e-postasıyla birebir aynı metin
          (supabase/functions/_shared/templates.ts) -->
     <article id="icerik" class="card" style="display:none">
-      <h1 id="baslik"></h1>
+      <h1><strong id="baslikAd"></strong> sizi Eonarya'da güvenilir kişi olarak belirledi</h1>
 
-      <p class="lead" id="metin1"></p>
+      <p class="lead"><strong id="metin1Ad"></strong>, Eonarya'daki Hayattayım Protokolü kapsamında sizi güvenilir kişilerinden biri olarak belirledi.</p>
       <p class="lead">Bu protokol, kullanıcıyla uzun süre iletişim kurulamadığında önceden belirlenen kişilerden bilgi alınmasını sağlayan bir güvenlik mekanizmasıdır.</p>
       <p class="lead">Bu bildirim yalnızca bilgilendirme amaçlıdır. Şu anda sizden herhangi bir işlem yapmanız beklenmemektedir.</p>
-      <p class="lead" id="metin2"></p>
+      <p class="lead">İleride protokol koşulları gerçekleşirse, <strong id="metin2Ad"></strong> hakkındaki bilginize başvurulabilmesi için size özel bir bağlantı gönderilebilir.</p>
 
       <div class="bilgi-blok">
         <p class="bilgi-baslik">Bu iletiyi neden aldım?</p>
-        <p id="bilgiMetin1"></p>
-        <p id="bilgiMetin2"></p>
+        <p>Bu iletiyi almanızın nedeni, <strong id="bilgiAd1"></strong> tarafından Eonarya içerisinde ilgili kişi olarak belirlenmiş olmanızdır.</p>
+        <p>Süreçle ilgili sorularınız varsa öncelikle <strong id="bilgiAd2"></strong> ile iletişime geçebilirsiniz.</p>
         <p>Bu iletinin size yanlışlıkla ulaştığını düşünüyorsanız herhangi bir işlem yapmanız gerekmez. Teknik bir hata olduğunu düşünüyorsanız <a href="mailto:destek@eonarya.com" style="color:var(--purple);text-decoration:underline;">destek@eonarya.com</a> adresinden bizimle iletişime geçebilirsiniz.</p>
       </div>
 
@@ -252,18 +254,16 @@
   }
 
   function doldur(sender) {
-    document.getElementById('baslik').textContent = sender + ' sizi Eonarya\'da güvenilir kişi olarak belirledi';
-    document.getElementById('metin1').textContent = sender + ', Eonarya\'daki Hayattayım Protokolü kapsamında sizi güvenilir kişilerinden biri olarak belirledi.';
-    document.getElementById('metin2').textContent = 'İleride protokol koşulları gerçekleşirse, ' + sender + ' hakkındaki bilginize başvurulabilmesi için size özel bir bağlantı gönderilebilir.';
-    document.getElementById('bilgiMetin1').textContent = 'Bu iletiyi almanızın nedeni, ' + sender + ' tarafından Eonarya içerisinde ilgili kişi olarak belirlenmiş olmanızdır.';
-    document.getElementById('bilgiMetin2').textContent = 'Süreçle ilgili sorularınız varsa öncelikle ' + sender + ' ile iletişime geçebilirsiniz.';
+    ['baslikAd', 'metin1Ad', 'metin2Ad', 'bilgiAd1', 'bilgiAd2'].forEach(id => {
+      document.getElementById(id).textContent = sender;
+    });
   }
 
   async function bilgiGetir() {
     if (PREVIEW) {
       doldur(PREVIEW_SENDER);
       document.getElementById('footerOptOut').innerHTML =
-        '<a href="tercihler.html?token=EO_PREVIEW_TERCIHLER">Mesaj Tercihleri</a>';
+        '<a href="tercihler.html?preview=1">Mesaj Tercihleri</a>';
       goster('icerik');
       return;
     }

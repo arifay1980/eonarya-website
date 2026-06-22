@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Eonarya — Hayattayım Doğrulaması</title>
+  <title>Eonarya — Hayattayım Doğrulaması Hatırlatması</title>
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -193,7 +193,7 @@
     /* CSS-FOOTER-OPTOUT-ORDER-01: .footer a ile aynı özgüllükte (specificity) olduğu
        için, kaynak sırası önemli olmasın diye .footer-optout a şeklinde (iki sınıf)
        yazıldı — aksi halde sonradan gelen .footer a kuralı bunu ezip moru/kalını
-       miras bırakabilir (gerçek yaşanmış hata: onay.html/onay-hatirlatma.html'de). */
+       miras bırakabilir. */
     .footer .footer-optout a { color: #938DA6; font-weight: 400; text-decoration: underline; }
 
     /* Evet / Hayir cevap butonlari */
@@ -291,12 +291,14 @@
       Yükleniyor…
     </div>
 
-    <!-- Asama 1: Karsilama -->
+    <!-- Asama 1: Karsilama — APPROVAL_REQUEST_REMINDER e-postasıyla birebir aynı metin
+         (supabase/functions/_shared/templates.ts) -->
     <section id="karsilama" class="card center-card" style="display:none">
-      <div class="badge">DOĞRULAMA TALEBİ</div>
-      <h1><strong id="karsilamaAd"></strong> hakkında bilginize ihtiyaç duyuluyor</h1>
+      <div class="badge">DOĞRULAMA TALEBİ HATIRLATMASI</div>
+      <h1><strong id="karsilamaAd"></strong> hakkında bilginiz hâlâ bekleniyor</h1>
       <p class="lead"><strong id="karsilamaAd2"></strong> tarafından oluşturulan Hayattayım Protokolü doğrulama aşamasına geçti.</p>
       <p class="lead">Siz, bu süreçte bilginize başvurulabilecek güvenilir kişilerden biri olarak belirlenmiştiniz.</p>
+      <p class="lead">Daha önce <strong id="karsilamaAd3"></strong> ile ilgili bir doğrulama talebi göndermiştik. Henüz yanıt alınamadığı için bu hatırlatma gönderilmiştir.</p>
       <p class="lead">Lütfen yalnızca bildiğiniz bilgiler doğrultusunda yanıt verin.</p>
 
       <div class="info">
@@ -315,18 +317,18 @@
       </div>
 
       <button class="cta" id="baslaBtn" type="button">Doğrulamaya Başla</button>
-      <p class="note">Bu bağlantı yalnızca size özeldir.</p>
+      <p class="note">Bu bağlantı, daha önce gönderilen bağlantıyla aynıdır.</p>
 
       <div class="bilgi-blok">
         <p class="bilgi-baslik">Bu bağlantı hakkında</p>
-        <p>Bu bağlantı yalnızca size özeldir.</p>
-        <p>Yalnızca bir kez kullanılabilir.</p>
+        <p>Bu bağlantı, daha önce gönderilen bağlantıyla aynıdır.</p>
+        <p>Yalnızca size özeldir ve bir kez kullanılabilir.</p>
         <p>Yanıtınız kaydedildikten sonra bağlantı geçersiz hale gelir.</p>
       </div>
 
       <div class="bilgi-blok">
         <p class="bilgi-baslik">Bu iletiyi neden aldım?</p>
-        <p><strong id="karsilamaAd3"></strong>, olası bir doğrulama sürecinde bilginize başvurulabilmesi için sizi güvenilir kişilerinden biri olarak belirledi.</p>
+        <p>Bu doğrulama süreci henüz tamamlanmadığı ve sizden yanıt alınamadığı için bu hatırlatma gönderilmektedir.</p>
         <p>Bu iletinin size yanlışlıkla ulaştığını düşünüyorsanız herhangi bir işlem yapmanız gerekmez. Teknik bir hata olduğunu düşünüyorsanız <a href="mailto:destek@eonarya.com" style="color:var(--purple);text-decoration:underline;">destek@eonarya.com</a> adresinden bizimle iletişime geçebilirsiniz.</p>
       </div>
 

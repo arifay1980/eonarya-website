@@ -193,6 +193,31 @@
       line-height: 22px;
     }
 
+    /* GÜVEN-BLOK-PARITY-01: e-postadaki "Bu iletiyi neden aldım?" / "Eonarya Nedir?"
+       blokları ile aynı görsel stil (bilgi.html/onay.html'deki .bilgi-blok ile
+       birebir aynı) — içerik birebir templates.ts'teki e-postayla eşit. */
+    .bilgi-blok {
+      background: #faf9fd;
+      border: 1px solid #eeeaf7;
+      border-radius: 16px;
+      padding: 18px 20px;
+      margin: 20px 0 0;
+      text-align: left;
+    }
+    .bilgi-blok p {
+      font-size: 14px;
+      line-height: 22px;
+      color: var(--muted);
+    }
+    .bilgi-blok p + p { margin-top: 10px; }
+    .bilgi-blok + .bilgi-blok { margin-top: 16px; }
+    .bilgi-baslik {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px !important;
+    }
+
     /* Mesaj icerigi karti */
     #icerik.card { overflow: hidden; }
 
@@ -296,7 +321,9 @@
     .footer-links a { margin: 0 8px; }
 
     .footer-optout { margin-top: 8px; font-size: 11.5px; color: #B3B1C2; }
-    .footer-optout a { color: #938DA6; text-decoration: underline; }
+    /* CSS-FOOTER-OPTOUT-ORDER-01: .footer a ile aynı özgüllükte olduğu için kaynak
+       sırası önemli olmasın diye .footer .footer-optout a (üç parça) kullanıldı. */
+    .footer .footer-optout a { color: #938DA6; font-weight: 400; text-decoration: underline; }
     .footer-optout a + a { margin-left: 10px; }
 
     .store-badges {
@@ -351,7 +378,7 @@
     <!-- Karsilama ekrani -->
     <section id="karsilama" class="card" style="display:none">
       <div class="badge" id="badge"></div>
-      <h1 id="karsilamaBaslik"></h1>
+      <h1><strong id="karsilamaAd"></strong> size bir mesaj bıraktı</h1>
       <p class="lead">Bu mesaj, size belirli bir zamanda veya belirli koşullar gerçekleştiğinde ulaştırılmak üzere hazırlanmıştır.</p>
 
       <div class="info">
@@ -382,6 +409,19 @@
 
       <button class="cta" id="acBtn" type="button" disabled>Mesajı Görüntüle</button>
       <p class="note">Bu içerik yalnızca sizin görüntülemeniz için hazırlanmıştır.</p>
+
+      <div class="bilgi-blok">
+        <p class="bilgi-baslik">Bu iletiyi neden aldım?</p>
+        <p><strong id="karsilamaAd2"></strong>, bu mesajın belirli bir zamanda veya belirli koşullar gerçekleştiğinde size ulaştırılmasını istemiştir.</p>
+        <p>Bu iletinin size yanlışlıkla ulaştığını düşünüyorsanız herhangi bir işlem yapmanız gerekmez. Teknik bir hata olduğunu düşünüyorsanız <a href="mailto:destek@eonarya.com" style="color:var(--purple);text-decoration:underline;">destek@eonarya.com</a> adresinden bizimle iletişime geçebilirsiniz.</p>
+      </div>
+
+      <div class="bilgi-blok">
+        <p class="bilgi-baslik">Eonarya Nedir?</p>
+        <p>Eonarya, insanların geleceğe bırakmak istedikleri mesajları, anıları ve önemli bilgileri doğru zamanda doğru kişilere ulaştırabilmesini sağlayan bir teslimat sistemidir.</p>
+        <p>Eonarya teslimat ve doğrulama süreçlerinde herhangi bir yönlendirme yapmaz. Sistem yalnızca verilen yanıtları kaydeder ve önceden tanımlanmış kuralları uygular.</p>
+        <p>Eonarya, kullanıcılar tarafından oluşturulan içeriklerin veya verilen yanıtların doğruluğunu değerlendirmez; yalnızca teslimat ve doğrulama sürecinin işletilmesini sağlar.</p>
+      </div>
     </section>
 
     <!-- Mesaj icerigi ekrani -->
@@ -446,6 +486,17 @@
   const EDGE  = 'https://jvakvxaadntxzrbxrzcx.supabase.co/functions/v1/get-message';
   const token = new URLSearchParams(window.location.search).get('token') || '';
 
+  // EMAIL-PREVIEW-01: ?preview=1 ile gerçek token/API olmadan sabit test verisiyle
+  // gösterir — email-preview.html'deki iframe için. Gerçek SMS/e-posta akışında kullanılmaz.
+  const PREVIEW      = new URLSearchParams(window.location.search).get('preview') === '1';
+  const PREVIEW_DATA = {
+    ok: true,
+    sender_name:    'Arif Ay',
+    delivery_badge: 'Planlanmış Mesaj',
+    delivery_type:  'Planlanmış Mesaj',
+    delivery_date:  '9 Haziran 2026',
+  };
+
   const HATALAR = {
     token_eksik:       'Link eksik veya hatalı. Lütfen orijinal linki kullanın.',
     mesaj_bulunamadi:  'Bu mesaj bulunamadı. Link geçersiz olabilir.',
@@ -485,6 +536,17 @@
   }
 
   async function karsilamaGetir() {
+    if (PREVIEW) {
+      const data = PREVIEW_DATA;
+      document.getElementById('badge').textContent          = data.delivery_badge || '';
+      document.getElementById('karsilamaAd').textContent  = data.sender_name || 'Eonarya';
+      document.getElementById('karsilamaAd2').textContent = data.sender_name || 'Eonarya';
+      dolduRBilgi('info', data);
+      document.getElementById('footerOptOut').innerHTML =
+        '<a href="tercihler.html?preview=1">Mesaj Tercihleri</a>';
+      goster('karsilama');
+      return;
+    }
     if (!token) { gosterHata('token_eksik'); return; }
     try {
       const res  = await fetch(EDGE + '?token=' + encodeURIComponent(token));
@@ -493,7 +555,8 @@
       if (!data.ok) { gosterHata(data.hata); return; }
 
       document.getElementById('badge').textContent          = data.delivery_badge || '';
-      document.getElementById('karsilamaBaslik').textContent = (data.sender_name || 'Eonarya') + ' size bir mesaj bıraktı';
+      document.getElementById('karsilamaAd').textContent  = data.sender_name || 'Eonarya';
+      document.getElementById('karsilamaAd2').textContent = data.sender_name || 'Eonarya';
       dolduRBilgi('info', data);
       footerLinkleriDoldur(data);
 

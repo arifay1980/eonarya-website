@@ -360,6 +360,10 @@
   const CONTACT_EDGE = 'https://jvakvxaadntxzrbxrzcx.supabase.co/functions/v1/recipient-contact-update';
   const token = new URLSearchParams(window.location.search).get('token') || '';
 
+  // EMAIL-PREVIEW-01: ?preview=1 ile gerçek token/API olmadan sabit test verisiyle
+  // gösterir — email-preview.html'deki iframe için. Gerçek SMS/e-posta akışında kullanılmaz.
+  const PREVIEW = new URLSearchParams(window.location.search).get('preview') === '1';
+
   const HATALAR = {
     token_eksik:             'Link eksik veya hatalı. Lütfen orijinal linki kullanın.',
     gecersiz_token:          'Bu link geçersiz.',
@@ -386,6 +390,14 @@
   let senderName = 'Eonarya';
 
   async function init() {
+    if (PREVIEW) {
+      senderName = 'Arif Ay';
+      document.getElementById('hubMetin').textContent =
+        'Bu sayfadan ' + senderName + ' tarafından Eonarya üzerinden gönderilen mesajlarla ilgili tercihlerinizi yönetebilirsiniz.';
+      document.getElementById('iletisimKart').style.display = '';
+      goster('hub');
+      return;
+    }
     if (!token) { gosterHata('token_eksik'); return; }
     try {
       const res  = await fetch(OPT_OUT_EDGE + '?token=' + encodeURIComponent(token));
