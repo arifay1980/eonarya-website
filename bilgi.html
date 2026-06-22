@@ -225,6 +225,11 @@
   const EDGE  = 'https://jvakvxaadntxzrbxrzcx.supabase.co/functions/v1/get-approval-intro';
   const token = new URLSearchParams(window.location.search).get('token') || '';
 
+  // EMAIL-PREVIEW-01: ?preview=1 ile gerçek token/API olmadan sabit test verisiyle
+  // gösterir — email-preview.html'deki iframe için. Gerçek SMS akışında kullanılmaz.
+  const PREVIEW        = new URLSearchParams(window.location.search).get('preview') === '1';
+  const PREVIEW_SENDER = 'Arif Ay';
+
   const HATALAR = {
     token_eksik:         'Link eksik veya hatalı. Lütfen orijinal linki kullanın.',
     bildirim_bulunamadi: 'Bu bildirim bulunamadı. Link geçersiz olabilir.',
@@ -243,7 +248,22 @@
     goster('hata');
   }
 
+  function doldur(sender) {
+    document.getElementById('baslik').textContent = sender + ' sizi Eonarya\'da güvenilir kişi olarak belirledi';
+    document.getElementById('metin1').textContent = sender + ', Eonarya\'daki Hayattayım Protokolü kapsamında sizi güvenilir kişilerinden biri olarak belirledi.';
+    document.getElementById('metin2').textContent = 'İleride protokol koşulları gerçekleşirse, ' + sender + ' hakkındaki bilginize başvurulabilmesi için size özel bir bağlantı gönderilebilir.';
+    document.getElementById('bilgiMetin1').textContent = 'Bu iletiyi almanızın nedeni, ' + sender + ' tarafından Eonarya içerisinde ilgili kişi olarak belirlenmiş olmanızdır.';
+    document.getElementById('bilgiMetin2').textContent = 'Süreçle ilgili sorularınız varsa öncelikle ' + sender + ' ile iletişime geçebilirsiniz.';
+  }
+
   async function bilgiGetir() {
+    if (PREVIEW) {
+      doldur(PREVIEW_SENDER);
+      document.getElementById('footerOptOut').innerHTML =
+        '<a href="tercihler.html?token=EO_PREVIEW_TERCIHLER">Mesaj Tercihleri</a>';
+      goster('icerik');
+      return;
+    }
     if (!token) { gosterHata('token_eksik'); return; }
     try {
       const res  = await fetch(EDGE + '?token=' + encodeURIComponent(token));
@@ -251,12 +271,7 @@
 
       if (!data.ok) { gosterHata(data.hata); return; }
 
-      const sender = data.sender_name || 'Eonarya';
-      document.getElementById('baslik').textContent = sender + ' sizi Eonarya\'da güvenilir kişi olarak belirledi';
-      document.getElementById('metin1').textContent = sender + ', Eonarya\'daki Hayattayım Protokolü kapsamında sizi güvenilir kişilerinden biri olarak belirledi.';
-      document.getElementById('metin2').textContent = 'İleride protokol koşulları gerçekleşirse, ' + sender + ' hakkındaki bilginize başvurulabilmesi için size özel bir bağlantı gönderilebilir.';
-      document.getElementById('bilgiMetin1').textContent = 'Bu iletiyi almanızın nedeni, ' + sender + ' tarafından Eonarya içerisinde ilgili kişi olarak belirlenmiş olmanızdır.';
-      document.getElementById('bilgiMetin2').textContent = 'Süreçle ilgili sorularınız varsa öncelikle ' + sender + ' ile iletişime geçebilirsiniz.';
+      doldur(data.sender_name || 'Eonarya');
 
       document.getElementById('footerOptOut').innerHTML =
         '<a href="tercihler.html?token=' + encodeURIComponent(token) + '">Mesaj Tercihleri</a>';
