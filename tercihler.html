@@ -314,22 +314,32 @@
           <label for="email">E-posta adresi</label>
           <input type="email" id="email" placeholder="ornek@eposta.com" autocomplete="email">
         </div>
-        <div class="field">
-          <label for="phone">Telefon numarası</label>
-          <input type="tel" id="phone" placeholder="05XX XXX XX XX" autocomplete="tel">
-        </div>
-        <p class="field-hint">En az birini doldurmanız yeterlidir. Bu değişiklik yalnızca bu göndericiden gelecek ölüm sonrası mesajları etkiler.</p>
+        <p class="field-hint">Bu değişiklik yalnızca bu göndericiden gelecek ölüm sonrası mesajları etkiler. Onay için kayıtlı e-postanıza bir link göndereceğiz.</p>
         <button class="cta" id="kaydetBtn" type="submit">Bilgilerimi Güncelle</button>
       </form>
       <p class="note">Bu işlem sizin orijinal kişi kaydınızı değiştirmez, yalnızca bu teslimat kanalı için geçerli olur.</p>
     </section>
 
-    <!-- İletişim güncelleme: tesekkur -->
+    <!-- İletişim güncelleme: talep alındı (henüz onaylanmadı) -->
     <section id="iletisimTesekkur" class="card center-card" style="display:none">
-      <div class="badge">KAYDEDİLDİ</div>
-      <h1>İletişim bilgileriniz güncellendi</h1>
-      <p class="lead">Bundan sonraki teslimatlar yeni bilgilerinizi kullanacaktır.</p>
+      <div class="badge">ONAY BEKLİYOR</div>
+      <h1>Talebiniz alındı</h1>
+      <p class="lead">Kayıtlı e-postanıza bir onay linki gönderdik. Bu değişikliği siz istediyseniz oradaki linke tıklayın — adresiniz ancak onaylandıktan sonra değişir.</p>
       <button class="cta" id="iletisimKapatBtn" type="button">Ekranı Kapat</button>
+    </section>
+
+    <!-- Çift onay zinciri: eski adres onayı tamamlandı -->
+    <section id="confirmEskiOnaylandi" class="card center-card" style="display:none">
+      <div class="badge">ONAYLANDI</div>
+      <h1>Talebiniz onaylandı</h1>
+      <p class="lead">Şimdi yeni e-posta adresinize bir doğrulama linki gönderdik. Teslimat adresiniz, o link tıklanana kadar değişmeyecek.</p>
+    </section>
+
+    <!-- Çift onay zinciri: yeni adres doğrulaması tamamlandı -->
+    <section id="confirmYeniOnaylandi" class="card center-card" style="display:none">
+      <div class="badge">DOĞRULANDI</div>
+      <h1>Teslimat adresiniz güncellendi</h1>
+      <p class="lead">Bundan sonraki teslimatlar yeni adresinizi kullanacak.</p>
     </section>
 
     <!-- Hata -->
@@ -365,19 +375,22 @@
   const PREVIEW = new URLSearchParams(window.location.search).get('preview') === '1';
 
   const HATALAR = {
-    token_eksik:             'Link eksik veya hatalı. Lütfen orijinal linki kullanın.',
-    gecersiz_token:          'Bu link geçersiz.',
-    kapsam_disi:             'Bu işlem yalnızca ölüm sonrası teslimatlar için geçerlidir.',
-    dogrulama_tamamlanmamis: 'Bu işlem yalnızca doğrulama tamamlandıktan sonra kullanılabilir.',
-    bilgi_eksik:             'E-posta veya telefon numarasından en az birini girmelisiniz.',
-    gecersiz_email:          'Girdiğiniz e-posta adresi geçerli değil.',
-    gecersiz_telefon:        'Girdiğiniz telefon numarası geçerli değil.',
-    gecersiz_alici:          'Bu link bir alıcıya bağlı değil.',
-    kayit_hatasi:            'İşleminiz kaydedilemedi. Lütfen tekrar deneyin.',
-    baglanti_hatasi:         'Bağlantı hatası. Lütfen sayfayı yenileyin.',
+    token_eksik:               'Link eksik veya hatalı. Lütfen orijinal linki kullanın.',
+    gecersiz_token:            'Bu link geçersiz.',
+    kapsam_disi:               'Bu işlem yalnızca ölüm sonrası teslimatlar için geçerlidir.',
+    dogrulama_tamamlanmamis:   'Bu işlem yalnızca doğrulama tamamlandıktan sonra kullanılabilir.',
+    bilgi_eksik:               'E-posta adresinizi girmelisiniz.',
+    gecersiz_email:            'Girdiğiniz e-posta adresi geçerli değil.',
+    telefon_henuz_desteklenmiyor: 'Telefon numarasıyla güncelleme şu an desteklenmiyor — yalnızca e-posta kullanabilirsiniz.',
+    dogrulanabilir_kanal_yok: 'İletişim bilgilerinizi güncellemek için doğrulanabilir kayıtlı bir e-postanız bulunmalıdır.',
+    gecersiz_alici:            'Bu link bir alıcıya bağlı değil.',
+    kayit_hatasi:              'İşleminiz kaydedilemedi. Lütfen tekrar deneyin.',
+    baglanti_hatasi:           'Bağlantı hatası. Lütfen sayfayı yenileyin.',
+    gecersiz_onay_tokeni:      'Bu onay linki geçersiz.',
+    onay_suresi_gecti:         'Bu onay linkinin süresi geçti. Lütfen değişiklik talebini yeniden başlatın.',
   };
 
-  const TUM_EKRANLAR = ['yukleniyor', 'hub', 'optOutOnay', 'optOutTesekkur', 'vazgecildi', 'iletisimForm', 'iletisimTesekkur', 'hata'];
+  const TUM_EKRANLAR = ['yukleniyor', 'hub', 'optOutOnay', 'optOutTesekkur', 'vazgecildi', 'iletisimForm', 'iletisimTesekkur', 'confirmEskiOnaylandi', 'confirmYeniOnaylandi', 'hata'];
   function goster(id) {
     TUM_EKRANLAR.forEach(x => { document.getElementById(x).style.display = (x === id) ? '' : 'none'; });
   }
@@ -389,7 +402,24 @@
 
   let senderName = 'Eonarya';
 
+  // R16/RECIPIENT-CONTACT-VERIFY-01: çift onay zincirinin linkleri (e-postadan
+  // gelir) bu sayfayı ?confirm=old|new&token=<confirm_token> ile açar — bu token
+  // normal "token" (view_token) ile karıştırılmamalı, ayrı bir akış.
+  const confirmAdim = new URLSearchParams(window.location.search).get('confirm');
+
+  async function confirmIsle() {
+    try {
+      const res  = await fetch(CONTACT_EDGE + '?confirm=' + encodeURIComponent(confirmAdim) + '&token=' + encodeURIComponent(token));
+      const data = await res.json();
+      if (!data.ok) { gosterHata(data.hata); return; }
+      goster(confirmAdim === 'old' ? 'confirmEskiOnaylandi' : 'confirmYeniOnaylandi');
+    } catch {
+      gosterHata('baglanti_hatasi');
+    }
+  }
+
   async function init() {
+    if (confirmAdim) { await confirmIsle(); return; }
     if (PREVIEW) {
       senderName = 'Arif Ay';
       document.getElementById('hubMetin').textContent =
@@ -464,9 +494,8 @@
     formHata.style.display = 'none';
 
     const email = document.getElementById('email').value.trim();
-    const phone = document.getElementById('phone').value.trim();
 
-    if (!email && !phone) {
+    if (!email) {
       formHata.textContent = HATALAR.bilgi_eksik;
       formHata.style.display = 'block';
       return;
@@ -480,7 +509,7 @@
       const res  = await fetch(CONTACT_EDGE, {
         method:  'POST',
         headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify({ token, email, phone }),
+        body:    JSON.stringify({ token, email }),
       });
       const data = await res.json();
 
