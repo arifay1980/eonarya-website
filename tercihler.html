@@ -328,6 +328,16 @@
       <button class="cta" id="iletisimKapatBtn" type="button">Ekranı Kapat</button>
     </section>
 
+    <!-- Çift onay zinciri: onay bekliyor (GET-MUTATION-GUARD-01 — mutasyon yalnızca bu butona basılınca POST ile olur) -->
+    <section id="confirmOnay" class="card center-card" style="display:none">
+      <div class="badge">ONAYINIZ GEREKİYOR</div>
+      <h1 id="confirmBaslik"></h1>
+      <p class="lead" id="confirmMetin"></p>
+      <div class="cevap-butonlar">
+        <button class="cevap-btn cevap-evet" id="confirmOnayBtn" type="button"></button>
+      </div>
+    </section>
+
     <!-- Çift onay zinciri: eski adres onayı tamamlandı -->
     <section id="confirmEskiOnaylandi" class="card center-card" style="display:none">
       <div class="badge">ONAYLANDI</div>
@@ -390,7 +400,7 @@
     onay_suresi_gecti:         'Bu onay linkinin süresi geçti. Lütfen değişiklik talebini yeniden başlatın.',
   };
 
-  const TUM_EKRANLAR = ['yukleniyor', 'hub', 'optOutOnay', 'optOutTesekkur', 'vazgecildi', 'iletisimForm', 'iletisimTesekkur', 'confirmEskiOnaylandi', 'confirmYeniOnaylandi', 'hata'];
+  const TUM_EKRANLAR = ['yukleniyor', 'hub', 'optOutOnay', 'optOutTesekkur', 'vazgecildi', 'iletisimForm', 'iletisimTesekkur', 'confirmOnay', 'confirmEskiOnaylandi', 'confirmYeniOnaylandi', 'hata'];
   function goster(id) {
     TUM_EKRANLAR.forEach(x => { document.getElementById(x).style.display = (x === id) ? '' : 'none'; });
   }
@@ -407,19 +417,61 @@
   // normal "token" (view_token) ile karıştırılmamalı, ayrı bir akış.
   const confirmAdim = new URLSearchParams(window.location.search).get('confirm');
 
-  async function confirmIsle() {
+  // GET-MUTATION-GUARD-01 (2026-07-14): önceden sayfa açılır açılmaz otomatik
+  // onaylıyordu (GET isteği tek başına durum değiştiriyordu) — bir mail
+  // sağlayıcısının linki otomatik ön-getirmesi tek başına onayı tamamlayabilirdi.
+  // Artık sayfa açılışı yalnızca token'ı DOĞRULAR (GET, salt-okuma); asıl onay
+  // yalnızca kullanıcı "Onaylıyorum" butonuna bastığında POST ile gönderilir.
+  const CONFIRM_METINLER = {
+    old: {
+      baslik: 'Bu değişikliği siz mi istediniz?',
+      metin:  'Bu kişinin ölüm sonrası mesajlarının teslim edileceği e-posta adresinin güncellenmesini onaylıyor musunuz? Onaylarsanız yeni adresin doğrulanması için bir sonraki adıma geçilecek.',
+      buton:  'Evet, onaylıyorum',
+    },
+    new: {
+      baslik: 'Yeni adresinizi doğrulayın',
+      metin:  'Bu e-posta adresinin gerçekten size ait olduğunu onaylıyor musunuz? Onayladıktan sonra teslimat adresiniz bu adres olacak.',
+      buton:  'Adresimi doğrula',
+    },
+  };
+
+  async function confirmBilgiGetir() {
     try {
       const res  = await fetch(CONTACT_EDGE + '?confirm=' + encodeURIComponent(confirmAdim) + '&token=' + encodeURIComponent(token));
       const data = await res.json();
       if (!data.ok) { gosterHata(data.hata); return; }
-      goster(confirmAdim === 'old' ? 'confirmEskiOnaylandi' : 'confirmYeniOnaylandi');
+
+      const metin = CONFIRM_METINLER[confirmAdim];
+      document.getElementById('confirmBaslik').textContent  = metin.baslik;
+      document.getElementById('confirmMetin').textContent   = metin.metin;
+      document.getElementById('confirmOnayBtn').textContent = metin.buton;
+      goster('confirmOnay');
     } catch {
       gosterHata('baglanti_hatasi');
     }
   }
 
+  async function confirmOnayla() {
+    const btn = document.getElementById('confirmOnayBtn');
+    btn.disabled = true;
+    try {
+      const res  = await fetch(CONTACT_EDGE, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ confirm: confirmAdim, token }),
+      });
+      const data = await res.json();
+      if (!data.ok) { gosterHata(data.hata); return; }
+      goster(confirmAdim === 'old' ? 'confirmEskiOnaylandi' : 'confirmYeniOnaylandi');
+    } catch {
+      gosterHata('baglanti_hatasi');
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
   async function init() {
-    if (confirmAdim) { await confirmIsle(); return; }
+    if (confirmAdim) { await confirmBilgiGetir(); return; }
     if (PREVIEW) {
       senderName = 'Arif Ay';
       document.getElementById('hubMetin').textContent =
@@ -539,6 +591,8 @@
   document.getElementById('form').addEventListener('submit', iletisimKaydet);
   document.getElementById('iletisimKapatBtn').addEventListener('click', () => window.close());
   document.getElementById('iletisimGeriLink').addEventListener('click', (e) => { e.preventDefault(); goster('hub'); });
+
+  document.getElementById('confirmOnayBtn').addEventListener('click', confirmOnayla);
 
   init();
 </script>

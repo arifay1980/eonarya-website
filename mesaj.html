@@ -488,6 +488,12 @@
 
   // EMAIL-PREVIEW-01: ?preview=1 ile gerçek token/API olmadan sabit test verisiyle
   // gösterir — email-preview.html'deki iframe için. Gerçek SMS/e-posta akışında kullanılmaz.
+  // PLUS-ONIZLEME-12: Mobil uygulamanın "Alıcı Deneyimini Önizle" WebView'ı da aynı
+  // ?preview=1 modunu kullanır ama sabit PREVIEW_DATA yerine editördeki taslağı
+  // window.__EONARYA_PREVIEW_DATA__'ya injectedJavaScript ile yazar; bu değişken
+  // yoksa (email-preview.html'in mevcut iframe kullanımı) sabit PREVIEW_DATA'ya
+  // düşülür — o davranış bozulmaz. Gerçek get-message sunucusuna PREVIEW modunda
+  // hiçbir zaman istek atılmaz.
   const PREVIEW      = new URLSearchParams(window.location.search).get('preview') === '1';
   const PREVIEW_DATA = {
     ok: true,
@@ -496,6 +502,10 @@
     delivery_type:  'Planlanmış Mesaj',
     delivery_date:  '9 Haziran 2026',
   };
+
+  function previewVerisi() {
+    return window.__EONARYA_PREVIEW_DATA__ || PREVIEW_DATA;
+  }
 
   const HATALAR = {
     token_eksik:       'Link eksik veya hatalı. Lütfen orijinal linki kullanın.',
@@ -537,7 +547,7 @@
 
   async function karsilamaGetir() {
     if (PREVIEW) {
-      const data = PREVIEW_DATA;
+      const data = previewVerisi();
       document.getElementById('badge').textContent          = data.delivery_badge || '';
       document.getElementById('karsilamaAd').textContent  = data.sender_name || 'Eonarya';
       document.getElementById('karsilamaAd2').textContent = data.sender_name || 'Eonarya';
@@ -567,6 +577,33 @@
   }
 
   async function mesajiAc() {
+    if (PREVIEW) {
+      const data = previewVerisi();
+      dolduRBilgi('meta', data);
+      document.getElementById('footerOptOut').innerHTML =
+        '<a href="tercihler.html?preview=1">Mesaj Tercihleri</a>';
+      document.getElementById('mesajBaslik').textContent = data.message_title || '';
+      document.getElementById('mesajIcerik').textContent = data.message_body  || '';
+
+      const onizlemeMaddeler = Array.isArray(data.message_maddeler) ? data.message_maddeler : [];
+      const liste = document.getElementById('mesajMaddeler');
+      liste.innerHTML = '';
+      if (onizlemeMaddeler.length > 0) {
+        liste.style.display = 'flex';
+        onizlemeMaddeler.forEach(m => {
+          const satir = document.createElement('div');
+          satir.className = 'madde-satir';
+          satir.innerHTML =
+            '<div class="madde-nokta"></div>' +
+            '<span class="madde-metin">' + String(m).replace(/</g, '&lt;') + '</span>';
+          liste.appendChild(satir);
+        });
+      }
+
+      goster('icerik');
+      return;
+    }
+
     const btn = document.getElementById('acBtn');
     btn.disabled = true;
     btn.textContent = 'Açılıyor…';
