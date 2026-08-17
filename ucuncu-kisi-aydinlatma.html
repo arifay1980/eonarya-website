@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Üçüncü Kişi Aydınlatma Metni — Eonarya</title>
+  <meta name="description" content="Eonarya kullanıcıları tarafından sisteme eklenen kişilerin kişisel verilerinin işlenmesine ilişkin aydınlatma metni.">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    a{text-decoration:none;color:inherit}
+
+    :root{
+      --lav-300:#B9A4F2;
+      --bg:#FBFAFE;
+      --ink:#16121F;
+      --ink-soft:#534E61;
+      --ink-faint:#938DA6;
+      --line:#ECE6F7;
+      --d-bg:#0A0713;
+      --d-ink:#F4EFFF;
+      --d-ink-soft:#BCB1D8;
+      --d-ink-faint:#8479A6;
+      --d-line:rgba(180,150,255,.16);
+      --accent:#6D4CFF;
+      --warn:#B8792E;
+      --warn-bg:#FBF3E7;
+      --warn-line:#EDD9B8;
+      --font-head:'Manrope';
+      --font-body:'Manrope',-apple-system,system-ui,sans-serif;
+      --wrap:1180px;
+    }
+
+    body{font-family:var(--font-body);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+    .wrap{max-width:var(--wrap);margin:0 auto;padding:0 40px}
+
+    .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(251,250,254,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+    .nav-inner{max-width:var(--wrap);margin:0 auto;padding:18px 40px;display:flex;align-items:center;gap:32px}
+    .brand{display:flex;align-items:center;gap:11px}
+    .brand-word{font-family:'Jost',sans-serif;font-weight:400;letter-spacing:.42em;font-size:16px;text-indent:.42em;color:var(--ink)}
+    .nav-links{display:flex;gap:30px;margin-left:auto}
+    .nav-links a{font-size:14.5px;font-weight:500;color:var(--ink-soft);transition:color .25s}
+    .nav-links a:hover{color:var(--ink)}
+
+    .page-hero{padding:130px 40px 56px;background:var(--d-bg);text-align:center}
+    .page-hero-label{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--lav-300);margin-bottom:14px}
+    .page-hero h1{font-family:var(--font-head),sans-serif;font-size:clamp(26px,4vw,40px);font-weight:700;color:var(--d-ink);letter-spacing:-.02em;line-height:1.2}
+    .page-hero-meta{margin-top:14px;font-size:13.5px;color:var(--d-ink-faint)}
+
+    .content{max-width:720px;margin:0 auto;padding:64px 40px 100px}
+
+    .draft-banner{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:12px;padding:18px 22px;margin-bottom:44px;font-size:14px;line-height:1.7;color:var(--warn)}
+    .draft-banner strong{display:block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:6px}
+
+    .doc-section{margin-top:44px}
+    .doc-section:first-child{margin-top:0}
+    .doc-section-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:18px}
+    .doc-body{font-size:15px;line-height:1.8;color:var(--ink-soft);margin-bottom:10px}
+    .doc-lead{font-size:15px;line-height:1.8;color:var(--ink-soft);margin-bottom:6px}
+    .doc-bullets{list-style:none;padding:0;margin-bottom:10px}
+    .doc-bullets li{display:flex;gap:12px;font-size:15px;line-height:1.8;color:var(--ink-soft);margin-bottom:4px}
+    .doc-bullets li::before{content:'';display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--ink-faint);margin-top:13px;flex-shrink:0}
+    .contact-block{background:#F4F1FC;border-left:3px solid var(--accent);border-radius:0 8px 8px 0;padding:14px 18px;margin-top:12px;font-size:14.5px;color:var(--ink-soft);line-height:1.7}
+    .contact-block a{color:var(--accent);font-weight:500}
+
+    .footer{background:#070411;color:var(--d-ink);padding:80px 0 40px}
+    .footer-inner{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap;padding-bottom:48px;border-bottom:1px solid var(--d-line)}
+    .footer-brand .brand-word{color:#fff;font-size:22px;letter-spacing:.46em;text-indent:.46em}
+    .footer-tagline{margin-top:16px;font-family:'Jost',sans-serif;font-weight:300;font-size:15px;letter-spacing:.06em;color:var(--lav-300)}
+    .footer-links{display:flex;flex-wrap:wrap;gap:14px 34px}
+    .footer-links a{font-size:14.5px;color:var(--d-ink-soft);transition:color .25s}
+    .footer-links a:hover{color:#fff}
+    .footer-base{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding-top:30px}
+    .footer-mail{font-size:14.5px;color:var(--d-ink-soft);transition:color .25s}
+    .footer-mail:hover{color:var(--lav-300)}
+    .footer-copy{font-size:13.5px;color:var(--d-ink-faint)}
+
+    @media(max-width:700px){
+      .nav-inner{padding:16px 20px}
+      .nav-links{display:none}
+      .page-hero{padding:120px 20px 48px}
+      .content{padding:48px 20px 80px}
+      .wrap{padding:0 20px}
+      .footer-inner{flex-direction:column}
+      .footer-base{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/" aria-label="Eonarya ana sayfa">
+      <svg viewBox="0 0 40 40" width="26" height="26" aria-hidden="true">
+        <circle cx="20" cy="20" r="14" fill="none" stroke="url(#navRing)" stroke-width="2" stroke-linecap="round" stroke-dasharray="78 10" transform="rotate(-12 20 20)"/>
+        <circle cx="33.2" cy="20" r="3.1" fill="var(--accent)"/>
+        <defs>
+          <linearGradient id="navRing" x1="20" y1="6" x2="20" y2="34">
+            <stop offset="0" stop-color="#EFE7FF"/>
+            <stop offset="0.5" stop-color="#9C82F0"/>
+            <stop offset="1" stop-color="#4A28DF"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <span class="brand-word">EONARYA</span>
+    </a>
+    <nav class="nav-links" aria-label="Ana bölümler">
+      <a href="/#nedir">Eonarya Nedir</a>
+      <a href="/#nasil">Nasıl Çalışır</a>
+      <a href="/#guven">Güven</a>
+      <a href="/#sss">Sıkça Sorulanlar</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <p class="page-hero-label">Yasal</p>
+  <h1>Üçüncü Kişi Aydınlatma Metni</h1>
+  <p class="page-hero-meta">Eonarya Kullanıcısı Olmayan İlgili Kişiler İçin · Taslak</p>
+</section>
+
+<main class="content">
+
+  <div class="draft-banner">
+    <strong>Taslak — Hukuki İnceleme Bekliyor</strong>
+    Bu sayfa, nihai metni değildir; içeriği bir KVKK uzmanı/avukat tarafından onaylanmadan önce yayımlanmış bir taslaktır. Aşağıdaki bilgiler, Eonarya'nın genel Aydınlatma Metni'nde zaten yer alan ve kullanıcı tarafından onaylanmış olgulara dayanır; yalnızca muhatabı (bu sayfayı bir Eonarya kullanıcısının sizi sisteme eklemesi/güncellemesi nedeniyle görüyorsunuz) değişmiştir.
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">Bu Sayfa Kimin İçin?</h2>
+    <p class="doc-body">Bu sayfayı görüyorsanız, bir Eonarya kullanıcısı sizi uygulama içinde bir kişi (alıcı) olarak eklemiş veya iletişim bilgilerinizi güncellemiş olabilir. Siz Eonarya'nın kendisini kullanan bir kişi olmak zorunda değilsiniz — bu metin, sizin kişisel verilerinizin bu bağlamda nasıl işlendiğini açıklamak için hazırlanmıştır.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">1. Veri Sorumlusu</h2>
+    <p class="doc-body">Kişisel verileriniz, 6698 sayılı Kişisel Verilerin Korunması Kanunu ("KVKK") kapsamında, Eonarya mobil uygulamasını işleten Hizmet Sağlayıcı tarafından veri sorumlusu sıfatıyla işlenmektedir.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">2. Hangi Verileriniz İşleniyor</h2>
+    <ul class="doc-bullets">
+      <li>Ad, soyad</li>
+      <li>E-posta adresi (eklenmişse)</li>
+      <li>Telefon numarası (eklenmişse)</li>
+    </ul>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">3. İşlenme Amacı</h2>
+    <p class="doc-lead">Bilgileriniz yalnızca sizi ekleyen/güncelleyen kullanıcının uygulama içinde tanımladığı süreçler kapsamında işlenir:</p>
+    <ul class="doc-bullets">
+      <li>mesaj oluşturulması ve teslimatı,</li>
+      <li>teslimat planlarının yürütülmesi,</li>
+      <li>bildirim gönderilmesi,</li>
+      <li>onay süreçlerinin yürütülmesi.</li>
+    </ul>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">4. Hukuki Sebep</h2>
+    <p class="doc-body">Bilgileriniz, sizi ekleyen/güncelleyen kullanıcı tarafından, aranızdaki ilişki çerçevesinde uygulamaya aktarılır. Hizmet Sağlayıcı, bu bilgilerin doğruluğunu veya kullanıcının bunları paylaşmaya yetkili olup olmadığını doğrulamaz — kullanıcı bu konuda kendi beyanını verir.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">5. Haklarınız</h2>
+    <p class="doc-lead">KVKK'nın 11. maddesi uyarınca aşağıdaki haklara sahipsiniz:</p>
+    <ul class="doc-bullets">
+      <li>Kişisel verinizin işlenip işlenmediğini öğrenme</li>
+      <li>İşlenmişse buna ilişkin bilgi talep etme</li>
+      <li>İşlenme amacını öğrenme</li>
+      <li>Verinizin düzeltilmesini isteme</li>
+      <li>Verinizin silinmesini veya yok edilmesini isteme</li>
+      <li>Gelecekteki iletişimleri durdurmayı talep etme</li>
+    </ul>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">6. Başvuru</h2>
+    <p class="doc-body">Yukarıdaki haklarınıza ilişkin taleplerinizi aşağıdaki adresten iletebilirsiniz.</p>
+    <div class="contact-block">
+      E-posta: <a href="mailto:eonarya@eonarya.com">eonarya@eonarya.com</a>
+    </div>
+  </div>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <span class="brand-word">EONARYA</span>
+      <p class="footer-tagline">ZAMANIN ÖTESİNE BIRAK</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="/gizlilik.html">Gizlilik Politikası</a>
+      <a href="/aydinlatma.html">Aydınlatma Metni</a>
+      <a href="/kvkk.html">KVKK</a>
+      <a href="mailto:destek@eonarya.com">İletişim</a>
+    </nav>
+  </div>
+  <div class="wrap footer-base">
+    <a href="mailto:destek@eonarya.com" class="footer-mail">destek@eonarya.com</a>
+    <span class="footer-copy">© Eonarya</span>
+  </div>
+</footer>
+
+</body>
+</html>
