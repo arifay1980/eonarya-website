@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /bilgi.html
+Disallow: /mesaj.html
+Disallow: /onay.html
+Disallow: /onay-hatirlatma.html
+Disallow: /tercihler.html
+Disallow: /ucuncu-kisi-aydinlatma.html
+
+Sitemap: https://eonarya.com/sitemap.xml
