@@ -1,0 +1,15 @@
+{
+  "name": "eonarya-website",
+  "private": true,
+  "version": "1.0.0",
+  "description": "eonarya.com — statik site. Yardım Merkezi ve hukuki metinler, kardeş 'Eonarya' uygulama reposundaki tek kaynaklardan senkronize script'lerle üretilir (bkz. scripts/README.md).",
+  "scripts": {
+    "sync:help": "node scripts/sync-help-content.js",
+    "sync:legal": "node scripts/sync-legal-content.js",
+    "sync:all": "npm run sync:help && npm run sync:legal"
+  },
+  "devDependencies": {
+    "@babel/parser": "^7.24.0",
+    "@babel/traverse": "^7.24.0"
+  }
+}

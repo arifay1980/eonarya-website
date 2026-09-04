@@ -1,0 +1,355 @@
+{
+  "generatedAt": "2026-09-04T20:08:31.937Z",
+  "sourceNote": "GENERATED — DO NOT EDIT. Kaynak: Eonarya/services/helpContent.js (npm run sync:help ile üretildi).",
+  "categories": [
+    {
+      "id": "mesajlar",
+      "label": "Mesajlar",
+      "questions": [
+        {
+          "id": "mesaj-nedir",
+          "question": "Mesaj nedir?",
+          "answer": "Eonarya'da oluşturduğun mesajlar, belirlediğin kişilere belirlediğin zamanda veya belirli koşullar gerçekleştiğinde iletilir."
+        },
+        {
+          "id": "mesaj-turleri",
+          "question": "Hangi mesaj türleri var?",
+          "answer": "Dört tür mesaj oluşturabilirsin: Belirli Tarihte gönderilen mesaj, Her Yıl Aynı Tarihte tekrarlanan mesaj, Doğum Gününde gönderilen mesaj ve Benden Sonra mesajı."
+        },
+        {
+          "id": "mesaj-duzenleme",
+          "question": "Mesajı düzenleyebilir miyim?",
+          "answer": "Mesaj henüz teslim edilmediği sürece içeriğini, alıcısını ve zamanlamasını istediğin zaman değiştirebilirsin."
+        },
+        {
+          "id": "mesaj-silme",
+          "question": "Mesajı silersem ne olur?",
+          "answer": "Mesaj silinir. Bu işlem geri alınamaz."
+        },
+        {
+          "id": "mesaj-kanal",
+          "question": "Mesajlar hangi kanaldan gönderilir?",
+          "answer": null
+        },
+        {
+          "id": "mesaj-on-okuma",
+          "question": "Mesaj teslim edilmeden önce okunabilir mi?",
+          "answer": "Hayır. Mesaj içeriği, belirlediğin zaman veya koşul gerçekleşmeden kimse tarafından açılamaz — erişim bağlantısı ancak teslimat anında oluşturulur."
+        },
+        {
+          "id": "mesaj-teslimat-basarisiz",
+          "question": "Teslimat başarısız olursa ne olur?",
+          "answer": "Sistem belirlenen kurallara göre otomatik olarak yeniden dener. Sonuç, mesajın teslimat geçmişinde görünür."
+        }
+      ]
+    },
+    {
+      "id": "benden-sonra",
+      "label": "Benden Sonra",
+      "questions": [
+        {
+          "id": "bs-nedir",
+          "question": "Benden Sonra mesajı nedir?",
+          "answer": "Hayatta olmadığın doğrulandıktan sonra iletilmek üzere bıraktığın mesajlardır."
+        },
+        {
+          "id": "bs-ne-zaman",
+          "question": "Ne zaman gönderilir?",
+          "answer": "Hayattayım Protokolü tamamlandıktan ve hayatta olmadığın doğrulandıktan sonra gönderilir."
+        },
+        {
+          "id": "bs-hemen-mi",
+          "question": "Hemen gönderilir mi?",
+          "answer": "Hayır. Önce doğrulama ve bekleme süreci tamamlanır."
+        },
+        {
+          "id": "bs-degistirme",
+          "question": "Sonradan değiştirebilir miyim?",
+          "answer": "Mesaj teslim edilmediği sürece düzenleyebilir veya kaldırabilirsin."
+        },
+        {
+          "id": "bs-kimler-gorebilir",
+          "question": "Mesajlarımı kimler görebilir?",
+          "answer": "Sadece belirlediğin alıcı görebilir. Eonarya mesaj içeriklerini incelemez veya kontrol etmez."
+        }
+      ]
+    },
+    {
+      "id": "hayattayim",
+      "label": "Hayattayım Protokolü",
+      "questions": [
+        {
+          "id": "ht-nedir",
+          "question": "Hayattayım Protokolü nedir?",
+          "answer": "Belirlediğin aralıklarla senden yaşam teyidi alan doğrulama sistemidir."
+        },
+        {
+          "id": "ht-nasil-calisir",
+          "question": "Nasıl çalışır?",
+          "answer": "Belirlediğin süre dolduğunda sana bir Hayattayım bildirimi gönderilir. Yanıt vermezsen bir süre sonra ikinci, ardından son bildirim gönderilir. Hâlâ yanıt yoksa ve Güvenilir Kişiler eklediysen, onlara bir doğrulama talebi gönderilir."
+        },
+        {
+          "id": "ht-yanit-verirsem",
+          "question": "Yanıt verirsem ne olur?",
+          "answer": "Süreç sıfırlanır ve sayaç yeniden başlar."
+        },
+        {
+          "id": "ht-yanit-vermezsem",
+          "question": "Yanıt vermezsem ne olur?",
+          "answer": "Doğrulama süreci bir sonraki adıma geçer."
+        },
+        {
+          "id": "ht-guvenilir-kisi-devreye",
+          "question": "Güvenilir Kişiler ne zaman devreye girer?",
+          "answer": "Art arda Hayattayım bildirimlerine yanıt vermezsen, son bildirimden sonra Güvenilir Kişiler'e bir doğrulama talebi gönderilir."
+        },
+        {
+          "id": "ht-guvenilir-kisi-yok",
+          "question": "Güvenilir Kişi yoksa ne olur?",
+          "answer": "Güvenilir Kişi eklemediysen, son bildirimden sonra final bekleme süreci başlar. Bu süre içinde uygulamayı açarsan süreç sıfırlanır; açmazsan Benden Sonra teslimatları sistem kurallarına göre devreye girer."
+        },
+        {
+          "id": "ht-uygulama-silme",
+          "question": "Hayattayım Protokolü uygulamayı silince durur mu?",
+          "answer": "Hayır. Uygulamayı silmek protokolü durdurmaz — detay için Hesap ve Güvenlik bölümüne bak."
+        },
+        {
+          "id": "ht-kapatma",
+          "question": "Hayattayım'ı kapatırsam ne olur?",
+          "answer": "Bekleyen tüm kontroller iptal edilir ve süreç sıfırlanır. Yeniden açtığında temiz bir başlangıçtan devam eder."
+        }
+      ]
+    },
+    {
+      "id": "guvenilir-kisiler",
+      "label": "Güvenilir Kişiler",
+      "questions": [
+        {
+          "id": "gk-nedir",
+          "question": "Güvenilir Kişi nedir?",
+          "answer": "Hayattayım Protokolü'nde, sana ulaşılamadığında doğrulama amacıyla başvurulan kişilerdir."
+        },
+        {
+          "id": "gk-kac-kisi",
+          "question": "Kaç kişi eklemem gerekir?",
+          "answer": "En az 5 kişi eklemen gerekir. Üst sınır yoktur."
+        },
+        {
+          "id": "gk-kac-onay",
+          "question": "Kaç onay gerekir?",
+          "answer": "Varsayılan olarak 3 güvenilir kişinin \"hayatta değil\" demesi gerekir. Bu eşik karşılanırsa sistem hemen mesaj göndermez; önce final bekleme süreci başlar. \"Hayatta\" yanıtları ve cevapsız kalan kişiler bu eşik hesabına dahil edilmez."
+        },
+        {
+          "id": "gk-mesaj-gorebilir-mi",
+          "question": "Güvenilir kişi mesajlarımı görebilir mi?",
+          "answer": "Hayır. Güvenilir Kişiler yalnızca doğrulama sürecinde yer alır, mesajlarını göremezler."
+        },
+        {
+          "id": "gk-listeden-cikma",
+          "question": "Güvenilir kişi listeden çıkarsa ne olur?",
+          "answer": "Aktif Güvenilir Kişi sayın yeniden hesaplanır. Sayı onay eşiğine yaklaşırsa e-postayla uyarılırsın; eşiğin altına düşerse Hayattayım Protokolü otomatik olarak durdurulur ve sana bilgi verilir."
+        },
+        {
+          "id": "gk-iletisim-durdurma",
+          "question": "Güvenilir kişi benimle iletişimi durdurabilir mi?",
+          "answer": "Evet. Bir Güvenilir Kişi senden gelen tüm iletişimi durdurabilir; bu durumda pasif duruma alınır, doğrulama sürecinde artık sayılmaz ve sana bilgi verilir."
+        }
+      ]
+    },
+    {
+      "id": "planlar",
+      "label": "Planlar",
+      "questions": [
+        {
+          "id": "plan-nedir",
+          "question": "Plan nedir?",
+          "answer": "Belirli bir kişi veya konu için oluşturduğun takip yapısıdır."
+        },
+        {
+          "id": "plan-paylasim",
+          "question": "Plan paylaşımı ne yapar?",
+          "answer": "Paylaşım, kişi için ayrı takip kayıtları oluşturur; mesaj göndermez."
+        },
+        {
+          "id": "plan-silme",
+          "question": "Planı silersem ne olur?",
+          "answer": "Plan silinir. Bu işlem geri alınamaz."
+        },
+        {
+          "id": "plan-otomatik-mesaj",
+          "question": "Planlar otomatik mesaj gönderir mi?",
+          "answer": "Hayır. Mesaj oluşturma işlemi ayrıca yapılır."
+        },
+        {
+          "id": "plan-gecikme-bildirimi",
+          "question": "Gecikme bildirimi nedir?",
+          "answer": "Beklenen tarih geçtiği halde tamamlanmamış bir kayıt olduğunda gönderilen hatırlatmadır."
+        }
+      ]
+    },
+    {
+      "id": "kisiler",
+      "label": "Kişiler",
+      "questions": [
+        {
+          "id": "kisi-eklemek",
+          "question": "Kişi eklemek ne sağlar?",
+          "answer": "Mesaj ve plan işlemlerinde kullanacağın iletişim bilgilerini kayıt altına alır."
+        },
+        {
+          "id": "kisi-silme",
+          "question": "Kişiyi silersem ne olur?",
+          "answer": "Kişi silinir."
+        },
+        {
+          "id": "kisi-iletisim-degisme",
+          "question": "İletişim bilgisi değişirse ne olur?",
+          "answer": "Kişinin iletişim bilgilerini güncelleyebilirsin; sonraki teslimatlar yeni bilgiler üzerinden devam eder."
+        },
+        {
+          "id": "kisi-mesaj-istemiyor",
+          "question": "Bir kişi benden mesaj almak istemezse ne olur?",
+          "answer": "Kişi pasif duruma alınır; yeni mesaj ve planlarda kullanılamaz. Güvenilir Kişi ise doğrulama sürecinde artık sayılmaz."
+        },
+        {
+          "id": "kisi-tekrar-ekleme",
+          "question": "Aynı kişiyi birden fazla kez ekleyebilir miyim?",
+          "answer": "Evet, aynı kişiyi birden fazla kez ekleyebilirsin; sistem bunu otomatik olarak engellemez."
+        }
+      ]
+    },
+    {
+      "id": "teslimatlar",
+      "label": "Teslimatlar",
+      "questions": [
+        {
+          "id": "teslimat-nedir",
+          "question": "Teslimat nedir?",
+          "answer": "Bir mesajın alıcıya ulaştırılması işlemidir."
+        },
+        {
+          "id": "teslimat-ne-zaman-baslar",
+          "question": "Teslimat ne zaman başlar?",
+          "answer": "Mesajın türüne göre belirlediğin tarihte, doğum gününde veya Hayattayım Protokolü tamamlandığında başlar."
+        },
+        {
+          "id": "teslimat-nasil-anlarim",
+          "question": "Teslim edildiğini nasıl anlarım?",
+          "answer": "Teslimat geçmişinden görüntüleyebilirsin."
+        },
+        {
+          "id": "teslimat-goruntulendi-mi",
+          "question": "Görüntülendiğini görebilir miyim?",
+          "answer": null
+        },
+        {
+          "id": "teslimat-basarisiz",
+          "question": "Teslimat başarısız olursa ne olur?",
+          "answer": "Sistem yeniden deneme kurallarını uygular."
+        }
+      ]
+    },
+    {
+      "id": "hesap-guvenlik",
+      "label": "Hesap ve Güvenlik",
+      "questions": [
+        {
+          "id": "hg-pin",
+          "question": "PIN neyi korur?",
+          "answer": "Bu cihazdaki uygulama erişimini korur."
+        },
+        {
+          "id": "hg-biyometrik",
+          "question": "Biyometrik koruma neyi korur?",
+          "answer": "Bu cihazdaki uygulama erişimini korur."
+        },
+        {
+          "id": "hg-uygulama-silme",
+          "question": "Uygulamayı silersem ne olur?",
+          "answer": "Hesabın ve verilerin sunucuda saklanmaya devam eder; uygulamayı silmek hiçbir süreci (Hayattayım Protokolü dahil) durdurmaz. Tekrar yüklediğinde aynı hesapla devam edebilirsin."
+        },
+        {
+          "id": "hg-hesap-silme",
+          "question": "Hesabımı silersem ne olur?",
+          "answer": "Hesabın kapatılır."
+        },
+        {
+          "id": "hg-veri-koruma",
+          "question": "Verilerim nasıl korunuyor?",
+          "answer": "Verilerinin korunması için makul teknik ve idari önlemler alınır; erişim yetkili sistem bileşenleriyle sınırlıdır."
+        }
+      ]
+    },
+    {
+      "id": "hesap-dogrulamalari",
+      "label": "Hesap Doğrulamaları",
+      "questions": [
+        {
+          "id": "hd-neden-dogrulama",
+          "question": "Hesabımı neden doğrulamam gerekiyor?",
+          "answer": "Eonarya yalnızca kendi hesabında veri sakladığın bir uygulama değildir; belirlediğin koşullarda senin adına başka insanlara mesaj ulaştırabilir. Bu yüzden üçüncü kişilere yapılan teslimatlarda hesabının gerçekten senin tarafından kontrol edildiğine dair ek güven gerekir — doğrulama yöntemlerin kullanabileceğin teslimat kanallarını belirler. Hiç doğrulama yapmazsan Eonarya'yı kullanmaya devam edebilir ve kendine yönelik içerikler oluşturabilirsin; ancak başka bir kişiyi alıcı seçemez, üçüncü kişilere teslimat yapamaz ve Hayattayım Ek Protokolünü açamazsın."
+        },
+        {
+          "id": "hd-eposta-dogrulama",
+          "question": "E-posta doğrulaması ne anlama gelir?",
+          "answer": "E-posta doğrulaması, kayıtlı e-posta adresine erişebildiğini doğrular. Tek başına gerçek kişi kimliğini kanıtlamaz ve üçüncü kişilere teslimat yetkisi sağlayan Apple, Google veya T.C. Kimlik Kartı doğrulamalarının yerine geçmez."
+        },
+        {
+          "id": "hd-apple",
+          "question": "Apple ile doğrulama neyi sağlar?",
+          "answer": "Apple hesabını Eonarya hesabınla eşleştirerek hesabın için güçlü bir sahiplik sinyali oluşturursun. Apple doğrulaması, başka kişilere e-posta yoluyla mesaj gönderebilmeni sağlar ve Android'de de geçerliliğini korur."
+        },
+        {
+          "id": "hd-google",
+          "question": "Google ile doğrulama neyi sağlar?",
+          "answer": "Google hesabını Eonarya hesabınla eşleştirmek, başka bir kişiye e-posta yoluyla mesaj gönderebilmeni sağlar. Android'de Google doğrulaması tek başına yeterlidir. iOS'ta ise Apple veya T.C. Kimlik Kartı doğrulaması da gerekir."
+        },
+        {
+          "id": "hd-nfc",
+          "question": "T.C. Kimlik Kartı + NFC ile doğrulama neyi sağlar?",
+          "answer": "Kimlik kartını NFC ile eşleştirmek, Eonarya'daki en yüksek güven seviyesini sağlayan doğrulama yöntemidir. Başka bir kişiye SMS veya WhatsApp yoluyla mesaj gönderebilmen için gereklidir; tamamlandığında e-posta dahil desteklenen tüm iletişim kanalları kullanılabilir hale gelir. Kimlik kartından okunan bilgiler saklanmaz — yalnızca doğrulama sırasında hesabındaki bilgilerle karşılaştırılır, tamamlandığında ise yalnızca başarı bilgisi hesabına işlenir."
+        },
+        {
+          "id": "hd-nfc-hangi-bilgiler",
+          "question": "Kimlik kartımdan hangi bilgiler okunuyor?",
+          "answer": "NFC Kimlik Eşleşmesi sırasında kimlik kartından yalnızca ad, soyad ve doğum tarihi okunur. Bu bilgiler yalnızca Eonarya hesabındaki bilgilerinle eşleştirme amacıyla kullanılır."
+        },
+        {
+          "id": "hd-nfc-saklama",
+          "question": "T.C. kimlik numaram veya kartımın kopyası saklanıyor mu?",
+          "answer": "Hayır. T.C. kimlik numaran, kartın ham NFC verisi, kart okuması için girdiğin bilgiler (belge no, doğum tarihi, son geçerlilik tarihi) ve kimlik kartının herhangi bir kopyası kalıcı olarak saklanmaz."
+        },
+        {
+          "id": "hd-nfc-sonra-ne-oluyor",
+          "question": "Okunan kimlik bilgileri daha sonra ne oluyor?",
+          "answer": "Kimlik kartından okunan ad, soyad ve doğum tarihi yalnızca doğrulama anında hesabındaki bilgilerle karşılaştırılır. Kartın kendisinden okunan veriler saklanmaz; hesabına yalnızca kimlik eşleşmesinin başarıyla tamamlandığını gösteren bir doğrulama kaydı işlenir."
+        },
+        {
+          "id": "hd-nfc-zorunlu-mu",
+          "question": "NFC ile kimlik eşleştirmek zorunlu mu?",
+          "answer": "Hayır. Eonarya'yı kullanmak veya kendine yönelik içerik oluşturmak için NFC Kimlik Eşleşmesi şart değildir. Gereklilik, kullanmak istediğin özelliğe ve teslimat kanalına göre değişir — bugünkü kurala göre SMS ve WhatsApp gibi bazı üçüncü kişi iletişim kanallarını kullanabilmek için NFC Kimlik Eşleşmesi gerekir. Diğer doğrulama seçenekleri için \"Apple ile doğrulama neyi sağlar?\" ve \"Google ile doğrulama neyi sağlar?\" sorularına bakabilirsin."
+        },
+        {
+          "id": "hd-birden-fazla-yontem",
+          "question": "Birden fazla doğrulama yöntemi kullanabilir miyim?",
+          "answer": "Evet. Desteklenen yöntemlerden birden fazlasını hesabına ekleyebilirsin — örneğin Apple ile doğrulandıktan sonra ayrıca Google hesabını veya T.C. Kimlik Kartını da doğrulayabilirsin. Kullanabileceğin teslimat seçenekleri, hesabındaki doğrulamalara göre otomatik olarak belirlenir."
+        },
+        {
+          "id": "hd-cihaz-degisimi",
+          "question": "Cihazımı değiştirirsem ne olur?",
+          "answer": "T.C. Kimlik Kartı + NFC doğrulaman varsa Android/iOS geçişinde sorun olmaz. Apple doğrulaman varsa Android'e geçtiğinde de yeterli olmaya devam eder. Yalnızca Google doğrulaman varsa Android'de gerekli minimumu karşılarsın; iOS'a geçtiğinde ise Apple veya T.C. Kimlik Kartı ile doğrulama yapman gerekir."
+        },
+        {
+          "id": "hd-dogrulama-kaldirma",
+          "question": "Bir doğrulamayı kaldırırsam ne olur?",
+          "answer": "Bir doğrulama yöntemini hesabından kaldırman, o yöntemin sağladığı yetkilerin yeniden değerlendirilmesine yol açar. Hesabında kalan doğrulamalar gerekli güven seviyesini karşılamıyorsa üçüncü kişilere yeni mesaj oluşturamazsın ve ilgili teslimatlar durdurulabilir."
+        },
+        {
+          "id": "hd-aliciya-gosterim",
+          "question": "Doğrulamalar mesajımı alan kişiye gösterilir mi?",
+          "answer": "Evet. Üçüncü kişilere yapılan teslimatlarda, hesabını doğrulayan en yüksek yöntem alıcıya gösterilir (örneğin Apple hesabıyla doğrulandığın veya T.C. Kimlik Kartının eşleştirildiği bilgisi). Bu bilgi her teslimatta gösterilir ve kapatılamaz. Kendine yaptığın teslimatlarda bu bilgi gösterilmez."
+        }
+      ]
+    }
+  ]
+}
