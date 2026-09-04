@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Eonarya — ZAMANIN ÖTESİNE BIRAK</title>
-<meta name="description" content="Eonarya; mesajlarınızı, anılarınızı ve dijital emanetlerinizi güvenle saklayan ve belirlediğiniz koşullarda doğru kişiye, doğru zamanda teslim eden bir zamanlı teslimat sistemidir.">
+<meta name="description" content="Eonarya; mesajlarını, planlarını ve senden sonra bilinmesini istediklerini organize eder — Hayattayım Protokolü ve Akıllı Teslimat ile doğru zamanda, doğru kişiye ulaştırır.">
 <meta name="theme-color" content="#0A0713">
 <meta name="author" content="Eonarya">
 <link rel="canonical" href="https://eonarya.com/">
@@ -15,12 +15,13 @@
 <meta property="og:locale" content="tr_TR">
 <meta property="og:site_name" content="Eonarya">
 <meta property="og:title" content="Eonarya — ZAMANIN ÖTESİNE BIRAK">
-<meta property="og:description" content="Geleceğe bırakmak istediklerinizi güvenle saklayan ve doğru zamanda, doğru kişiye teslim eden sistem.">
+<meta property="og:description" content="Mesajlarını, planlarını ve senden sonra bilinmesini istediklerini organize et — Eonarya doğru zamanda, doğru kişiye ulaştırsın.">
 <meta property="og:url" content="https://eonarya.com/">
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Eonarya — ZAMANIN ÖTESİNE BIRAK">
-<meta name="twitter:description" content="Geleceğe bırakmak istediklerinizi güvenle saklayan ve doğru zamanda, doğru kişiye teslim eden sistem.">
+<meta name="twitter:description" content="Mesajlarını, planlarını ve senden sonra bilinmesini istediklerini organize et — Eonarya doğru zamanda, doğru kişiye ulaştırsın.">
+<meta name="robots" content="index, follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Manrope:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -201,14 +202,12 @@ img,svg{display:block;}
 .band-lead{margin-top:20px;font-size:18.5px;line-height:1.6;color:var(--ink-soft);font-weight:400;}
 .band-lead.on-dark{color:var(--d-ink-soft);}
 
-/* reveal — progressive enhancement: visible by default, animates on scroll where supported */
+/* reveal — her zaman görünür. Not: animation-timeline:view() + "both" fill-mode,
+   sayfa yüklendiğinde doğrudan bir #çapaya (deep link) atlarken hedef bölümün
+   içeriğini bir paint anlığına opacity:0'da bırakabiliyordu (görünmez/boş bölüm
+   sorunu) — bu yüzden scroll-tetiklemeli reveal tamamen kaldırıldı, içerik her
+   zaman görünür durumda tutulur. */
 .reveal{opacity:1;transform:none;}
-@keyframes revealIn{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:none;}}
-@media (prefers-reduced-motion:no-preference){
-  @supports (animation-timeline:view()){
-    .reveal{animation:revealIn .9s var(--ease) both;animation-timeline:view();animation-range:entry 2% entry 30%;}
-  }
-}
 
 /* ─────────────────────  PROBLEM  ───────────────────── */
 .problem-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
@@ -408,6 +407,14 @@ img,svg{display:block;}
   .split-visual{order:-1;}
   .step::after{display:none;}
 }
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  .orbit-ring,.orbit-node,.orbit-rotor,.star,.cap-node,.capsule-svg circle[stroke^="url"],.scroll-cue span{
+    animation:none!important;
+  }
+  .orbit-node{opacity:1;}
+  .star{opacity:.55;}
+}
 @media (max-width:680px){
   .wrap{padding:0 22px;}
   .nav-inner{padding:14px 22px;gap:14px;}
@@ -452,7 +459,7 @@ img,svg{display:block;}
       <a href="#nedir">Eonarya Nedir</a>
       <a href="#nasil">Nasıl Çalışır</a>
       <a href="#guven">Güven</a>
-      <a href="#sss">Sıkça Sorulanlar</a>
+      <a href="/yardim.html">Yardım Merkezi</a>
     </nav>
     <a href="#nedir" class="btn btn-ghost nav-cta">Keşfet</a>
   </div>
@@ -494,9 +501,9 @@ img,svg{display:block;}
     </div>
 
     <div class="hero-copy">
-      <p class="eyebrow">DİJİTAL EMANET VE ZAMANLI TESLİMAT</p>
+      <p class="eyebrow">SEN YAZ, EONARYA DOĞRU ZAMANDA İLETSİN</p>
       <h1 class="hero-title">ZAMANIN ÖTESİNE<br><span class="accent-text">BIRAK</span></h1>
-      <p class="hero-sub">Bugün bıraktığınız bir mesajın, bir anının veya önemli bir bilginin yıllar sonra doğru kişiye ulaşmasını sağlayın.</p>
+      <p class="hero-sub">Mesajlarını, planlarını ve senden sonra bilinmesini istediklerini Eonarya'ya bırak. Sen belirlediğin zamanı ve koşulu, gerisini Eonarya takip etsin.</p>
       <div class="hero-actions">
         <a href="#nasil" class="btn btn-primary">Nasıl Çalışır?</a>
         <a href="#nedir" class="btn btn-quiet">Eonarya nedir →</a>
@@ -504,30 +511,12 @@ img,svg{display:block;}
       <div class="hero-trust" aria-label="Öne çıkan özellikler">
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Zamanlı Teslimatlar</span>
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Hayattayım Protokolü</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Güvenilir Kişi Doğrulaması</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Dijital Emanetler</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Planlı Takip</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg>Benden Sonra</span>
       </div>
     </div>
   </div>
   <a href="#problem" class="scroll-cue" aria-label="Aşağı kaydır"><span></span></a>
-</section>
-
-<!-- ─────────────────────────  MİNİ KULLANIM ALANLARI (yeni)  ───────────────────────── -->
-<section class="band light soft slim" id="ornekler" data-section="Örnekler">
-  <div class="wrap">
-    <header class="band-head center">
-      <p class="kicker">ÖRNEKLER</p>
-      <h2 class="band-title">Geleceğe bırakabilecekleriniz</h2>
-    </header>
-    <div class="mini-grid">
-      <article class="minicard"><span class="mini-tag">18 Yaş</span><h3>18 Yaşındaki Çocuğuma</h3><p>Yıllar sonra açılacak bir mesaj.</p></article>
-      <article class="minicard"><span class="mini-tag">Gelecek</span><h3>Gelecekteki Kendime</h3><p>Bugünün düşünceleri ileriye.</p></article>
-      <article class="minicard"><span class="mini-tag">Benden Sonra</span><h3>Benden Sonra</h3><p>Önemli bilgiler doğru kişilere.</p></article>
-      <article class="minicard"><span class="mini-tag">Doğum Günü</span><h3>Doğum Günü Mesajı</h3><p>Belirlediğiniz günde teslim edilsin.</p></article>
-      <article class="minicard"><span class="mini-tag">Kapsül</span><h3>Zaman Kapsülü</h3><p>Seçtiğiniz tarihte açılsın.</p></article>
-      <article class="minicard"><span class="mini-tag">Acil</span><h3>Acil Durum Talimatları</h3><p>Beklenmedik anlar için rehber.</p></article>
-    </div>
-  </div>
 </section>
 
 <!-- ─────────────────────────  PROBLEM  ───────────────────────── -->
@@ -536,28 +525,28 @@ img,svg{display:block;}
     <header class="band-head center">
       <p class="kicker">SENARYO</p>
       <h2 class="band-title">Her şey doğru zamanda söylenemez.</h2>
-      <p class="band-lead">Bazı sözler bir yaşı, bir günü, doğru anı bekler. Eonarya o anı sizin için korur.</p>
+      <p class="band-lead">Bazı sözler bir yaşı, bir günü, doğru anı bekler. Eonarya o anı senin için korur.</p>
     </header>
     <div class="problem-grid">
       <article class="pcard">
         <span class="pcard-glyph" aria-hidden="true"></span>
-        <h3>Çocuğunuza</h3>
-        <p>18 yaşında açılacak bir mesaj bırakın.</p>
+        <h3>Çocuğuna</h3>
+        <p>18 yaşında açılacak bir mesaj bırak.</p>
       </article>
       <article class="pcard">
         <span class="pcard-glyph" aria-hidden="true"></span>
-        <h3>Kendinize</h3>
-        <p>Yıllar sonra okuyacağınız bir zaman kapsülü oluşturun.</p>
+        <h3>Kendine</h3>
+        <p>Yıllar sonra okuyacağın bir zaman kapsülü oluştur.</p>
       </article>
       <article class="pcard">
         <span class="pcard-glyph" aria-hidden="true"></span>
-        <h3>Eşinize</h3>
-        <p>Bir gün ihtiyaç duyabileceği önemli bilgileri bırakın.</p>
+        <h3>Eşine</h3>
+        <p>Bir gün ihtiyaç duyabileceği önemli bilgileri bırak.</p>
       </article>
       <article class="pcard">
         <span class="pcard-glyph" aria-hidden="true"></span>
-        <h3>Sevdiklerinize</h3>
-        <p>Doğru zamanda ulaşması gereken anıları saklayın.</p>
+        <h3>Sevdiklerine</h3>
+        <p>Doğru zamanda ulaşması gereken sözleri sakla.</p>
       </article>
     </div>
   </div>
@@ -569,28 +558,28 @@ img,svg{display:block;}
     <header class="band-head center">
       <p class="kicker">NEDEN EONARYA?</p>
       <h2 class="band-title">Bazı şeyler kaybolmamalı.</h2>
-      <p class="band-lead">Hayat her zaman planlandığı gibi ilerlemez. Bazen önemli bilgiler, anılar veya söylenmesi gereken şeyler doğru kişilere ulaşamaz. Eonarya bunun için vardır.</p>
+      <p class="band-lead">Hayat her zaman planlandığı gibi ilerlemez. Bazen önemli bilgiler, anılar veya söylenmesi gereken şeyler doğru kişilere ulaşamaz. Eonarya bunun için var.</p>
     </header>
     <div class="why-grid">
       <article class="wcard">
         <span class="wcard-no">01</span>
-        <h3>Bir gün ulaşamayabilirsiniz</h3>
-        <p>Telefonunuz kapalı olabilir, iletişim kuramayabilirsiniz. Söylemek istedikleriniz sizinle birlikte sessizleşmesin.</p>
+        <h3>Bir gün ulaşamayabilirsin</h3>
+        <p>Telefonun kapalı olabilir, iletişim kuramayabilirsin. Söylemek istediklerin seninle birlikte sessizleşmesin.</p>
       </article>
       <article class="wcard">
         <span class="wcard-no">02</span>
         <h3>Bir gün birileri cevap arayabilir</h3>
-        <p>Çocuğunuz, eşiniz veya sevdikleriniz. İhtiyaç duydukları yanıt, siz onu bıraktığınız için orada olsun.</p>
+        <p>Çocuğun, eşin veya sevdiklerin. İhtiyaç duydukları yanıt, sen onu bıraktığın için orada olsun.</p>
       </article>
       <article class="wcard">
         <span class="wcard-no">03</span>
-        <h3>Önemli bilgiler kaybolabilir</h3>
-        <p>Şifreler, belgeler, talimatlar veya emanetler. Kaybolmaması gerekenler doğru ellere güvenle geçsin.</p>
+        <h3>Takip etmesi gereken çok şey var</h3>
+        <p>Kimin ne borcu var, hangi taahhüt ne zaman doluyor, hangi tarih yaklaşıyor. Eonarya bu takibi senin için sürdürür.</p>
       </article>
       <article class="wcard">
         <span class="wcard-no">04</span>
         <h3>Bazı şeyler doğru zamanı bekler</h3>
-        <p>Bugün söylenemeyen bir söz, yıllar sonra anlam kazanabilir. Eonarya o anı sizin için korur.</p>
+        <p>Bugün söylenemeyen bir söz, yıllar sonra anlam kazanabilir. Eonarya o anı senin için korur.</p>
       </article>
     </div>
   </div>
@@ -601,9 +590,9 @@ img,svg{display:block;}
   <div class="wrap split">
     <div class="split-text">
       <p class="kicker">EONARYA NEDİR?</p>
-      <h2 class="band-title">Geleceğe bırakılan her şey, doğru zamanda teslim edilir.</h2>
-      <p class="band-lead">Eonarya, insanların geleceğe bırakmak istedikleri içerikleri güvenle saklayan ve belirledikleri koşullar gerçekleştiğinde doğru kişilere teslim eden bir sistemdir.</p>
-      <p class="band-lead">Bir not defteri ya da depolama alanı değil; zamanı, koşulu ve doğrulamayı yöneten bir teslimat sistemidir.</p>
+      <h2 class="band-title">Yalnızca mesaj saklayan bir uygulama değil.</h2>
+      <p class="band-lead">Eonarya'da mesajlarını, planlarını ve senden sonra bilinmesini istediklerini bir araya getirirsin. Eonarya bunun karşılığında takip edilmesi gereken süreçleri hatırlatır, belirlediğin zaman ve koşullarda ilgili kişilere iletir.</p>
+      <p class="band-lead">Bir not defteri ya da depolama alanı değil; zamanı, koşulu ve doğrulamayı yöneten bir teslimat ve takip sistemidir.</p>
     </div>
     <div class="split-visual" aria-hidden="true">
       <div class="capsule">
@@ -624,44 +613,42 @@ img,svg{display:block;}
   </div>
 </section>
 
-<!-- ─────────────────────────  YALNIZCA MESAJ DEĞİLDİR (yeni)  ───────────────────────── -->
-<section class="band light soft" id="yalnizca-mesaj" data-section="Yalnızca Mesaj Değildir">
+<!-- ─────────────────────────  EONARYA SANA NE SAĞLAR (yeni)  ───────────────────────── -->
+<section class="band light soft" id="ne-saglar" data-section="Eonarya Sana Ne Sağlar">
   <div class="wrap">
     <header class="band-head center">
-      <p class="kicker">EONARYA YALNIZCA MESAJ DEĞİLDİR</p>
-      <h2 class="band-title">Geleceğe bırakılan her şey korunabilir.</h2>
-      <p class="band-lead">Bir mesajdan çok daha fazlası: bilgiler, talimatlar, planlar ve dijital emanetler — hepsi tek bir güvenli teslimat sisteminde.</p>
+      <p class="kicker">EONARYA SANA NE SAĞLAR?</p>
+      <h2 class="band-title">Dört ana kolon, tek sistem.</h2>
+      <p class="band-lead">Mesajlarını, planlarını ve senden sonrasını organize edersin; Eonarya süreci takip eder ve doğru zamanda devreye girer.</p>
     </header>
     <div class="message-grid">
       <article class="mcard">
+        <a href="#mesajlar" style="display:contents">
         <span class="micon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-4 4v-4H4z"/></svg></span>
         <h3>Mesajlar</h3>
-        <p>Duygular, düşünceler ve anılar.</p>
+        <p>Belirli bir tarihte, her yıl tekrar eden bir günde, doğum gününde veya önemli bir günde teslim edilsin.</p>
+        </a>
       </article>
       <article class="mcard">
-        <span class="micon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6M9 13h6M9 17h3"/></svg></span>
-        <h3>Bilgiler</h3>
-        <p>Önemli hesaplar, belgeler ve erişimler.</p>
-      </article>
-      <article class="mcard">
-        <span class="micon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7l2 2 3-3M4 16l2 2 3-3M13 8h7M13 17h7"/></svg></span>
-        <h3>Talimatlar</h3>
-        <p>Acil durum rehberleri ve yönlendirmeler.</p>
-      </article>
-      <article class="mcard">
+        <a href="#planlar" style="display:contents">
         <span class="micon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 9h16M9 5V3M15 5V3M8 13h2M14 13h2"/></svg></span>
         <h3>Planlar</h3>
-        <p>Hatırlatmalar ve geleceğe bırakılan görevler.</p>
+        <p>Kimin ne borcu, taahhüdü veya takibi var — Eonarya süreci ve gecikmeleri senin için izler.</p>
+        </a>
       </article>
       <article class="mcard">
+        <a href="#benden-sonra" style="display:contents">
         <span class="micon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg></span>
-        <h3>Dijital Emanetler</h3>
-        <p>Bir gün ihtiyaç duyulabilecek içerikler.</p>
+        <h3>Benden Sonra</h3>
+        <p>Bugün söyleyemediğin ama mutlaka bilinmesini istediğin şeyler, doğrulanmış zamanında iletilsin.</p>
+        </a>
       </article>
       <article class="mcard">
-        <span class="micon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 3h6"/></svg></span>
-        <h3>Zaman Kapsülleri</h3>
-        <p>Belirli tarihlerde açılacak kayıtlar.</p>
+        <a href="#protokol" style="display:contents">
+        <span class="micon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <h3>Hayattayım Protokolü</h3>
+        <p>Benden Sonra teslimatları, yalnızca çok aşamalı bir doğrulama sürecinden geçtikten sonra başlar.</p>
+        </a>
       </article>
     </div>
   </div>
@@ -677,20 +664,105 @@ img,svg{display:block;}
     <ol class="steps">
       <li class="step">
         <span class="step-no">01</span>
-        <h3>Hazırlayın</h3>
-        <p>Mesajlarınızı, anılarınızı ve önemli bilgilerinizi ekleyin.</p>
+        <h3>Yaz</h3>
+        <p>Mesajını, planını veya Benden Sonra bırakmak istediğini ekle.</p>
       </li>
       <li class="step">
         <span class="step-no">02</span>
-        <h3>Koşulu Belirleyin</h3>
-        <p>Doğum günü, belirli bir yaş, belirli bir tarih, tekrarlanan teslimat ya da “Benden Sonra”.</p>
+        <h3>Koşulu Belirle</h3>
+        <p>Belirli bir tarih, her yıl tekrarlanan bir gün, doğum günü, önemli bir gün ya da “Benden Sonra”.</p>
       </li>
       <li class="step">
         <span class="step-no">03</span>
-        <h3>Eonarya Teslim Etsin</h3>
-        <p>İçerikler doğru zamanda doğru kişiye ulaşsın.</p>
+        <h3>Eonarya Takip Etsin</h3>
+        <p>Doğru zaman geldiğinde, doğru kişiye ulaşsın.</p>
       </li>
     </ol>
+  </div>
+</section>
+
+<!-- ─────────────────────────  MESAJLAR (yeni)  ───────────────────────── -->
+<section class="band light soft" id="mesajlar" data-section="Mesajlar">
+  <div class="wrap split">
+    <div class="split-text">
+      <p class="kicker">MESAJLAR</p>
+      <h2 class="band-title">Zamanı sen belirle.</h2>
+      <p class="band-lead">Bir mesaj yazarsın, ne zaman ve kime ulaşacağını sen seçersin. Eonarya o anı beklemesini ve doğru kişiye ulaşmasını sağlar.</p>
+      <ul class="chip-list">
+        <li>Belirli bir tarihte</li>
+        <li>Her yıl aynı tarihte</li>
+        <li>Doğum gününde</li>
+        <li>Önemli bir günde</li>
+        <li>Benden Sonra</li>
+      </ul>
+    </div>
+    <div class="split-visual" aria-hidden="true">
+      <div class="capsule">
+        <svg viewBox="0 0 320 320" class="capsule-svg">
+          <circle cx="160" cy="160" r="120" fill="none" stroke="#E7DEFB" stroke-width="1.5"/>
+          <circle cx="160" cy="160" r="86" fill="none" stroke="url(#capRing)" stroke-width="2" stroke-dasharray="500 540" transform="rotate(-90 160 160)"/>
+          <circle cx="160" cy="160" r="52" fill="none" stroke="#EFE7FF" stroke-width="1"/>
+          <circle class="cap-node" cx="246" cy="160" r="9" fill="#7C5CE6"/>
+          <circle cx="160" cy="160" r="6" fill="#4B2BE0"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────  PLANLAR (yeni)  ───────────────────────── -->
+<section class="band light" id="planlar" data-section="Planlar">
+  <div class="wrap">
+    <header class="band-head center">
+      <p class="kicker">PLANLAR</p>
+      <h2 class="band-title">Kimin ne borcu, ne taahhüdü olduğunu unutma.</h2>
+      <p class="band-lead">Planlar, bir kişi veya konu etrafında kurduğun takip yapısıdır — Eonarya'nın günlük yükünü azaltma tarafı.</p>
+    </header>
+    <div class="why-grid">
+      <article class="wcard">
+        <span class="wcard-no">01</span>
+        <h3>Ödeme ve borç takibi</h3>
+        <p>Kim sana ne borçlu, sen kime ne ödeyeceksin — taksit taksit, tarih tarih izle.</p>
+      </article>
+      <article class="wcard">
+        <span class="wcard-no">02</span>
+        <h3>Gecikme hatırlatması</h3>
+        <p>Beklenen tarih geçtiğinde, tamamlanmamış bir kayıt olduğunu sana hatırlatır.</p>
+      </article>
+      <article class="wcard">
+        <span class="wcard-no">03</span>
+        <h3>Kişiyle ilişkili takip</h3>
+        <p>Her planı bir kişiye bağlayabilir, o kişiyle ilgili tüm hareketleri tek yerde görebilirsin.</p>
+      </article>
+      <article class="wcard">
+        <span class="wcard-no">04</span>
+        <h3>Gecikme faizi hesaplama</h3>
+        <p>Plus ile, geciken tutarlar için faiz otomatik hesaplanır. <a href="#plus" style="color:var(--accent);font-weight:600">Plus'ı incele →</a></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────  BENDEN SONRA (yeni — öne çıkan)  ───────────────────────── -->
+<section class="band dark" id="benden-sonra" data-section="Benden Sonra" style="background:radial-gradient(ellipse 100% 90% at 50% 0%,#1a1330 0%,#0a0713 60%);">
+  <div class="wrap split">
+    <div class="split-text">
+      <p class="kicker on-dark">BENDEN SONRA</p>
+      <h2 class="band-title on-dark">Bugün söyleyemediğin, kaybolmasın.</h2>
+      <p class="band-lead on-dark">İster itiraf et, ister vasiyet et, ister emanet et. Senden sonra mutlaka bilinmesini istediğin şeyler için Benden Sonra mesajı bırak — Eonarya, hayatta olmadığın doğrulandıktan sonra bunu ilgili kişiye iletir.</p>
+      <p class="band-lead on-dark" style="font-size:14.5px;color:var(--d-ink-faint)">Eonarya resmî bir vasiyetname, noterlik veya miras planlama hizmeti değildir; kanuni şekil şartlarını taşıyan resmî belgelerin yerine geçmez.</p>
+    </div>
+    <div class="split-visual" aria-hidden="true">
+      <div class="capsule" style="background:radial-gradient(circle at 50% 45%,rgba(124,92,230,.18) 0%,transparent 70%)">
+        <svg viewBox="0 0 320 320" class="capsule-svg">
+          <circle cx="160" cy="160" r="120" fill="none" stroke="rgba(217,204,255,.25)" stroke-width="1.5"/>
+          <circle cx="160" cy="160" r="86" fill="none" stroke="url(#capRing)" stroke-width="2" stroke-dasharray="500 540" transform="rotate(-90 160 160)"/>
+          <circle cx="160" cy="160" r="52" fill="none" stroke="rgba(217,204,255,.4)" stroke-width="1"/>
+          <circle class="cap-node" cx="246" cy="160" r="9" fill="#B9A4F2"/>
+          <circle cx="160" cy="160" r="6" fill="#EFE7FF"/>
+        </svg>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -704,18 +776,50 @@ img,svg{display:block;}
     <header class="band-head center">
       <p class="kicker on-dark">GÜVENLİĞİN TEMELİ</p>
       <h2 class="band-title on-dark">Hayattayım Protokolü</h2>
-      <p class="band-lead on-dark">Eonarya, kritik teslimatları doğrudan açmak yerine önceden tanımlanmış bir doğrulama sürecini işletir.</p>
+      <p class="band-lead on-dark">Eonarya, Benden Sonra teslimatlarını doğrudan açmak yerine önceden tanımlanmış, çok aşamalı bir doğrulama sürecini işletir. Tek bir sinyal hiçbir zaman yeterli değildir.</p>
     </header>
 
     <div class="protocol-flow" aria-label="Doğrulama akışı">
       <div class="flow-line" aria-hidden="true"></div>
-      <div class="flow-step"><span class="flow-dot"></span><h4>Yaşam Belirtisi</h4><p>Sistem önce sizden yaşam belirtisi bekler.</p></div>
-      <div class="flow-step"><span class="flow-dot"></span><h4>Hatırlatmalar</h4><p>Belirli aralıklarla size hatırlatmalar gönderilir.</p></div>
-      <div class="flow-step"><span class="flow-dot"></span><h4>Güvenilir Kişiler</h4><p>Yanıt alınamazsa güvenilir kişilerden bilgi istenir.</p></div>
-      <div class="flow-step"><span class="flow-dot"></span><h4>Doğrulama</h4><p>Çok aşamalı doğrulama tamamlanır.</p></div>
+      <div class="flow-step"><span class="flow-dot"></span><h4>Yaşam Teyidi</h4><p>Belirlediğin aralıklarla senden yaşam teyidi istenir.</p></div>
+      <div class="flow-step"><span class="flow-dot"></span><h4>Uyarılar</h4><p>Yanıt vermezsen sırayla birkaç uyarı daha gönderilir.</p></div>
+      <div class="flow-step"><span class="flow-dot"></span><h4>Güvenilir Kişiler</h4><p>Hâlâ yanıt yoksa, belirlediğin güvenilir kişilere sorulur.</p></div>
+      <div class="flow-step"><span class="flow-dot"></span><h4>Final Bekleme</h4><p>Onaylandıktan sonra bile bir bekleme süresi daha işler.</p></div>
       <div class="flow-step is-final"><span class="flow-dot"></span><h4>Benden Sonra</h4><p>Yalnızca o zaman “Benden Sonra” teslimatları devreye girer.</p></div>
     </div>
-    <p class="protocol-note">Bu süreç yalnızca kullanıcı tarafından etkinleştirilen <strong>“Benden Sonra”</strong> teslimatları için uygulanır. Zamanlı mesajlar belirlediğiniz tarihte doğrudan teslim edilir.</p>
+    <p class="protocol-note">Bu süreç yalnızca senin etkinleştirdiğin <strong>“Benden Sonra”</strong> teslimatları için uygulanır. Zamanlı mesajlar belirlediğin tarihte doğrudan teslim edilir. Süreç boyunca herhangi bir an uygulamayı açman, her şeyi sıfırlar.</p>
+  </div>
+</section>
+
+<!-- ─────────────────────────  AKILLI TESLİMAT (yeni)  ───────────────────────── -->
+<section class="band light" id="teslimat" data-section="Akıllı Teslimat">
+  <div class="wrap">
+    <header class="band-head center">
+      <p class="kicker">AKILLI TESLİMAT</p>
+      <h2 class="band-title">Teslimat tek bir kanala bağımlı kalmaz.</h2>
+      <p class="band-lead">Eonarya, desteklenen iletişim kanalları arasından mesajının ulaşacağı yolu yönetir. Bugün mesajların e-posta ile teslim edilir; SMS ve WhatsApp gibi ek kanallar yakında ekleniyor.</p>
+    </header>
+    <div class="value-grid">
+      <div class="vcard"><span class="vnum">01</span><p>Desteklenen kanallar arasından teslimat yolu otomatik seçilir.</p></div>
+      <div class="vcard"><span class="vnum">02</span><p>Teslimat başarısız olursa sistem kurallara göre yeniden dener.</p></div>
+      <div class="vcard"><span class="vnum">03</span><p>Tüm teslimat geçmişini kendi hesabından görebilirsin.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────  ÖNEMLİ GÜNLER + TAKVİM (yeni)  ───────────────────────── -->
+<section class="band light soft" id="onemli-gunler" data-section="Önemli Günler">
+  <div class="wrap">
+    <header class="band-head center">
+      <p class="kicker">ÖNEMLİ GÜNLER</p>
+      <h2 class="band-title">Hangi gün, kime, ne zaman.</h2>
+      <p class="band-lead">Doğum günleri ve seçtiğin önemli günler için mesajını bir kere hazırla — Eonarya her yıl doğru zamanda hatırlar ve teslim eder.</p>
+    </header>
+    <div class="minicard" style="max-width:520px;margin:0 auto;text-align:center;padding:28px 24px;">
+      <span class="mini-tag" style="display:block">YAKINDA</span>
+      <h3 style="margin-bottom:6px">Takvim Senkronizasyonu</h3>
+      <p>Mesaj ve planlarını kendi takvimine yansıtabileceğin senkronizasyon özelliği üzerinde çalışıyoruz.</p>
+    </div>
   </div>
 </section>
 
@@ -758,44 +862,24 @@ img,svg{display:block;}
   </div>
 </section>
 
-<!-- ─────────────────────────  NELER TESLİM EDİLEBİLİR  ───────────────────────── -->
-<section class="band light soft" id="teslim" data-section="Neler Teslim Edilebilir">
-  <div class="wrap">
-    <header class="band-head center">
-      <p class="kicker">İÇERİK TÜRLERİ</p>
-      <h2 class="band-title">Neler teslim edilebilir?</h2>
-      <p class="band-lead">Hemen hemen her formatta içerik — kısaca:</p>
-    </header>
-    <div class="deliver-grid compact">
-      <div class="dcard"><span class="dglyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-4 4v-4H4z"/></svg></span><span>Mesajlar</span></div>
-      <div class="dcard"><span class="dglyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M5 18l5-4 4 3 3-2 2 2"/></svg></span><span>Fotoğraflar</span></div>
-      <div class="dcard"><span class="dglyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="14" height="14" rx="2"/><path d="M17 10l4-2v8l-4-2z"/></svg></span><span>Videolar</span></div>
-      <div class="dcard"><span class="dglyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h2M9 7v10M14 4v16M19 9v6"/></svg></span><span>Ses kayıtları</span></div>
-      <div class="dcard"><span class="dglyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 13h6M9 17h6"/></svg></span><span>Belgeler</span></div>
-      <div class="dcard"><span class="dglyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5" width="16" height="16" rx="2"/><path d="M4 9h16M9 5V3M15 5V3"/></svg></span><span>Planlar</span></div>
-      <div class="dcard"><span class="dglyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7l2 2 3-3M4 16l2 2 3-3M13 8h7M13 17h7"/></svg></span><span>Talimatlar</span></div>
-      <div class="dcard"><span class="dglyph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><circle cx="20" cy="12" r="1.6" fill="currentColor" stroke="none"/></svg></span><span>Dijital emanetler</span></div>
-    </div>
-  </div>
-</section>
 
 <!-- ─────────────────────────  SENARYOLAR  ───────────────────────── -->
 <section class="band light" id="senaryolar" data-section="Senaryolar">
   <div class="wrap">
     <header class="band-head center">
       <p class="kicker">KULLANIM</p>
-      <h2 class="band-title">Eonarya ile neler yapabilirsiniz?</h2>
+      <h2 class="band-title">Eonarya ile neler yapabilirsin?</h2>
       <p class="band-lead">Soyut değil, gerçek hayattan seçilmiş senaryolar.</p>
     </header>
     <div class="scenario-grid">
-      <article class="scard"><span class="scard-no">18 Yaş</span><h3>18 Yaşındaki Çocuğuma</h3><p>Bugün yazdığınız bir mesaj yıllar sonra açılsın.</p></article>
-      <article class="scard"><span class="scard-no">Gelecek</span><h3>Gelecekteki Kendime</h3><p>Bugünkü düşünceleriniz gelecekte size ulaşsın.</p></article>
-      <article class="scard"><span class="scard-no">Benden Sonra</span><h3>Benden Sonra Teslimatları</h3><p>Önemli bilgiler doğru kişilere teslim edilsin.</p></article>
+      <article class="scard"><span class="scard-no">18 Yaş</span><h3>18 Yaşındaki Çocuğuma</h3><p>Bugün yazdığın bir mesaj yıllar sonra açılsın.</p></article>
+      <article class="scard"><span class="scard-no">Gelecek</span><h3>Gelecekteki Kendime</h3><p>Bugünkü düşüncelerin gelecekte sana ulaşsın.</p></article>
+      <article class="scard"><span class="scard-no">Benden Sonra</span><h3>Benden Sonra Teslimatları</h3><p>Söylemek istediklerin doğru kişilere ulaşsın.</p></article>
       <article class="scard"><span class="scard-no">Eş</span><h3>Eşime</h3><p>Bir gün ihtiyaç duyabileceği bilgiler güvende kalsın.</p></article>
-      <article class="scard"><span class="scard-no">Acil</span><h3>Acil Durum Talimatları</h3><p>Beklenmedik durumlar için rehber bırakın.</p></article>
-      <article class="scard"><span class="scard-no">Gerçek</span><h3>Açıklanacak Bir Gerçek</h3><p>Doğru zaman gelene kadar saklı kalsın.</p></article>
-      <article class="scard"><span class="scard-no">Kapsül</span><h3>Zaman Kapsülü</h3><p>Belirlediğiniz tarihte açılsın.</p></article>
-      <article class="scard"><span class="scard-no">Emanet</span><h3>Önemli Bilgiler ve Emanetler</h3><p>Kaybolmaması gereken şeyler korunsun.</p></article>
+      <article class="scard"><span class="scard-no">Acil</span><h3>Acil Durum Talimatları</h3><p>Beklenmedik durumlar için rehber bırak.</p></article>
+      <article class="scard"><span class="scard-no">Borç</span><h3>Kim Kime Ne Borçlu</h3><p>Bir planla ödeme ve taksitleri takip et.</p></article>
+      <article class="scard"><span class="scard-no">Kapsül</span><h3>Zaman Kapsülü</h3><p>Belirlediğin tarihte açılsın.</p></article>
+      <article class="scard"><span class="scard-no">Emanet</span><h3>Önemli Bir Sözün</h3><p>Doğru zaman gelene kadar saklı kalsın.</p></article>
     </div>
   </div>
 </section>
@@ -821,57 +905,68 @@ img,svg{display:block;}
 <section class="band light" id="guven" data-section="Güven">
   <div class="wrap">
     <header class="band-head center">
-      <p class="kicker">İLKELER</p>
-      <h2 class="band-title">Güven olmadan teslimat olmaz.</h2>
-    </header>
-    <div class="value-grid">
-      <div class="vcard"><span class="vnum">01</span><p>Veriler güvenli şekilde korunur.</p></div>
-      <div class="vcard"><span class="vnum">02</span><p>İçerikler kullanıcıya aittir.</p></div>
-      <div class="vcard"><span class="vnum">03</span><p>Eonarya içerik oluşturmaz.</p></div>
-      <div class="vcard"><span class="vnum">04</span><p>Eonarya içerikleri yorumlamaz.</p></div>
-      <div class="vcard"><span class="vnum">05</span><p>Eonarya yalnızca teslimatı gerçekleştirir.</p></div>
-      <div class="vcard"><span class="vnum">06</span><p>Sistem, teslimat süreçlerini izlenebilir kayıtlarla destekler.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- ─────────────────────────  GÜVENİN ARKASINDAKİ SİSTEM (yeni)  ───────────────────────── -->
-<section class="band light soft" id="guvenin-arkasi" data-section="Güvenin Arkasındaki Sistem">
-  <div class="wrap">
-    <header class="band-head center">
-      <p class="kicker">GÜVENİN ARKASINDAKİ SİSTEM</p>
+      <p class="kicker">GÜVEN</p>
       <h2 class="band-title">Bir teslimat gerçekleşmeden önce birçok kontrol yapılır.</h2>
+      <p class="band-lead">Eonarya içeriklerini oluşturmaz, düzenlemez veya yorumlamaz — yalnızca senin belirlediğin koşullarda güvenle saklar ve teslim eder.</p>
     </header>
     <div class="message-grid">
       <article class="mcard">
         <span class="micon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
         <h3>Çok Aşamalı Doğrulama</h3>
-        <p>Tek bir sinyal asla yeterli değildir.</p>
+        <p>Benden Sonra teslimatlarında tek bir sinyal asla yeterli değildir.</p>
       </article>
       <article class="mcard">
         <span class="micon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3 2.7-5 6-5s6 2 6 5"/><path d="M17 8l2 2 3-3"/></svg></span>
         <h3>Güvenilir Kişiler</h3>
-        <p>Yetkiyi yalnızca siz belirlersiniz.</p>
+        <p>Kimin devreye gireceğini yalnızca sen belirlersin; içeriklerine erişemezler.</p>
       </article>
       <article class="mcard">
         <span class="micon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a4 4 0 0 0 5.7.3l2.6-2.6a4 4 0 0 0-5.6-5.6L11 6.7"/><path d="M14 11a4 4 0 0 0-5.7-.3l-2.6 2.6a4 4 0 0 0 5.6 5.6L13 17.3"/></svg></span>
-        <h3>Tek Kullanımlık Bağlantılar</h3>
-        <p>Her doğrulama benzersizdir.</p>
+        <h3>Kimlik Eşleştirme</h3>
+        <p>Bazı teslimatlar için hesabının gerçekten sana ait olduğuna dair ek doğrulama istenir.</p>
       </article>
       <article class="mcard">
         <span class="micon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></svg></span>
         <h3>Teslimat Kayıtları</h3>
-        <p>Tüm süreç kayıt altındadır.</p>
+        <p>Tüm teslimat süreci kayıt altındadır, geçmişini kendin görebilirsin.</p>
       </article>
       <article class="mcard">
         <span class="micon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.2"/></svg></span>
         <h3>Veri Güvenliği</h3>
-        <p>İçerikler korunur.</p>
+        <p>İçeriklerin, korunması için alınan makul teknik ve idari önlemlerle saklanır.</p>
       </article>
       <article class="mcard">
         <span class="micon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
         <h3>Kullanıcı Kontrolü</h3>
-        <p>Teslimatlar her zaman sizin yönetiminizdedir.</p>
+        <p>İçeriklerin ve koşulların her zaman senin yönetimindedir; dilediğin an değiştirebilirsin.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────  PLUS (yeni)  ───────────────────────── -->
+<section class="band light soft" id="plus" data-section="Plus">
+  <div class="wrap">
+    <header class="band-head center">
+      <p class="kicker">EONARYA PLUS</p>
+      <h2 class="band-title">Daha güvenli, daha görünür, daha düzenli.</h2>
+      <p class="band-lead">Plus, temel Eonarya deneyimini üç yönde genişletir. Güncel fiyat ve kapsam uygulama içinden görüntülenir.</p>
+    </header>
+    <div class="why-grid">
+      <article class="wcard">
+        <span class="wcard-no">01</span>
+        <h3>Daha Güvenli Teslimat</h3>
+        <p>Ekstra güvenilir kişi onayı, daha uzun final bekleme süresi ve genişletilmiş erişim süresi.</p>
+      </article>
+      <article class="wcard">
+        <span class="wcard-no">02</span>
+        <h3>Daha Görünür Teslimat</h3>
+        <p>Detaylı teslimat geçmişi, mesaj önizleme ve hesabının sağlık raporu.</p>
+      </article>
+      <article class="wcard">
+        <span class="wcard-no">03</span>
+        <h3>Daha Düzenli Kullanım</h3>
+        <p>Çoklu etiket, şablon kütüphanesi, daha fazla plan ve gecikme faizi hesaplama.</p>
       </article>
     </div>
   </div>
@@ -882,20 +977,19 @@ img,svg{display:block;}
   <div class="wrap narrow">
     <header class="band-head center">
       <p class="kicker">SIK SORULAN SORULAR</p>
-      <h2 class="band-title">Aklınızdakiler.</h2>
+      <h2 class="band-title">Aklındakiler.</h2>
     </header>
     <div class="faq">
-      <details class="faq-item"><summary>Eonarya neden gerekli?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>Çünkü bazı bilgiler, mesajlar ve emanetler yalnızca saklanmak değil, doğru zamanda doğru kişiye ulaştırılmak ister. Eonarya bu teslimat sürecini yönetmek için tasarlanmıştır.</p></div></details>
-      <details class="faq-item"><summary>Eonarya mesajlarımı okuyor mu?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>Hayır. Eonarya içeriklerinizi okumaz veya yorumlamaz; yalnızca güvenle saklar ve teslim eder.</p></div></details>
-      <details class="faq-item"><summary>İçerikler ne zaman açılır?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>Yalnızca sizin belirlediğiniz koşullar gerçekleştiğinde.</p></div></details>
-      <details class="faq-item"><summary>Yanlış teslimat nasıl önleniyor?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>Hayattayım Protokolü ve çok aşamalı doğrulama süreçleriyle.</p></div></details>
-      <details class="faq-item"><summary>Hayattayım Protokolü nedir?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>Teslimat öncesinde çalışan, çok aşamalı bir doğrulama sistemidir.</p></div></details>
-      <details class="faq-item"><summary>Güvenilir kişiler ne yapar?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>Yalnızca kendilerine yöneltilen doğrulama sorularını yanıtlarlar; içeriklere erişemezler.</p></div></details>
-      <details class="faq-item"><summary>Eonarya bir dijital miras sistemi mi?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>Hayır. Dijital miras, kullanım alanlarından yalnızca biridir.</p></div></details>
-      <details class="faq-item"><summary>İçeriklerimi değiştirebilir miyim?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>Evet. İçerikleriniz ve koşullarınız her zaman sizin kontrolünüzdedir.</p></div></details>
-      <details class="faq-item"><summary>Teslimatları iptal edebilir miyim?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>Evet. Dilediğiniz an teslimatı durdurabilir veya güncelleyebilirsiniz.</p></div></details>
-      <details class="faq-item"><summary>Verilerimi dışarı aktarabilir miyim?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>Evet. İçerikleriniz size aittir.</p></div></details>
+      <details class="faq-item"><summary>Eonarya nedir?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>Mesajlarını, planlarını ve senden sonra bilinmesini istediklerini organize ettiğin; belirlediğin zaman ve koşullarda doğru kişiye ulaştıran bir sistem.</p></div></details>
+      <details class="faq-item"><summary>Benden Sonra nasıl çalışır?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>Bıraktığın Benden Sonra mesajları, yalnızca Hayattayım Protokolü'ndeki çok aşamalı doğrulama süreci tamamlanıp hayatta olmadığın doğrulandıktan sonra iletilir.</p></div></details>
+      <details class="faq-item"><summary>Hayattayım Protokolü nedir?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>Belirlediğin aralıklarla senden yaşam teyidi isteyen, yanıt alınamazsa sırayla uyarı ve güvenilir kişi onayına geçen çok aşamalı bir doğrulama sistemidir.</p></div></details>
+      <details class="faq-item"><summary>Mesajlarım ne zaman gönderilir?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>Belirlediğin tarihte, her yıl tekrarlanan bir günde, doğum gününde, seçtiğin önemli bir günde veya Benden Sonra koşulunda — sen neyi seçtiysen ona göre.</p></div></details>
+      <details class="faq-item"><summary>Planlar ne işe yarar?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>Bir kişi veya konuyla ilgili ödeme, borç, taahhüt gibi takipleri düzenlemene yarar; beklenen tarih geçerse sana hatırlatma gönderir.</p></div></details>
+      <details class="faq-item"><summary>Verilerim güvende mi?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>Eonarya içeriklerini okumaz, yorumlamaz veya senin adına değiştirmez; yalnızca güvenle saklar ve senin belirlediğin koşullarda teslim eder.</p></div></details>
+      <details class="faq-item"><summary>Eonarya vasiyetname veya noterlik hizmeti mi?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>Hayır. Eonarya resmî vasiyetname, noterlik veya miras planlama hizmeti sunmaz; oluşturduğun içerikler bu resmî işlemlerin yerine geçmez.</p></div></details>
+      <details class="faq-item"><summary>Kimlik eşleştirme neden var?<span class="faq-ico" aria-hidden="true"></span></summary><div class="faq-a"><p>Başka bir kişiye teslimat yaptığında, hesabının gerçekten sana ait olduğuna dair ek bir güven sinyali oluşturur — hangi kanalları kullanabileceğin buna göre belirlenir.</p></div></details>
     </div>
+    <p style="text-align:center;margin-top:36px;font-size:15px;color:var(--ink-soft)">Daha fazla soru mu var? <a href="/yardim.html" style="color:var(--accent);font-weight:600">Yardım Merkezi'ne göz at →</a></p>
   </div>
 </section>
 
@@ -907,9 +1001,9 @@ img,svg{display:block;}
     <div class="starfield" id="starfield-2"></div>
   </div>
   <div class="wrap center final-inner">
-    <h2 class="final-title">Bugünden geleceğe<br>bir iz bırakın.</h2>
-    <p class="final-lead">Bazı şeyler hemen söylenmez. Bazı şeyler yıllar sonra anlam kazanır. Bazı şeyler ise kaybolmamalıdır. Eonarya, geleceğe bırakmak istediklerinizi korur ve doğru zamanda teslim eder.</p>
-    <a href="#protokol" class="btn btn-primary btn-lg">Eonarya'yı Keşfet</a>
+    <h2 class="final-title">Bugünden geleceğe<br>bir iz bırak.</h2>
+    <p class="final-lead">Bazı şeyler hemen söylenmez. Bazı şeyler yıllar sonra anlam kazanır. Bazı şeyler ise kaybolmamalıdır. Eonarya, bırakmak istediklerini korur ve doğru zamanda teslim eder.</p>
+    <a href="#nedir" class="btn btn-primary btn-lg">Eonarya'yı Keşfet</a>
   </div>
 </section>
 
