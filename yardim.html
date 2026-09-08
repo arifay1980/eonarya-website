@@ -108,12 +108,12 @@ h1,h2,h3{font-family:var(--font-head),sans-serif;letter-spacing:-.01em;line-heig
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .field{margin-bottom:18px;text-align:left}
 .field label{display:block;font-size:13px;font-weight:600;color:var(--ink-soft);margin-bottom:7px}
-.field input,.field textarea{
+.field input,.field select,.field textarea{
   width:100%;font:inherit;font-size:15px;color:var(--ink);background:var(--bg);
   border:1px solid var(--line-strong);border-radius:10px;padding:12px 14px;outline:none;
   transition:border-color .2s;resize:vertical;
 }
-.field input:focus,.field textarea:focus{border-color:var(--accent)}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent)}
 .field textarea{min-height:120px}
 .field.has-error input,.field.has-error textarea{border-color:#D64545}
 .field-error{display:none;margin-top:6px;font-size:12.5px;color:#D64545}
@@ -220,6 +220,14 @@ h1,h2,h3{font-family:var(--font-head),sans-serif;letter-spacing:-.01em;line-heig
           <input type="email" id="sf-email" name="email" maxlength="254" required>
           <p class="field-error">Geçerli bir e-posta adresi gerekli.</p>
         </div>
+      </div>
+      <div class="field" id="field-category">
+        <label for="sf-category">Nasıl yardımcı olabiliriz?</label>
+        <select id="sf-category" name="category" required>
+          <option value="iletisim">Bize Ulaşın</option>
+          <option value="sorun">Sorun Bildir</option>
+        </select>
+        <p class="field-error">Bir destek türü seçer misin?</p>
       </div>
       <div class="field" id="field-subject">
         <label for="sf-subject">Konu</label>
@@ -448,6 +456,7 @@ h1,h2,h3{font-family:var(--font-head),sans-serif;letter-spacing:-.01em;line-heig
 
     var name = document.getElementById('sf-name').value.trim();
     var email = document.getElementById('sf-email').value.trim();
+    var category = document.getElementById('sf-category').value;
     var subject = document.getElementById('sf-subject').value.trim();
     var message = document.getElementById('sf-message').value.trim();
     var website = document.getElementById('sf-website').value;
@@ -465,7 +474,7 @@ h1,h2,h3{font-family:var(--font-head),sans-serif;letter-spacing:-.01em;line-heig
     fetch(SUPPORT_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: name, email: email, subject: subject, message: message, website: website }),
+      body: JSON.stringify({ name: name, email: email, category: category, subject: subject, message: message, website: website }),
     })
       .then(function(res){ return res.json().then(function(data){ return { status: res.status, data: data }; }); })
       .then(function(result){
