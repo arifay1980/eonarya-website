@@ -27,10 +27,26 @@
   }
 
   function hydrateSharedContent() {
-    document.querySelectorAll('[data-brand-copy]').forEach((node) => {
-      const key = node.getAttribute('data-brand-copy');
-      const value = experience.BRAND_COPY && experience.BRAND_COPY[key];
+    document.querySelectorAll('[data-content-path]').forEach((node) => {
+      const path = (node.getAttribute('data-content-path') || '').split('.');
+      const value = path.reduce((current, key) => current && current[key], experience);
       if (typeof value === 'string') node.textContent = value;
+    });
+
+    document.querySelectorAll('[data-support-link]').forEach((node) => {
+      const kind = node.getAttribute('data-support-link');
+      const labelKey = kind === 'message' ? 'messageLabel' : 'helpLabel';
+      const hrefKey = kind === 'message' ? 'messageHref' : 'helpHref';
+      const support = experience.SUPPORT_COPY || {};
+      if (typeof support[labelKey] === 'string') node.textContent = support[labelKey];
+      if (typeof support[hrefKey] === 'string') node.setAttribute('href', support[hrefKey]);
+    });
+
+    document.querySelectorAll('[data-support-href]').forEach((node) => {
+      const kind = node.getAttribute('data-support-href');
+      const hrefKey = kind === 'message' ? 'messageHref' : 'helpHref';
+      const support = experience.SUPPORT_COPY || {};
+      if (typeof support[hrefKey] === 'string') node.setAttribute('href', support[hrefKey]);
     });
 
     Object.values(experience.LEGAL_LINKS || {}).forEach(({ href, label }) => {

@@ -19,6 +19,12 @@ function requireMatch(value, pattern, label) {
   if (!pattern.test(value)) throw new Error(label);
 }
 
+function requireText(value, expected, label) {
+  if (!value.includes(expected)) throw new Error(label);
+}
+
+const content = JSON.parse(read(appRoot, 'supabase/functions/_shared/experience/content.json'));
+
 for (const page of privatePages) {
   const html = read(root, page);
   requireMatch(html, /<meta name="robots" content="noindex, nofollow">/, `${page}: noindex eksik`);
@@ -27,19 +33,64 @@ for (const page of privatePages) {
   requireMatch(html, /assets\/private-shell\.js/, `${page}: private shell JS eksik`);
   requireMatch(html, /generated\/experience-content\.js/, `${page}: content registry eksik`);
   requireMatch(html, /captureSensitiveParams\(\['token', 'ot', 'confirm'\]\)/, `${page}: güvenli query yakalama eksik`);
-  requireMatch(html, /data-brand-copy="privateFooter"/, `${page}: private footer registry bağı eksik`);
+  requireMatch(html, /data-content-path="PRODUCT_COPY\.Eonarya\.short"/, `${page}: private footer ürün metni bağı eksik`);
+  requireMatch(html, /data-support-link="help"/, `${page}: Yardım Merkezi bağı eksik`);
+  requireMatch(html, /data-support-link="message"/, `${page}: destek mesajı bağı eksik`);
+  if (page !== 'tercihler.html') {
+    requireText(html, `data-support-href="message" href="${content.SUPPORT_COPY.messageHref}"`, `${page}: yanlış alıcı destek rotası bağı eksik`);
+    requireText(html, `>${content.DELIVERY_COPY.wrongRecipientCta}</a>`, `${page}: yanlış alıcı CTA metni saptı`);
+  }
   if (/new URLSearchParams\(window\.location\.search\)\.get\('(token|ot|confirm)'\)/.test(html)) {
     throw new Error(`${page}: hassas query doğrudan okunuyor`);
   }
 }
 
 for (const page of publicPages) {
-  requireMatch(read(root, page), /data-footer-variant="public"/, `${page}: public footer varyantı eksik`);
+  const html = read(root, page);
+  requireMatch(html, /data-footer-variant="public"/, `${page}: public footer varyantı eksik`);
+  requireMatch(html, /generated\/experience-content\.js/, `${page}: content registry eksik`);
 }
 for (const page of legalPages) {
   requireMatch(read(root, page), /data-footer-variant="legal"/, `${page}: legal footer varyantı eksik`);
 }
 requireMatch(read(root, 'yardim.html'), /data-footer-variant="support"/, 'yardim.html: support footer varyantı eksik');
+
+const home = read(root, 'index.html');
+const hero = content.PRODUCT_COPY.Eonarya.web.title;
+requireText(home, `aria-label="${hero}"`, 'Ana sayfa hero metni canonical kaynaktan saptı');
+requireText(home, `<em>Senden Sonra</em>`, 'Ana sayfa hero vurgusu eksik');
+requireText(home, `content="${hero}"`, 'OG/Twitter açıklaması kilitli hero metninden saptı');
+requireText(home, `"description":"${content.PRODUCT_COPY.Eonarya.short}"`, 'Schema açıklaması Eonarya.short kaynağından saptı');
+requireText(home, content.PRODUCT_COPY.BendenSonra.web.body, 'Ana sayfa Benden Sonra web metni canonical kaynaktan saptı');
+requireText(home, `data-support-link="message">${content.SUPPORT_COPY.messageLabel}</a>`, 'Ana sayfa destek etiketi canonical kaynaktan saptı');
+
+const help = JSON.parse(read(root, 'generated/help-content.json'));
+const helpAnswers = Object.fromEntries(help.categories.flatMap((category) => category.questions.map((question) => [question.id, question.answer])));
+for (const [questionId, expected] of [
+  ['mesaj-nedir', content.PRODUCT_COPY.Mesajlar.canonical],
+  ['bs-nedir', content.PRODUCT_COPY.BendenSonra.canonical],
+  ['ht-nedir', content.PRODUCT_COPY.Hayattayim.canonical],
+  ['gk-nedir', content.PRODUCT_COPY.GuvenilirKisiler.canonical],
+  ['plan-nedir', content.PRODUCT_COPY.Planlar.canonical],
+]) {
+  if (helpAnswers[questionId] !== expected) throw new Error(`Yardım cevabı canonical kaynaktan saptı: ${questionId}`);
+}
+
+for (const deprecated of [
+  'İnsanların önemli gördükleri şeyleri zaman içinde takip eden',
+  'insanların geleceğe bırakmak istedikleri mesajları',
+  'yalnızca ölüm sonrası mesajları',
+  'yalnızca Benden Sonra mesajları',
+  'ölüm sonrası mesaj',
+  'Önem verdiğin şeyler, zamanı geldiğinde doğru kişiye ulaşsın.',
+  'Mesajını bugünden hazırla; kime ulaşacağını ve teslimat sırasını sen belirle.',
+  'ilgili kişi olarak liste',
+  'hayatta olmadığın doğrulandı',
+]) {
+  for (const page of [...privatePages, 'index.html', 'yardim.html']) {
+    if (read(root, page).includes(deprecated)) throw new Error(`${page}: deprecated metin kaldı: ${deprecated}`);
+  }
+}
 
 const privateShell = read(root, 'assets/private-shell.js');
 requireMatch(privateShell, /history\.replaceState/, 'query cleanup replaceState eksik');

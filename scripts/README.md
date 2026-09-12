@@ -53,9 +53,10 @@ no-store ve logo/link sözleşmelerini doğrular.
 node scripts/sync-help-content.js
 ```
 
-**Kaynak:** `Eonarya/shared/content/helpContent.data.js` (bağımlılıksız veri —
-kategori/soru/cevap) + `Eonarya/shared/uiSabitleri.js` → `TELEFON_DOGRULAMA_AKTIF`
-flag'i.
+**Kaynak:** `Eonarya/shared/content/helpContent.data.js` (kategori/soru/cevap) +
+canonical “nedir?” yanıtları için `Eonarya/supabase/functions/_shared/experience/content.json`
++ `Eonarya/shared/uiSabitleri.js` → `TELEFON_DOGRULAMA_AKTIF` flag'i. Script,
+modülleri çalıştırmadan bu kaynakları AST/JSON üzerinden çözümler.
 
 **Çıktı:**
 - `generated/help-content.json` — üretilen veri, insan tarafından okunabilir kontrol için.

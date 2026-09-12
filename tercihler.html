@@ -271,7 +271,7 @@
       <div class="aksiyon-kart" id="iletisimKart" style="display:none">
         <h2>İletişim Bilgilerimi Güncelle</h2>
         <p>Bu kişiden gelecekte mesaj almak istiyorsanız ancak iletişim bilgileriniz değiştiyse güncelleyebilirsiniz.</p>
-        <p class="not-satiri">İletişim bilgilerinizi güncelleme seçeneği yalnızca ölüm sonrası mesajlar için kullanılabilir.</p>
+        <p class="not-satiri">Bu değişiklik, bu göndericiden gelecekte yapılacak uygun teslimatlarda kullanılacak iletişim adresinizi günceller.</p>
         <button class="cevap-btn cevap-hayir" id="iletisimAcBtn" type="button">İletişim Bilgilerimi Güncelle</button>
       </div>
     </section>
@@ -319,7 +319,7 @@
           <label for="email">E-posta adresi</label>
           <input type="email" id="email" placeholder="ornek@eposta.com" autocomplete="email">
         </div>
-        <p class="field-hint">Bu değişiklik yalnızca bu göndericiden gelecek ölüm sonrası mesajları etkiler. Onay için kayıtlı e-postanıza bir link göndereceğiz.</p>
+        <p class="field-hint">Bu değişiklik, bu göndericiden gelecekte yapılacak uygun teslimatlarda kullanılacak iletişim adresinizi günceller. Onay için kayıtlı e-postanıza bir link göndereceğiz.</p>
         <button class="cta" id="kaydetBtn" type="submit">Bilgilerimi Güncelle</button>
       </form>
       <p class="note">Bu işlem sizin orijinal kişi kaydınızı değiştirmez, yalnızca bu teslimat kanalı için geçerli olur.</p>
@@ -364,13 +364,13 @@
 
     <footer class="footer">
       <img class="footer-logo" src="/assets/brand/logo-dark.png" width="158" height="19" alt="Eonarya">
-      <p class="footer-description" data-brand-copy="privateFooter"></p>
+      <p class="footer-description" data-content-path="PRODUCT_COPY.Eonarya.short"></p>
       <div class="footer-links">
         <a href="https://eonarya.com">eonarya.com</a>
         <a href="/gizlilik.html">Gizlilik Politikası</a>
         <a href="/kullanim-sartlari.html">Kullanım Şartları</a>
-        <a href="/yardim.html">Yardım Merkezi</a>
-        <a href="mailto:destek@eonarya.com">destek@eonarya.com</a>
+        <a data-support-link="help" href="/yardim.html">Yardım Merkezi</a>
+        <a data-support-link="message" href="/yardim.html#destek">Bize Mesaj Gönder</a>
       </div>
       <div class="store-badges">
         <img src="assets/email/appstore-badge.png" width="107" height="36" alt="App Store — yakında">
@@ -434,7 +434,7 @@
   const CONFIRM_METINLER = {
     old: {
       baslik: 'Bu değişikliği siz mi istediniz?',
-      metin:  'Bu kişinin ölüm sonrası mesajlarının teslim edileceği e-posta adresinin güncellenmesini onaylıyor musunuz? Onaylarsanız yeni adresin doğrulanması için bir sonraki adıma geçilecek.',
+      metin:  'Bu değişiklik, bu göndericiden gelecekte yapılacak uygun teslimatlarda kullanılacak iletişim adresinizi günceller.',
       buton:  'Evet, onaylıyorum',
     },
     new: {
@@ -545,7 +545,7 @@
   // ── İletişim güncelleme alt akışı ────────────────────────────────────────────
   function iletisimAc() {
     document.getElementById('iletisimMetin').textContent =
-      senderName + ' tarafından bırakılan ölüm sonrası mesajları almaya devam etmek istiyorsanız, güncel iletişim bilginizi girebilirsiniz.';
+      'Bu değişiklik, bu göndericiden gelecekte yapılacak uygun teslimatlarda kullanılacak iletişim adresinizi günceller.';
     goster('iletisimForm');
   }
 

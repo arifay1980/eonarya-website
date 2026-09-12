@@ -1,5 +1,8 @@
 const toggle=document.querySelector('.menu-toggle');
 const menu=document.querySelector('#main-nav');
+const experience=window.EONARYA_EXPERIENCE||{};
+document.querySelectorAll('[data-content-path]').forEach(node=>{const value=(node.getAttribute('data-content-path')||'').split('.').reduce((current,key)=>current&&current[key],experience);if(typeof value==='string')node.textContent=value});
+document.querySelectorAll('[data-support-link]').forEach(node=>{const kind=node.getAttribute('data-support-link');const support=experience.SUPPORT_COPY||{};const labelKey=kind==='message'?'messageLabel':'helpLabel';const hrefKey=kind==='message'?'messageHref':'helpHref';if(typeof support[labelKey]==='string')node.textContent=support[labelKey];if(typeof support[hrefKey]==='string')node.setAttribute('href',support[hrefKey])});
 function closeMenu(){menu.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Menüyü aç')}
 toggle.addEventListener('click',()=>{const open=menu.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'Menüyü kapat':'Menüyü aç')});
 menu.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMenu));

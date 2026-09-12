@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-07T18:47:41.173Z",
-  "sourceNote": "GENERATED — DO NOT EDIT. Kaynak: Eonarya/services/helpContent.js (npm run sync:help ile üretildi).",
+  "generatedAt": "2026-09-12T14:48:31.570Z",
+  "sourceNote": "GENERATED — DO NOT EDIT. Kaynak: Eonarya/shared/content/helpContent.data.js (npm run sync:help ile üretildi).",
   "categories": [
     {
       "id": "mesajlar",
@@ -9,7 +9,7 @@
         {
           "id": "mesaj-nedir",
           "question": "Mesaj nedir?",
-          "answer": "Eonarya'da oluşturduğun mesajlar, belirlediğin kişilere belirlediğin zamanda veya belirli koşullar gerçekleştiğinde iletilir."
+          "answer": "Mesajlar; bugün, gelecekte ya da senden sonra belirlediğin zamanda veya koşullar gerçekleştiğinde, seçtiğin kişilere ulaştırılmak üzere oluşturduğun içeriklerdir."
         },
         {
           "id": "mesaj-turleri",
@@ -50,12 +50,12 @@
         {
           "id": "bs-nedir",
           "question": "Benden Sonra mesajı nedir?",
-          "answer": "Hayatta olmadığın doğrulandıktan sonra iletilmek üzere bıraktığın mesajlardır."
+          "answer": "Benden Sonra; Hayattayım Protokolü ve tercih ettiğin ek güvenlik adımları tamamlandıktan, yani artık sana ulaşılamadığı doğrulandıktan sonra hazırladığın mesajların ve emanetlerin belirlediğin kişilere ulaştırılmasını sağlayan teslimat koşuludur."
         },
         {
           "id": "bs-ne-zaman",
           "question": "Ne zaman gönderilir?",
-          "answer": "Hayattayım Protokolü tamamlandıktan ve hayatta olmadığın doğrulandıktan sonra gönderilir."
+          "answer": "Hayattayım Protokolü ve tercih ettiğin ek güvenlik adımları tamamlandıktan, sana ulaşılamadığı doğrulandıktan sonra gönderilir."
         },
         {
           "id": "bs-hemen-mi",
@@ -81,7 +81,7 @@
         {
           "id": "ht-nedir",
           "question": "Hayattayım Protokolü nedir?",
-          "answer": "Belirlediğin aralıklarla senden yaşam teyidi alan doğrulama sistemidir."
+          "answer": "Hayattayım Protokolü, belirlediğin üç farklı zaman aralığında Eonarya’ya girmeni bekler. Eonarya’ya yaptığın her giriş bu süreleri yeniden başlatır. Belirlenen sürelerde senden yanıt alınamazsa, Benden Sonra olarak hazırladığın mesajların teslim süreci başlatılır. Dilersen Onay Grubu’nu kullanarak belirlediğin kişilerin de sürece dahil olmasını sağlayabilir ve teslimatları ek bir güvenlik adımıyla koruyabilirsin."
         },
         {
           "id": "ht-nasil-calisir",
@@ -127,7 +127,7 @@
         {
           "id": "gk-nedir",
           "question": "Güvenilir Kişi nedir?",
-          "answer": "Hayattayım Protokolü'nde, sana ulaşılamadığında doğrulama amacıyla başvurulan kişilerdir."
+          "answer": "Güvenilir Kişiler; sana ulaşılamadığı durumlarda sürecin doğrulanmasına yardımcı olmak için önceden belirlediğin kişilerdir. Bu kişilerden oluşturduğun Onay Grubu’ndan istediğin doğrulama katmanı, Benden Sonra teslimatlarının başlamasından önce ek bir güvenlik adımı sağlar."
         },
         {
           "id": "gk-kac-kisi",
@@ -163,7 +163,7 @@
         {
           "id": "plan-nedir",
           "question": "Plan nedir?",
-          "answer": "Belirli bir kişi veya konu için oluşturduğun takip yapısıdır."
+          "answer": "Planlar; ödemelerini, alacaklarını, aidatlarını, kiralarını, taksitlerini ve diğer periyodik işlerini takip etmeni; gerektiğinde ilgili kişilere hatırlatma yapmanı sağlayan yapılardır."
         },
         {
           "id": "plan-paylasim",
@@ -178,7 +178,7 @@
         {
           "id": "plan-otomatik-mesaj",
           "question": "Planlar otomatik mesaj gönderir mi?",
-          "answer": "Hayır. Mesaj oluşturma işlemi ayrıca yapılır."
+          "answer": "Bir şey geciktiğinde Eonarya senin yerine ilgili kişiye hatırlatma mesajı oluşturabilir."
         },
         {
           "id": "plan-gecikme-bildirimi",

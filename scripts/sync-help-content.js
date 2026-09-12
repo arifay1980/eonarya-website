@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /*
  * Yardım Merkezi içeriğini kardeş 'Eonarya' uygulama reposundaki tek kaynaktan
- * (shared/content/helpContent.data.js — bağımlılıksız veri dosyası) statik olarak
+ * (shared/content/helpContent.data.js) statik olarak
  * (AST üzerinden, hiç kod çalıştırmadan) okuyup web sitesine aktarır.
  * Kullanım: bkz. scripts/README.md.
  *
@@ -48,6 +48,9 @@ const traverse = traverseModule.default || traverseModule;
 
 const HELP_CONTENT_PATH = path.join(APP_REPO, 'shared/content/helpContent.data.js');
 const UI_SABITLERI_PATH = path.join(APP_REPO, 'shared/uiSabitleri.js');
+const EXPERIENCE_CONTENT_PATH = path.join(
+  APP_REPO, 'supabase/functions/_shared/experience/content.json'
+);
 const OUTPUT_JSON = path.join(__dirname, '../generated/help-content.json');
 const YARDIM_HTML = path.join(__dirname, '../yardim.html');
 
@@ -71,6 +74,20 @@ function getBooleanFlag(ast, name) {
   return value;
 }
 
+function memberPath(node) {
+  const parts = [];
+  let cursor = node;
+  while (cursor && cursor.type === 'MemberExpression') {
+    if (cursor.computed && cursor.property.type === 'StringLiteral') parts.unshift(cursor.property.value);
+    else if (!cursor.computed && cursor.property.type === 'Identifier') parts.unshift(cursor.property.name);
+    else return null;
+    cursor = cursor.object;
+  }
+  if (!cursor || cursor.type !== 'Identifier') return null;
+  parts.unshift(cursor.name);
+  return parts;
+}
+
 function valueToJs(node, ctx) {
   switch (node.type) {
     case 'StringLiteral':
@@ -87,10 +104,21 @@ function valueToJs(node, ctx) {
       }
       throw new Error('İfade içeren template literal desteklenmiyor: ' + JSON.stringify(node.loc && node.loc.start));
     case 'MemberExpression':
-      if (node.property && node.property.type === 'Identifier') {
-        return '@icon:' + node.property.name;
+      {
+        const parts = memberPath(node);
+        if (parts && parts[0] === 'PRODUCT_COPY') {
+          let value = ctx.productCopy;
+          for (const part of parts.slice(1)) value = value && value[part];
+          if (typeof value !== 'string') {
+            throw new Error(`Canonical ürün metni bulunamadı: ${parts.join('.')}`);
+          }
+          return value;
+        }
+        if (node.property && node.property.type === 'Identifier') {
+          return '@icon:' + node.property.name;
+        }
+        throw new Error('Desteklenmeyen member expression.');
       }
-      throw new Error('Desteklenmeyen member expression.');
     case 'ObjectExpression':
       return objectExpressionToJs(node, ctx);
     case 'ArrayExpression':
@@ -179,7 +207,11 @@ function main() {
   const telefonFlag = getBooleanFlag(uiAst, 'TELEFON_DOGRULAMA_AKTIF');
 
   const helpAst = parseFile(HELP_CONTENT_PATH);
-  const ctx = { flags: { TELEFON_DOGRULAMA_AKTIF: telefonFlag } };
+  const experienceContent = JSON.parse(fs.readFileSync(EXPERIENCE_CONTENT_PATH, 'utf8'));
+  const ctx = {
+    flags: { TELEFON_DOGRULAMA_AKTIF: telefonFlag },
+    productCopy: experienceContent.PRODUCT_COPY,
+  };
   const categories = filterFlaggedQuestions(extractHelpCategories(helpAst, ctx), ctx);
 
   let totalQuestions = 0;
@@ -198,7 +230,7 @@ function main() {
   const payload = {
     generatedAt: new Date().toISOString(),
     sourceNote:
-      'GENERATED — DO NOT EDIT. Kaynak: Eonarya/services/helpContent.js (npm run sync:help ile üretildi).',
+      'GENERATED — DO NOT EDIT. Kaynak: Eonarya/shared/content/helpContent.data.js (npm run sync:help ile üretildi).',
     categories,
   };
 

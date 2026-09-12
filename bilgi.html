@@ -185,25 +185,24 @@
     <!-- Bilgilendirme icerigi — APPROVAL_INTRO e-postasıyla birebir aynı metin
          (supabase/functions/_shared/templates.ts) -->
     <article id="icerik" class="card" style="display:none">
-      <h1><strong id="baslikAd"></strong> sizi Eonarya'da güvenilir kişi olarak listeliyor</h1>
+      <h1><strong id="baslikAd"></strong>, sizi Eonarya’da Güvenilir Kişi olarak belirledi.</h1>
 
-      <p class="lead"><strong id="metin1Ad"></strong>, Eonarya'daki Hayattayım Protokolü kapsamında sizi güvenilir kişilerinden biri olarak listeliyor.</p>
-      <p class="lead">Bu protokol, kullanıcıyla uzun süre iletişim kurulamadığında önceden belirlenen kişilerden bilgi alınmasını sağlayan bir güvenlik mekanizmasıdır.</p>
+      <p class="lead"><strong id="metin1Ad"></strong>, Hayattayım Protokolü kapsamında sizi Güvenilir Kişilerinden biri olarak belirledi.</p>
+      <p class="lead">Güvenilir Kişiler, kullanıcıya ulaşılamadığı durumlarda sürecin doğrulanmasına yardımcı olur.</p>
       <p class="lead">Bu bildirim yalnızca bilgilendirme amaçlıdır. Şu anda sizden herhangi bir işlem yapmanız beklenmemektedir.</p>
-      <p class="lead">İleride protokol koşulları gerçekleşirse, <strong id="metin2Ad"></strong> hakkındaki bilginize başvurulabilmesi için size özel bir bağlantı gönderilebilir.</p>
+      <p class="lead">İleride Hayattayım Protokolü kapsamında doğrulamanıza ihtiyaç duyulursa size özel bir bağlantı gönderilebilir.</p>
 
       <div class="bilgi-blok">
         <p class="bilgi-baslik">Bu iletiyi neden aldım?</p>
-        <p>Bu iletiyi almanızın nedeni, <strong id="bilgiAd1"></strong>'in Eonarya içerisinde sizi ilgili kişi olarak listelemesidir.</p>
+        <p><strong id="bilgiAd1"></strong>, sizi Eonarya’da Güvenilir Kişi olarak belirlediği için bu iletiyi aldınız. Gerektiğinde Hayattayım Protokolü kapsamında sizden doğrulama istenebilir.</p>
         <p>Süreçle ilgili sorularınız varsa öncelikle <strong id="bilgiAd2"></strong> ile iletişime geçebilirsiniz.</p>
-        <p>Bu iletinin size yanlışlıkla ulaştığını düşünüyorsanız herhangi bir işlem yapmanız gerekmez. Teknik bir hata olduğunu düşünüyorsanız <a href="mailto:destek@eonarya.com" style="color:var(--purple);text-decoration:underline;">destek@eonarya.com</a> adresinden bizimle iletişime geçebilirsiniz.</p>
+        <p><span data-content-path="DELIVERY_COPY.wrongRecipient"></span> <a data-support-href="message" href="/yardim.html#destek" style="color:var(--purple);text-decoration:underline;">Talebimi İlet</a></p>
       </div>
 
       <div class="bilgi-blok">
         <p class="bilgi-baslik">Eonarya Nedir?</p>
-        <p>Eonarya, insanların geleceğe bırakmak istedikleri mesajları, anıları ve önemli bilgileri doğru zamanda doğru kişilere ulaştırabilmesini sağlayan bir teslimat sistemidir.</p>
-        <p>Eonarya teslimat ve doğrulama süreçlerinde herhangi bir yönlendirme yapmaz. Sistem yalnızca verilen yanıtları kaydeder ve önceden tanımlanmış kuralları uygular.</p>
-        <p>Eonarya, kullanıcılar tarafından oluşturulan mesajların veya verilen yanıtların doğruluğunu değerlendirmez; yalnızca teslimat ve doğrulama sürecinin işletilmesini sağlar.</p>
+        <p data-content-path="PRODUCT_COPY.Eonarya.short"></p>
+        <p data-content-path="PRODUCT_COPY.Trust.canonical"></p>
       </div>
     </article>
 
@@ -214,14 +213,14 @@
 
     <footer class="footer">
       <img class="footer-logo" src="/assets/brand/logo-dark.png" width="158" height="19" alt="Eonarya">
-      <p class="footer-description" data-brand-copy="privateFooter"></p>
+      <p class="footer-description" data-content-path="PRODUCT_COPY.Eonarya.short"></p>
       <p class="footer-optout" id="footerOptOut"></p>
       <div class="footer-links">
         <a href="https://eonarya.com">eonarya.com</a>
         <a href="/gizlilik.html">Gizlilik Politikası</a>
         <a href="/kullanim-sartlari.html">Kullanım Şartları</a>
-        <a href="/yardim.html">Yardım Merkezi</a>
-        <a href="mailto:destek@eonarya.com">destek@eonarya.com</a>
+        <a data-support-link="help" href="/yardim.html">Yardım Merkezi</a>
+        <a data-support-link="message" href="/yardim.html#destek">Bize Mesaj Gönder</a>
       </div>
       <div class="store-badges">
         <img src="assets/email/appstore-badge.png" width="107" height="36" alt="App Store — yakında">
