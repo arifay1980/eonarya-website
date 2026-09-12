@@ -16,11 +16,12 @@ C:\Arif\Eonarya\Eonarya            (uygulama reposu)
 C:\Arif\Eonarya\eonarya-website    (bu repo)
 ```
 
-Farklı bir yerdeyse `EONARYA_APP_REPO` ortam değişkenini o checkout'un tam yoluna
-ayarlayın:
+Farklı bir yerdeyse yardım senkronu için `EONARYA_APP_REPO`, deneyim senkronu
+için `EONARYA_APP_ROOT` ortam değişkenini o checkout'un tam yoluna ayarlayın:
 
 ```bash
 EONARYA_APP_REPO=/path/to/Eonarya node scripts/sync-help-content.js
+EONARYA_APP_ROOT=/path/to/Eonarya node scripts/sync-experience.js
 ```
 
 Script'ler `@babel/parser` ve `@babel/traverse` kullanır (kaynak dosyayı hiç
@@ -28,6 +29,23 @@ Script'ler `@babel/parser` ve `@babel/traverse` kullanır (kaynak dosyayı hiç
 React Native/Deno bağımlılıkları hiç gerekmez). Bu paketler `eonarya-website` için
 `npm install` ile kurulabilir; kurulmadıysa script otomatik olarak kardeş Eonarya
 reposunun kendi `node_modules`'ına düşer (zaten oradalar).
+
+## Marka / deneyim — `npm run sync:experience`
+
+Bu akış TypeScript AST okumaz. İki açık canonical veri kaynağını tüketir:
+
+- `Eonarya/supabase/functions/_shared/experience/design-tokens.json`
+- `Eonarya/supabase/functions/_shared/experience/content.json`
+
+Üretilen `assets/experience-tokens.css`, `generated/experience-content.js` ve
+`generated/experience-manifest.json` website çalışma zamanını uygulama reposunun
+implementation detaylarına bağlamaz. Web ve e-posta logo dosyaları da uygulamadaki
+canonical master PNG'lerden aynı komutla deterministik olarak türetilir; public
+asset yolları değişmez.
+
+`npm run check:experience` committed çıktıların kaynaklarla aynı olduğunu,
+`npm run test:experience` ise private shell, footer varyantları, token temizliği,
+no-store ve logo/link sözleşmelerini doğrular.
 
 ## Yardım Merkezi — `npm run sync:help`
 

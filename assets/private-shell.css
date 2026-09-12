@@ -1,0 +1,116 @@
+:root {
+  --bg: var(--eon-color-paper);
+  --card: var(--eon-color-surface);
+  --text: var(--eon-color-ink);
+  --muted: var(--eon-color-soft);
+  --soft: var(--eon-color-muted);
+  --border: var(--eon-color-line);
+  --purple: var(--eon-color-orbit);
+  --purple2: var(--eon-color-focus);
+  --font-body: var(--eon-font-family);
+}
+
+body[data-private-page] {
+  background: var(--bg);
+  font-family: var(--font-body);
+  color: var(--text);
+}
+
+body[data-private-page] :focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--eon-color-focus) 42%, transparent);
+  outline-offset: 3px;
+}
+
+body[data-private-page] .wrap {
+  width: min(100%, var(--eon-private-max));
+}
+
+body[data-private-page] .brand {
+  padding-block: var(--eon-space-xl) var(--eon-space-2xl);
+  text-align: center;
+}
+
+body[data-private-page] .task-brand-logo {
+  width: 220px;
+  max-width: 64vw;
+  height: auto;
+  margin-inline: auto;
+}
+
+body[data-private-page] .card {
+  border-color: var(--border);
+  border-radius: var(--eon-radius-card);
+  box-shadow: 0 18px 56px rgba(39, 28, 58, .08);
+}
+
+body[data-private-page] .cta,
+body[data-private-page] .cevap-btn,
+body[data-private-page] button,
+body[data-private-page] input {
+  min-height: var(--eon-control-height);
+}
+
+body[data-private-page] .cta,
+body[data-private-page] .cevap-btn {
+  border-radius: var(--eon-radius-md);
+  font-family: var(--eon-font-family);
+}
+
+body[data-private-page] .yukleniyor,
+body[data-private-page] .hata-mesaj {
+  border: 1px solid var(--border);
+  border-radius: var(--eon-radius-card);
+  background: var(--card);
+  color: var(--muted);
+}
+
+body[data-private-page] .dot-spin {
+  border-color: color-mix(in srgb, var(--eon-color-accent) 26%, transparent);
+  border-top-color: var(--eon-color-focus);
+}
+
+body[data-private-page] .footer {
+  margin-top: var(--eon-space-2xl);
+  padding: var(--eon-space-2xl) var(--eon-space-lg) 0;
+  border-top: 1px solid var(--border);
+  color: var(--soft);
+  text-align: center;
+  line-height: 1.7;
+}
+
+body[data-private-page] .footer-description {
+  margin: 0 auto;
+  max-width: 620px;
+  font-size: 12px;
+}
+
+body[data-private-page] .footer-logo {
+  display: block;
+  width: 158px;
+  height: auto;
+  margin: 0 auto 14px;
+}
+
+body[data-private-page] .footer a {
+  color: var(--eon-color-accent-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+body[data-private-page] .footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 16px;
+  margin-top: 10px;
+}
+
+body[data-private-page] .footer-links a {
+  margin: 0;
+}
+
+@media (max-width: 620px) {
+  body[data-private-page] .page { padding-inline: 14px; }
+  body[data-private-page] .card { border-radius: var(--eon-radius-xl); }
+  body[data-private-page] .footer-links { flex-direction: column; gap: 8px; }
+}

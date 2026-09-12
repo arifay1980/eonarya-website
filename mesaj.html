@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Eonarya — Size Bir Mesaj Var</title>
   <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -360,8 +361,10 @@
     }
   </style>
   <link rel="stylesheet" href="/assets/page-shell.css">
+  <link rel="stylesheet" href="/assets/experience-tokens.css">
+  <link rel="stylesheet" href="/assets/private-shell.css">
 </head>
-<body>
+<body data-private-page="mesaj">
 
 <main class="page">
   <div class="wrap">
@@ -467,7 +470,7 @@
 
     <footer class="footer">
       <img class="footer-logo" src="/assets/brand/logo-dark.png" width="158" height="19" alt="Eonarya">
-      <strong>Eonarya</strong>, insanların mesajlarını, anılarını, planlarını ve dijital emanetlerini doğru zamanda doğru kişilere ulaştırabilmesini sağlayan teslimat sistemidir.
+      <p class="footer-description" data-brand-copy="privateFooter"></p>
       <p class="footer-optout" id="footerOptOut"></p>
       <div class="footer-links">
         <a href="https://eonarya.com">eonarya.com</a>
@@ -485,9 +488,12 @@
   </div>
 </main>
 
+<script src="/generated/experience-content.js"></script>
+<script src="/assets/private-shell.js"></script>
 <script>
   const EDGE  = 'https://jvakvxaadntxzrbxrzcx.supabase.co/functions/v1/get-message';
-  const token = new URLSearchParams(window.location.search).get('token') || '';
+  const PRIVATE_PARAMS = window.EonaryaPrivate.captureSensitiveParams(['token', 'ot', 'confirm']);
+  const token = PRIVATE_PARAMS.token || '';
 
   // EMAIL-PREVIEW-01: ?preview=1 ile gerçek token/API olmadan sabit test verisiyle
   // gösterir — email-preview.html'deki iframe için. Gerçek SMS/e-posta akışında kullanılmaz.

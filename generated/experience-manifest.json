@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "designVersion": 1,
+  "contentVersion": 1,
+  "sources": {
+    "designTokensSha256": "784befc2c6331b84a1bd37e686ab104726fe314033fbcb5d8946d1be4e204dbc",
+    "contentSha256": "8b6bb0df63484a5f55eb7c4578827e19adbb03d4e934150e661d5a0f61ef32f3"
+  },
+  "outputs": {
+    "assets/brand/logo-dark.png": "77d5ea40899361a9a1d97b84e0341fd96f91bd2cd9d9627df04364c773855767",
+    "assets/brand/logo-light.png": "3c91e8b8017a79af3c7ca4d22f19a51389478be9b76921b4d55bf5f4643d127b",
+    "assets/brand/symbol-dark.png": "498b997c4fdc2f608933fa3c5c16964cb4b30deda3cc1a857c033058f9c59e60",
+    "assets/email/footer-logo.png": "e5f315b0e45861cfa93984d315a79ccf15a2cb129edd6c85fb1a4474caeb76cb",
+    "assets/email/header-logo.png": "8828c7ff93d4996f9dd7aed73c8c0b8b9edccbc9b4b6a8e7263270013921408d",
+    "assets/experience-tokens.css": "1e2a78e86adf3fd18b687d824f5222619214a2c8843357ba99391ca5216c5c05",
+    "generated/experience-content.js": "e15f6fb859d951e5d3a3e98220b0ac73d4e974b4fd048cc89bb25f9ffe93ba48"
+  }
+}

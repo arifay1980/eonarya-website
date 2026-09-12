@@ -1,0 +1,32 @@
+body[data-footer-variant] .footer {
+  background: var(--eon-color-night);
+  color: var(--eon-color-white-soft);
+  border-top: 1px solid rgba(255, 255, 255, .09);
+}
+
+body[data-footer-variant] .footer a {
+  color: inherit;
+  text-underline-offset: 3px;
+}
+
+body[data-footer-variant] .footer a:hover {
+  color: var(--eon-color-white);
+}
+
+body[data-footer-variant="legal"] .footer,
+body[data-footer-variant="support"] .footer {
+  margin-top: var(--eon-space-3xl);
+}
+
+body[data-footer-variant] .footer-brand-logo,
+body[data-footer-variant] .footer-logo {
+  height: auto;
+}
+
+@media (max-width: 620px) {
+  body[data-footer-variant] .footer-inner,
+  body[data-footer-variant] .footer-grid,
+  body[data-footer-variant] .footer-base {
+    align-items: flex-start;
+  }
+}
