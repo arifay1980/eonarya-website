@@ -1,5 +1,5 @@
 window.EONARYA_EXPERIENCE = Object.freeze({
-  "version": 2,
+  "version": 3,
   "PRODUCT_COPY": {
     "Eonarya": {
       "standard": "Eonarya; bugün, gelecekte ya da senden sonra senin için önemli olan anılarını, emanetlerini ve mesajlarını belirlediğin zaman ve koşullarda belirlediğin kişilere ulaştıran; planlarını ve periyodik işlerini takip ederek gerektiğinde ilgili kişilere hatırlatan kişisel bir dijital süreklilik sistemidir.",
@@ -75,7 +75,8 @@ window.EONARYA_EXPERIENCE = Object.freeze({
   "DELIVERY_COPY": {
     "whyTitle": "Bu iletiyi neden aldım?",
     "wrongRecipient": "Bu iletinin size yanlışlıkla ulaştığını düşünüyorsanız herhangi bir işlem yapmanız gerekmez. Bize bildirmek isterseniz talebinizi iletebilirsiniz.",
-    "wrongRecipientCta": "Talebimi İlet"
+    "wrongRecipientCta": "Talebimi İlet",
+    "recipientContactUpdate": "İletişim bilgilerinizi güncellemeniz, bu göndericiden gelecekte alacağınız tekrar eden mesajlarda yeni e-posta adresinizin kullanılmasını sağlar. Daha önce gönderilmeye başlanmış teslimatlar bu değişiklikten etkilenmez."
   },
   "SUPPORT_COPY": {
     "email": "destek@eonarya.com",

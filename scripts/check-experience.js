@@ -24,6 +24,11 @@ function requireText(value, expected, label) {
 }
 
 const content = JSON.parse(read(appRoot, 'supabase/functions/_shared/experience/content.json'));
+const recipientContactUpdate = 'İletişim bilgilerinizi güncellemeniz, bu göndericiden gelecekte alacağınız tekrar eden mesajlarda yeni e-posta adresinizin kullanılmasını sağlar. Daha önce gönderilmeye başlanmış teslimatlar bu değişiklikten etkilenmez.';
+
+if (content.DELIVERY_COPY.recipientContactUpdate !== recipientContactUpdate) {
+  throw new Error('İletişim güncelleme kapsamı kilitli son metinden saptı');
+}
 
 for (const page of privatePages) {
   const html = read(root, page);
@@ -55,6 +60,11 @@ for (const page of legalPages) {
 }
 requireMatch(read(root, 'yardim.html'), /data-footer-variant="support"/, 'yardim.html: support footer varyantı eksik');
 
+const preferences = read(root, 'tercihler.html');
+requireText(preferences, 'data-content-path="DELIVERY_COPY.recipientContactUpdate"', 'tercihler.html: iletişim güncelleme registry bağı eksik');
+requireText(preferences, 'const CONTACT_UPDATE_COPY = window.EONARYA_EXPERIENCE.DELIVERY_COPY.recipientContactUpdate;', 'tercihler.html: dinamik iletişim güncelleme registry bağı eksik');
+requireText(preferences, recipientContactUpdate, 'tercihler.html: kilitli iletişim güncelleme metni eksik');
+
 const home = read(root, 'index.html');
 const hero = content.PRODUCT_COPY.Eonarya.web.title;
 requireText(home, `aria-label="${hero}"`, 'Ana sayfa hero metni canonical kaynaktan saptı');
@@ -81,6 +91,7 @@ for (const deprecated of [
   'insanların geleceğe bırakmak istedikleri mesajları',
   'yalnızca ölüm sonrası mesajları',
   'yalnızca Benden Sonra mesajları',
+  'Bu değişiklik, bu göndericiden gelecekte yapılacak uygun teslimatlarda kullanılacak iletişim adresinizi günceller.',
   'ölüm sonrası mesaj',
   'Önem verdiğin şeyler, zamanı geldiğinde doğru kişiye ulaşsın.',
   'Mesajını bugünden hazırla; kime ulaşacağını ve teslimat sırasını sen belirle.',

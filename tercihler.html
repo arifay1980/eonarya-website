@@ -271,7 +271,7 @@
       <div class="aksiyon-kart" id="iletisimKart" style="display:none">
         <h2>İletişim Bilgilerimi Güncelle</h2>
         <p>Bu kişiden gelecekte mesaj almak istiyorsanız ancak iletişim bilgileriniz değiştiyse güncelleyebilirsiniz.</p>
-        <p class="not-satiri">Bu değişiklik, bu göndericiden gelecekte yapılacak uygun teslimatlarda kullanılacak iletişim adresinizi günceller.</p>
+        <p class="not-satiri" data-content-path="DELIVERY_COPY.recipientContactUpdate">İletişim bilgilerinizi güncellemeniz, bu göndericiden gelecekte alacağınız tekrar eden mesajlarda yeni e-posta adresinizin kullanılmasını sağlar. Daha önce gönderilmeye başlanmış teslimatlar bu değişiklikten etkilenmez.</p>
         <button class="cevap-btn cevap-hayir" id="iletisimAcBtn" type="button">İletişim Bilgilerimi Güncelle</button>
       </div>
     </section>
@@ -319,7 +319,7 @@
           <label for="email">E-posta adresi</label>
           <input type="email" id="email" placeholder="ornek@eposta.com" autocomplete="email">
         </div>
-        <p class="field-hint">Bu değişiklik, bu göndericiden gelecekte yapılacak uygun teslimatlarda kullanılacak iletişim adresinizi günceller. Onay için kayıtlı e-postanıza bir link göndereceğiz.</p>
+        <p class="field-hint"><span data-content-path="DELIVERY_COPY.recipientContactUpdate">İletişim bilgilerinizi güncellemeniz, bu göndericiden gelecekte alacağınız tekrar eden mesajlarda yeni e-posta adresinizin kullanılmasını sağlar. Daha önce gönderilmeye başlanmış teslimatlar bu değişiklikten etkilenmez.</span> Onay için kayıtlı e-postanıza bir link göndereceğiz.</p>
         <button class="cta" id="kaydetBtn" type="submit">Bilgilerimi Güncelle</button>
       </form>
       <p class="note">Bu işlem sizin orijinal kişi kaydınızı değiştirmez, yalnızca bu teslimat kanalı için geçerli olur.</p>
@@ -392,6 +392,7 @@
   // EMAIL-PREVIEW-01: ?preview=1 ile gerçek token/API olmadan sabit test verisiyle
   // gösterir — email-preview.html'deki iframe için. Gerçek SMS/e-posta akışında kullanılmaz.
   const PREVIEW = new URLSearchParams(window.location.search).get('preview') === '1';
+  const CONTACT_UPDATE_COPY = window.EONARYA_EXPERIENCE.DELIVERY_COPY.recipientContactUpdate;
 
   const HATALAR = {
     token_eksik:               'Link eksik veya hatalı. Lütfen orijinal linki kullanın.',
@@ -434,7 +435,7 @@
   const CONFIRM_METINLER = {
     old: {
       baslik: 'Bu değişikliği siz mi istediniz?',
-      metin:  'Bu değişiklik, bu göndericiden gelecekte yapılacak uygun teslimatlarda kullanılacak iletişim adresinizi günceller.',
+      metin:  CONTACT_UPDATE_COPY,
       buton:  'Evet, onaylıyorum',
     },
     new: {
@@ -545,7 +546,7 @@
   // ── İletişim güncelleme alt akışı ────────────────────────────────────────────
   function iletisimAc() {
     document.getElementById('iletisimMetin').textContent =
-      'Bu değişiklik, bu göndericiden gelecekte yapılacak uygun teslimatlarda kullanılacak iletişim adresinizi günceller.';
+      CONTACT_UPDATE_COPY;
     goster('iletisimForm');
   }
 
