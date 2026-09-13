@@ -1,0 +1,14 @@
+name: Webhook CI Test
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  webhook-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Complete successfully
+        run: echo "webhook test"
