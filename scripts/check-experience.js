@@ -78,8 +78,15 @@ if (/ucuncu-kisi-aydinlatma[^"'\s>]*\?(?:token|ot|confirm)=/.test(messagePage)) 
 
 const thirdPartyPage = read(root, 'ucuncu-kisi-aydinlatma.html');
 requireText(thirdPartyPage, 'data-legal-canonical="UCUNCU_KISI_AYDINLATMA_METNI"', 'üçüncü kişi sayfası canonical üretim işareti eksik');
-requireText(thirdPartyPage, 'Taslak — Hukuki Kimlik Bilgisi Bekleniyor', 'kimlik blocker varken taslak durumu korunmadı');
-requireText(thirdPartyPage, '[MEVCUT CANONICAL ADRES]', 'kimlik blocker tahminle gizlendi');
+requireText(thirdPartyPage, 'Veri Sorumlusu: Arif Yıldırım', 'veri sorumlusu kimliği eksik');
+requireText(thirdPartyPage, 'Web: eonarya.com', 'veri sorumlusu web bilgisi eksik');
+if (thirdPartyPage.includes('Taslak') || thirdPartyPage.includes('[MEVCUT CANONICAL')) {
+  throw new Error('kimlik blocker kapandıktan sonra taslak/yer tutucu izi kaldı');
+}
+
+const aydinlatmaPage = read(root, 'aydinlatma.html');
+requireText(aydinlatmaPage, 'Veri Sorumlusu: Arif Yıldırım', 'genel aydınlatma veri sorumlusu kimliği eksik');
+requireText(aydinlatmaPage, 'Web: eonarya.com', 'genel aydınlatma web bilgisi eksik');
 
 const templatesSource = read(appRoot, 'supabase/functions/_shared/templates.ts');
 for (const preservedWhy of [

@@ -79,7 +79,7 @@ window.EONARYA_EXPERIENCE = Object.freeze({
     "recipientContactUpdate": "İletişim bilgilerinizi güncellemeniz, bu göndericiden gelecekte alacağınız tekrar eden mesajlarda yeni e-posta adresinizin kullanılmasını sağlar. Daha önce gönderilmeye başlanmış teslimatlar bu değişiklikten etkilenmez."
   },
   "THIRD_PARTY_NOTICE": {
-    "version": "2026-09-12.1",
+    "version": "2026-09-13.1",
     "short": "Bu ileti, bir Eonarya kullanıcısı tarafından Eonarya'ya sağlanan iletişim bilgileriniz kullanılarak ilgili Eonarya işleminin gerçekleştirilmesi amacıyla gönderilmiştir. Kişisel verilerinizin nasıl işlendiğine ilişkin ayrıntılı bilgi için Üçüncü Kişi Aydınlatma Metni'ni inceleyebilirsiniz.",
     "label": "Üçüncü Kişi Aydınlatma Metni",
     "href": "/ucuncu-kisi-aydinlatma"

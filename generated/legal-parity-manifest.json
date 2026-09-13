@@ -14,13 +14,13 @@
     },
     "AYDINLATMA_METNI": {
       "page": "aydinlatma.html",
-      "canonicalSha256": "13a9fa463fbff7aa184899e2503610937705939b115d457d292162ce113ee909",
-      "pageVisibleTextSha256": "5ca978926455b9b70fc8e1aa1e5d14c30f7ef2228178eef55bf7d1a6c3dfcdf5"
+      "canonicalSha256": "2f51a35793984952152c017b262667c06fba7082fa1eb9fd8a6b8d745a329cdb",
+      "pageVisibleTextSha256": "a8bf1f6164bae86cc18d321b7bbd6a33d4e353cd87536ac5990eda67b478eae1"
     },
     "UCUNCU_KISI_AYDINLATMA_METNI": {
       "page": "ucuncu-kisi-aydinlatma.html",
-      "canonicalSha256": "1f9315b614f6811633d2510004212fad77cde59b5ee93a02113b542b0ed4e78f",
-      "pageVisibleTextSha256": "66c645ec2711d65e0856b8efdd7c2c381c1604876278df29af9eb5df30df5933"
+      "canonicalSha256": "764672386149f204fe5564d86d0e5144eda30815530afc3a3a28861ed7c7ff9e",
+      "pageVisibleTextSha256": "aba5d11999e974899b77a0800fe521caef885158c878fcacbe69add866311dfc"
     }
   }
 }
