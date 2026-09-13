@@ -53,6 +53,7 @@ const EXPERIENCE_CONTENT_PATH = path.join(
 );
 const OUTPUT_JSON = path.join(__dirname, '../generated/help-content.json');
 const YARDIM_HTML = path.join(__dirname, '../yardim.html');
+const CHECK_ONLY = process.argv.includes('--check');
 
 function parseFile(filePath) {
   const code = fs.readFileSync(filePath, 'utf8');
@@ -227,15 +228,17 @@ function main() {
     totalQuestions += cat.questions.length;
   }
 
+  const mevcutPayload = fs.existsSync(OUTPUT_JSON)
+    ? JSON.parse(fs.readFileSync(OUTPUT_JSON, 'utf8'))
+    : null;
   const payload = {
-    generatedAt: new Date().toISOString(),
+    generatedAt: CHECK_ONLY && mevcutPayload?.generatedAt
+      ? mevcutPayload.generatedAt
+      : new Date().toISOString(),
     sourceNote:
       'GENERATED — DO NOT EDIT. Kaynak: Eonarya/shared/content/helpContent.data.js (npm run sync:help ile üretildi).',
     categories,
   };
-
-  fs.mkdirSync(path.dirname(OUTPUT_JSON), { recursive: true });
-  fs.writeFileSync(OUTPUT_JSON, JSON.stringify(payload, null, 2) + '\n', 'utf8');
 
   const START = '<!-- GENERATED:HELP-CONTENT:START -->';
   const END = '<!-- GENERATED:HELP-CONTENT:END -->';
@@ -257,6 +260,20 @@ function main() {
     jsonBlock +
     '</script>\n    ';
   html = html.slice(0, startIdx) + replacement + html.slice(endIdx);
+
+  const outputJson = JSON.stringify(payload, null, 2) + '\n';
+  if (CHECK_ONLY) {
+    const mevcutJson = fs.existsSync(OUTPUT_JSON) ? fs.readFileSync(OUTPUT_JSON, 'utf8') : '';
+    const mevcutHtml = fs.readFileSync(YARDIM_HTML, 'utf8');
+    if (mevcutJson !== outputJson || mevcutHtml !== html) {
+      throw new Error('Yardım Merkezi çıktıları canonical kaynaklarla eşleşmiyor. npm run sync:help çalıştırın.');
+    }
+    console.log(`✓ Yardım Merkezi parity: ${categories.length} kategori, ${totalQuestions} soru`);
+    return;
+  }
+
+  fs.mkdirSync(path.dirname(OUTPUT_JSON), { recursive: true });
+  fs.writeFileSync(OUTPUT_JSON, outputJson, 'utf8');
   fs.writeFileSync(YARDIM_HTML, html, 'utf8');
 
   console.log(

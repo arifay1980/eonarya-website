@@ -27,7 +27,7 @@ window.EONARYA_EXPERIENCE = Object.freeze({
       "onboarding": "Tekrarlayan ödemeleri, alacakları, aidatları, kiraları, taksitleri veya düzenli işleri takip edebilirsin. Bir şey geciktiğinde Eonarya senin yerine ilgili kişiye hatırlatma mesajı oluşturabilir. Ne takip edileceği senin yaşam akışına bağlıdır."
     },
     "Hayattayim": {
-      "canonical": "Hayattayım Protokolü, belirlediğin üç farklı zaman aralığında Eonarya’ya girmeni bekler. Eonarya’ya yaptığın her giriş bu süreleri yeniden başlatır. Belirlenen sürelerde senden yanıt alınamazsa, Benden Sonra olarak hazırladığın mesajların teslim süreci başlatılır. Dilersen Onay Grubu’nu kullanarak belirlediğin kişilerin de sürece dahil olmasını sağlayabilir ve teslimatları ek bir güvenlik adımıyla koruyabilirsin.",
+      "canonical": "Hayattayım Protokolü, belirlediğin üç farklı zaman aralığında Eonarya’ya girmeni bekler. Eonarya’ya yaptığın her giriş bu süreleri yeniden başlatır. Belirlenen sürelerde senden yanıt alınamazsa, Benden Sonra olarak hazırladığın mesajların teslim süreci başlatılır. Dilersen Güvenilir Kişiler ekleyerek belirlediğin kişilerin de sürece dahil olmasını sağlayabilir ve teslimatları ek bir güvenlik adımıyla koruyabilirsin.",
       "onboarding": "Belirlediğin aralıklarla seninle iletişime geçer. Yanıt alınamazsa son bildirimden sonra Benden Sonra mesajlarının teslim süreci başlar. Dilersen ek güvenlik için Güvenilir Kişiler ekleyerek, bu süreci daha sağlam bir doğrulama katmanına bağlayabilirsin."
     },
     "BendenSonra": {
@@ -39,7 +39,7 @@ window.EONARYA_EXPERIENCE = Object.freeze({
       }
     },
     "GuvenilirKisiler": {
-      "canonical": "Güvenilir Kişiler; sana ulaşılamadığı durumlarda sürecin doğrulanmasına yardımcı olmak için önceden belirlediğin kişilerdir. Bu kişilerden oluşturduğun Onay Grubu’ndan istediğin doğrulama katmanı, Benden Sonra teslimatlarının başlamasından önce ek bir güvenlik adımı sağlar."
+      "canonical": "Güvenilir Kişiler; sana ulaşılamadığı durumlarda sürecin doğrulanmasına yardımcı olmak için önceden belirlediğin kişilerdir. Bu kişilerden istediğin doğrulama katmanı, Benden Sonra teslimatlarının başlamasından önce ek bir güvenlik adımı sağlar."
     },
     "ZamanKapsulu": {
       "canonical": "Kızına gelecekte söylemek istediğin bir söz, unutulmasın dediğin bir düşünce, özel bir gün için sakladığın bir anı… Eonarya bunları senin yerine takip eder ve belirlediğin zamanda doğru kişiye ulaştırır."

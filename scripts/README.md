@@ -53,6 +53,9 @@ no-store ve logo/link sözleşmelerini doğrular.
 node scripts/sync-help-content.js
 ```
 
+`npm run check:help`, committed `generated/help-content.json` ve `yardim.html`
+veri bloğunun canonical uygulama kaynağıyla aynı olduğunu dosya yazmadan doğrular.
+
 **Kaynak:** `Eonarya/shared/content/helpContent.data.js` (kategori/soru/cevap) +
 canonical “nedir?” yanıtları için `Eonarya/supabase/functions/_shared/experience/content.json`
 + `Eonarya/shared/uiSabitleri.js` → `TELEFON_DOGRULAMA_AKTIF` flag'i. Script,

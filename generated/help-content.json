@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-12T14:48:31.570Z",
+  "generatedAt": "2026-09-13T10:16:05.764Z",
   "sourceNote": "GENERATED — DO NOT EDIT. Kaynak: Eonarya/shared/content/helpContent.data.js (npm run sync:help ile üretildi).",
   "categories": [
     {
@@ -19,7 +19,7 @@
         {
           "id": "mesaj-duzenleme",
           "question": "Mesajı düzenleyebilir miyim?",
-          "answer": "Mesaj henüz teslim edilmediği sürece içeriğini, alıcısını ve zamanlamasını istediğin zaman değiştirebilirsin."
+          "answer": "Tek seferlik bir mesajı gerçek teslimat girişimi başlamadan önce düzenleyebilirsin. Teslimat süreci başladığında içerik, alıcı ve zamanlama kilitlenir. Her Yıl Aynı Tarihte, Doğum Gününde ve Önemli Gün mesajları ise sonraki tekrarları için düzenlenebilir."
         },
         {
           "id": "mesaj-silme",
@@ -29,7 +29,12 @@
         {
           "id": "mesaj-kanal",
           "question": "Mesajlar hangi kanaldan gönderilir?",
-          "answer": null
+          "answer": "Mesaj için E-posta, SMS ve WhatsApp kanallarından, alıcının kayıtlı iletişim bilgileri ve hesabındaki güncel teslimat yetkileriyle kullanılabilenleri seçebilirsin. Üçüncü kişilere teslimat yetkisi doğrulama yöntemlerine göre belirlenir ve gönderim anında yeniden kontrol edilir. Kendine yönelik teslimatlarda bu üçüncü kişi doğrulama koşulu aranmaz."
+        },
+        {
+          "id": "mesaj-akilli-teslimat",
+          "question": "Akıllı Teslimat nasıl çalışır?",
+          "answer": "Her gerçek alıcı için kanal sırasını ayrı belirlersin; varsayılan bir sıra yoktur. Mesaj bir kanalda açılmazsa 24 saat sonra o alıcının sıradaki kanalına geçilir. Mesaj açıldığında kalan kanal adımları durur. Teslimat Yinele açıksa tüm sıra en fazla bir kez daha çalışır. Kendime teslimatında Akıllı Teslimat uygulanmaz; seçtiğin kanallar standart teslimat adımında birlikte kullanılır."
         },
         {
           "id": "mesaj-on-okuma",
@@ -65,7 +70,7 @@
         {
           "id": "bs-degistirme",
           "question": "Sonradan değiştirebilir miyim?",
-          "answer": "Mesaj teslim edilmediği sürece düzenleyebilir veya kaldırabilirsin."
+          "answer": "Benden Sonra mesajını gerçek teslimat girişimi başlamadan önce düzenleyebilirsin. Teslimat süreci başladığında mesaj kilitlenir."
         },
         {
           "id": "bs-kimler-gorebilir",
@@ -81,7 +86,7 @@
         {
           "id": "ht-nedir",
           "question": "Hayattayım Protokolü nedir?",
-          "answer": "Hayattayım Protokolü, belirlediğin üç farklı zaman aralığında Eonarya’ya girmeni bekler. Eonarya’ya yaptığın her giriş bu süreleri yeniden başlatır. Belirlenen sürelerde senden yanıt alınamazsa, Benden Sonra olarak hazırladığın mesajların teslim süreci başlatılır. Dilersen Onay Grubu’nu kullanarak belirlediğin kişilerin de sürece dahil olmasını sağlayabilir ve teslimatları ek bir güvenlik adımıyla koruyabilirsin."
+          "answer": "Hayattayım Protokolü, belirlediğin üç farklı zaman aralığında Eonarya’ya girmeni bekler. Eonarya’ya yaptığın her giriş bu süreleri yeniden başlatır. Belirlenen sürelerde senden yanıt alınamazsa, Benden Sonra olarak hazırladığın mesajların teslim süreci başlatılır. Dilersen Güvenilir Kişiler ekleyerek belirlediğin kişilerin de sürece dahil olmasını sağlayabilir ve teslimatları ek bir güvenlik adımıyla koruyabilirsin."
         },
         {
           "id": "ht-nasil-calisir",
@@ -127,7 +132,7 @@
         {
           "id": "gk-nedir",
           "question": "Güvenilir Kişi nedir?",
-          "answer": "Güvenilir Kişiler; sana ulaşılamadığı durumlarda sürecin doğrulanmasına yardımcı olmak için önceden belirlediğin kişilerdir. Bu kişilerden oluşturduğun Onay Grubu’ndan istediğin doğrulama katmanı, Benden Sonra teslimatlarının başlamasından önce ek bir güvenlik adımı sağlar."
+          "answer": "Güvenilir Kişiler; sana ulaşılamadığı durumlarda sürecin doğrulanmasına yardımcı olmak için önceden belirlediğin kişilerdir. Bu kişilerden istediğin doğrulama katmanı, Benden Sonra teslimatlarının başlamasından önce ek bir güvenlik adımı sağlar."
         },
         {
           "id": "gk-kac-kisi",
@@ -184,6 +189,11 @@
           "id": "plan-gecikme-bildirimi",
           "question": "Gecikme bildirimi nedir?",
           "answer": "Beklenen tarih geçtiği halde tamamlanmamış bir kayıt olduğunda gönderilen hatırlatmadır."
+        },
+        {
+          "id": "plan-gecikme-analizi",
+          "question": "Gecikme Analizi nasıl çalışır?",
+          "answer": "Geciken plan kayıtların için Yasal, Mevduat veya Aidat türünü seçerek tahmini faiz hesaplayabilirsin. Hesabı tüm planla, bir etiketle veya bir kişiyle sınırlayabilir; yalnız açık kayıtları ya da tamamlananlar dahil tüm kayıtları ve tarih aralığını seçebilirsin. Oranlar her hesaplamada güncel oran tablosundan okunur. Bir ayın oranı yoksa önceki en yakın tanımlı ay kullanılır ve bu sana gösterilir; daha eski uygun oran da yoksa hesaplama durur. Tutar değişiklikleri ve kısmi ödemeler sonucu yaklaşık hale getirebilir. Sonuç yalnız bilgi amaçlıdır, plan kayıtlarını değiştirmez ve hukuki değerlendirme yerine geçmez."
         }
       ]
     },
@@ -199,12 +209,12 @@
         {
           "id": "kisi-silme",
           "question": "Kişiyi silersem ne olur?",
-          "answer": "Kişi silinir."
+          "answer": "Kişi bekleyen bir mesaj veya teslimatta, aktif bir plan katılımında ya da Hayattayım Protokolü’nde Güvenilir Kişi olarak kullanılıyorsa önce bu bağlantıları kaldırman gerekir. Aktif bir ilişkisi kalmadığında kişiyi silebilirsin; işlem geri alınamaz."
         },
         {
           "id": "kisi-iletisim-degisme",
           "question": "İletişim bilgisi değişirse ne olur?",
-          "answer": "Kişinin iletişim bilgilerini güncelleyebilirsin; sonraki teslimatlar yeni bilgiler üzerinden devam eder."
+          "answer": "Kişinin iletişim bilgilerini güncelleyebilirsin. Mevcut mesaj ve plan paylaşımları seçildikleri andaki adresleri korur; eski kayıtlar sessizce yeni adrese geçmez. Güncel adresi kullanmasını istediğin aktif paylaşımları senkronizasyon işlemiyle yenileyebilirsin."
         },
         {
           "id": "kisi-mesaj-istemiyor",
@@ -240,7 +250,7 @@
         {
           "id": "teslimat-goruntulendi-mi",
           "question": "Görüntülendiğini görebilir miyim?",
-          "answer": null
+          "answer": "Evet. Teslimat geçmişinde “Görüldü”, alıcının teslimat sayfasını açtığını ancak mesajı henüz açmadığını gösterir. “Okundu” ise alıcının “Mesajı Aç” adımıyla içeriği açtığını gösterir; bu, kişinin içeriğin tamamını kesin olarak okuduğunu kanıtlamaz."
         },
         {
           "id": "teslimat-basarisiz",
@@ -271,7 +281,12 @@
         {
           "id": "hg-hesap-silme",
           "question": "Hesabımı silersem ne olur?",
-          "answer": "Hesabın kapatılır."
+          "answer": "Hesap silme geri alınamaz. Hesabın kapatılır; mesajların, planların ve kişi kayıtların silinir, Hayattayım Protokolü durdurulur. Daha sonra aynı e-posta adresiyle yeni bir hesap açsan bile önceki verilerin geri gelmez."
+        },
+        {
+          "id": "hg-saglik-puani",
+          "question": "Sağlık Merkezi puanı neyi gösterir?",
+          "answer": "Sağlık Merkezi puanı; Hayattayım, mesaj, hesap, kişi, plan ve güvenlik alanlarındaki mevcut hazırlığının ağırlıklı özetidir. Teslimata Hazırlık göstergesinden ayrıdır ve bir mesajın teslim edileceğini garanti etmez."
         },
         {
           "id": "hg-veri-koruma",
