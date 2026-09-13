@@ -6,9 +6,11 @@
   "scripts": {
     "sync:help": "node scripts/sync-help-content.js",
     "sync:experience": "node scripts/sync-experience.js",
+    "sync:legal": "node scripts/sync-legal-content.js",
     "check:experience": "node scripts/sync-experience.js --check",
-    "test:experience": "npm run check:experience && node scripts/check-experience.js",
-    "sync:all": "npm run sync:help && npm run sync:experience"
+    "check:legal": "node scripts/sync-legal-content.js --check",
+    "test:experience": "npm run check:experience && npm run check:legal && node scripts/check-experience.js",
+    "sync:all": "npm run sync:help && npm run sync:experience && npm run sync:legal"
   },
   "devDependencies": {
     "@babel/parser": "^7.24.0",

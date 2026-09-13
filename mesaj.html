@@ -136,8 +136,8 @@
       font-weight: 650;
     }
 
-    /* Bilgilendirme + okudum onayı (ALICI-ONAY-01) */
-    .onay-blok {
+    /* Üçüncü kişi aydınlatması — bilgi katmanı, kabul/onay kapısı değildir. */
+    .aydinlatma-blok {
       background: #faf9fd;
       border: 1px solid #eeeaf7;
       border-radius: 16px;
@@ -145,28 +145,13 @@
       margin: 0 0 20px;
       text-align: left;
     }
-    .onay-metin {
+    .aydinlatma-metin {
       font-size: 14px;
       line-height: 22px;
       color: var(--muted);
       margin: 0 0 14px;
     }
-    .onay-checkbox {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 14px;
-      color: var(--text);
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .onay-checkbox input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      accent-color: var(--purple2);
-      cursor: pointer;
-      flex-shrink: 0;
-    }
+    .aydinlatma-metin a { color: var(--purple); text-decoration: underline; }
 
     .cta {
       display: block;
@@ -401,18 +386,14 @@
         </div>
       </div>
 
-      <div class="onay-blok">
-        <p class="onay-metin">
-          Bu mesaj bir Eonarya kullanıcısı tarafından sizinle paylaşılmıştır.<br>
-          Mesajın sorumluluğu gönderen kişiye aittir.
+      <div class="aydinlatma-blok">
+        <p class="aydinlatma-metin">
+          <span data-content-path="THIRD_PARTY_NOTICE.short"></span>
+          <a href="/ucuncu-kisi-aydinlatma" data-content-path="THIRD_PARTY_NOTICE.label"></a>
         </p>
-        <label class="onay-checkbox">
-          <input type="checkbox" id="okuduOnay">
-          <span>Bilgilendirmeyi okudum</span>
-        </label>
       </div>
 
-      <button class="cta" id="acBtn" type="button" disabled>Mesajı Görüntüle</button>
+      <button class="cta" id="acBtn" type="button">Mesajı Görüntüle</button>
       <p class="note">Bu mesaj yalnızca sizin görüntülemeniz için hazırlanmıştır.</p>
 
       <div class="bilgi-blok">
@@ -534,11 +515,6 @@
     document.getElementById('hataAciklama').textContent = aciklama || '';
     goster('hata');
   }
-
-  // ALICI-ONAY-01: bilgilendirme okunmadan "Mesajı Görüntüle" aktif olmaz (UI kilidi — kayıt tutulmaz).
-  document.getElementById('okuduOnay').addEventListener('change', function () {
-    document.getElementById('acBtn').disabled = !this.checked;
-  });
 
   function dolduRBilgi(prefix, data) {
     document.getElementById(prefix + 'Sender').textContent = data.sender_name || 'Eonarya';

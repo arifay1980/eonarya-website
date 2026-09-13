@@ -1,7 +1,7 @@
 # Senkronizasyon script'leri
 
 Bu klasördeki script'ler, `eonarya.com`'un elle iki kez düzenlenmesini gerektiren
-içeriklerini (Yardım Merkezi, ileride hukuki metinler) kardeş **Eonarya** uygulama
+içeriklerini (Yardım Merkezi ve hukuki metinler) kardeş **Eonarya** uygulama
 reposundaki tek (canonical) kaynaktan üretir. İnsan yalnız uygulama reposundaki
 kaynağı düzenler; buradaki çıktılar **GENERATED — DO NOT EDIT** olarak işaretlenir
 ve script yeniden çalıştırıldığında üzerine yazılır.
@@ -76,9 +76,12 @@ modülleri çalıştırmadan bu kaynakları AST/JSON üzerinden çözümler.
 soru, metin düzeltmesi) bu script yeniden çalıştırılıp `yardim.html` + `generated/`
 commit'lenmelidir. Aksi halde web sitesindeki Yardım Merkezi uygulamadan geride kalır.
 
-## Hukuki metinler (henüz yok)
+## Hukuki metinler — `npm run sync:legal`
 
-Aynı model (canonical source + generated block) hukuki metinler
-(`gizlilik.html`, `kullanim-sartlari.html`, `aydinlatma.html`, `kvkk.html`) için de
-planlanıyor — kaynak `Eonarya/services/contracts.js`. Bu script henüz yazılmadı;
-ayrı bir işte ele alınacak (bkz. proje Y- kayıtları).
+Kaynak `Eonarya/services/contracts.js` dosyasıdır. Üçüncü kişi aydınlatma sayfasının
+gövdesi canonical metinden deterministik üretilir; veri sorumlusu unvanı/adresi
+eksikken taslak uyarısı otomatik korunur. Kullanıcı Sözleşmesi, Gizlilik Politikası
+ve kullanıcı Aydınlatma Metni için her canonical satırın web çıktısında bulunduğu
+doğrulanır. `generated/legal-parity-manifest.json` source ve görünür web metni
+hash'lerini kilitler; `npm run check:legal` eksik içerik veya sessiz drift'te fail
+verir. `npm run test:experience` bu kontrolü de çalıştırır.

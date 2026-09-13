@@ -1,5 +1,5 @@
 window.EONARYA_EXPERIENCE = Object.freeze({
-  "version": 3,
+  "version": 4,
   "PRODUCT_COPY": {
     "Eonarya": {
       "standard": "Eonarya; bugün, gelecekte ya da senden sonra senin için önemli olan anılarını, emanetlerini ve mesajlarını belirlediğin zaman ve koşullarda belirlediğin kişilere ulaştıran; planlarını ve periyodik işlerini takip ederek gerektiğinde ilgili kişilere hatırlatan kişisel bir dijital süreklilik sistemidir.",
@@ -78,6 +78,12 @@ window.EONARYA_EXPERIENCE = Object.freeze({
     "wrongRecipientCta": "Talebimi İlet",
     "recipientContactUpdate": "İletişim bilgilerinizi güncellemeniz, bu göndericiden gelecekte alacağınız tekrar eden mesajlarda yeni e-posta adresinizin kullanılmasını sağlar. Daha önce gönderilmeye başlanmış teslimatlar bu değişiklikten etkilenmez."
   },
+  "THIRD_PARTY_NOTICE": {
+    "version": "2026-09-12.1",
+    "short": "Bu ileti, bir Eonarya kullanıcısı tarafından Eonarya'ya sağlanan iletişim bilgileriniz kullanılarak ilgili Eonarya işleminin gerçekleştirilmesi amacıyla gönderilmiştir. Kişisel verilerinizin nasıl işlendiğine ilişkin ayrıntılı bilgi için Üçüncü Kişi Aydınlatma Metni'ni inceleyebilirsiniz.",
+    "label": "Üçüncü Kişi Aydınlatma Metni",
+    "href": "/ucuncu-kisi-aydinlatma"
+  },
   "SUPPORT_COPY": {
     "email": "destek@eonarya.com",
     "text": "Yardıma mı ihtiyacınız var? Yardım Merkezi’ni ziyaret edebilir veya bize mesaj gönderebilirsiniz.",
@@ -112,8 +118,8 @@ window.EONARYA_EXPERIENCE = Object.freeze({
       "href": "/aydinlatma.html"
     },
     "thirdPartyNotice": {
-      "label": "Üçüncü Kişi Bilgilendirmesi",
-      "href": "/ucuncu-kisi-aydinlatma.html"
+      "label": "Üçüncü Kişi Aydınlatma Metni",
+      "href": "/ucuncu-kisi-aydinlatma"
     },
     "help": {
       "label": "Yardım Merkezi",

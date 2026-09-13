@@ -65,6 +65,37 @@ requireText(preferences, 'data-content-path="DELIVERY_COPY.recipientContactUpdat
 requireText(preferences, 'const CONTACT_UPDATE_COPY = window.EONARYA_EXPERIENCE.DELIVERY_COPY.recipientContactUpdate;', 'tercihler.html: dinamik iletişim güncelleme registry bağı eksik');
 requireText(preferences, recipientContactUpdate, 'tercihler.html: kilitli iletişim güncelleme metni eksik');
 
+const messagePage = read(root, 'mesaj.html');
+for (const removedGate of ['Bilgilendirmeyi okudum', 'id="okuduOnay"', 'onay-checkbox']) {
+  if (messagePage.includes(removedGate)) throw new Error(`mesaj.html: kaldırılan aydınlatma kapısı kaldı: ${removedGate}`);
+}
+requireText(messagePage, 'id="acBtn" type="button">Mesajı Görüntüle</button>', 'mesaj.html: mesaj görüntüleme butonu koşulsuz değil');
+requireText(messagePage, 'data-content-path="THIRD_PARTY_NOTICE.short"', 'mesaj.html: kısa üçüncü kişi katmanı eksik');
+requireText(messagePage, 'href="/ucuncu-kisi-aydinlatma"', 'mesaj.html: doğrudan üçüncü kişi aydınlatma linki eksik');
+if (/ucuncu-kisi-aydinlatma[^"'\s>]*\?(?:token|ot|confirm)=/.test(messagePage)) {
+  throw new Error('mesaj.html: hukuki URL hassas token taşıyor');
+}
+
+const thirdPartyPage = read(root, 'ucuncu-kisi-aydinlatma.html');
+requireText(thirdPartyPage, 'data-legal-canonical="UCUNCU_KISI_AYDINLATMA_METNI"', 'üçüncü kişi sayfası canonical üretim işareti eksik');
+requireText(thirdPartyPage, 'Taslak — Hukuki Kimlik Bilgisi Bekleniyor', 'kimlik blocker varken taslak durumu korunmadı');
+requireText(thirdPartyPage, '[MEVCUT CANONICAL ADRES]', 'kimlik blocker tahminle gizlendi');
+
+const templatesSource = read(appRoot, 'supabase/functions/_shared/templates.ts');
+for (const preservedWhy of [
+  'CONTENT.WHY_RECEIVED.trustedPersonIntro',
+  'CONTENT.WHY_RECEIVED.aliveApproval',
+  'CONTENT.WHY_RECEIVED.approvalReminder',
+  'CONTENT.WHY_RECEIVED.messageDelivery',
+]) requireText(templatesSource, preservedWhy, `template role nedeni kayboldu: ${preservedWhy}`);
+requireText(templatesSource, 'CONTENT.THIRD_PARTY_NOTICE.short', 'template ortak hukuki katmanı canonical değil');
+requireText(templatesSource, '{{ucuncu_kisi_aydinlatma_url}}', 'template hukuki URL değişkeni eksik');
+
+const processorSource = read(appRoot, 'supabase/functions/process-deliveries/index.ts');
+requireText(processorSource, "const THIRD_PARTY_NOTICE_URL = 'https://www.eonarya.com/ucuncu-kisi-aydinlatma';", 'hukuki URL sabit ve tokensız değil');
+requireText(processorSource, 'third_party_notice_version: THIRD_PARTY_NOTICE_VERSION', 'delivery snapshot hukuki sürüm kanıtı eksik');
+requireText(processorSource, 'third_party_notice_presented: basarili', 'delivery snapshot sunum kanıtı gönderim sonucuna bağlı değil');
+
 const home = read(root, 'index.html');
 const hero = content.PRODUCT_COPY.Eonarya.web.title;
 requireText(home, `aria-label="${hero}"`, 'Ana sayfa hero metni canonical kaynaktan saptı');
