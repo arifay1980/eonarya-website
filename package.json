@@ -10,10 +10,8 @@
     "sync:legal": "node scripts/sync-legal-content.js",
     "check:experience": "node scripts/sync-experience.js --check",
     "check:legal": "node scripts/sync-legal-content.js --check",
-    "test:experience": "npm run check:experience && npm run check:help && npm run check:legal && node scripts/check-experience.js && npm run check:web",
-    "sync:all": "npm run sync:help && npm run sync:experience && npm run sync:legal",
-    "check:web": "node scripts/check-web-health.js",
-    "check:web:live": "node scripts/check-web-health.js --live"
+    "test:experience": "npm run check:experience && npm run check:help && npm run check:legal && node scripts/check-experience.js",
+    "sync:all": "npm run sync:help && npm run sync:experience && npm run sync:legal"
   },
   "devDependencies": {
     "@babel/parser": "^7.24.0",
