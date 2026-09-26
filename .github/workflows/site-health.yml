@@ -1,0 +1,42 @@
+name: Site Health
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '**.html'
+      - 'assets/**'
+      - 'scripts/check-web-health.js'
+      - 'robots.txt'
+      - 'sitemap.xml'
+      - 'package.json'
+      - '.github/workflows/site-health.yml'
+  schedule:
+    - cron: '17 5 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  source-health:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check source health
+        run: node scripts/check-web-health.js
+
+  live-health:
+    if: github.event_name != 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check live site health
+        run: node scripts/check-web-health.js --live
