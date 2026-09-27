@@ -191,6 +191,7 @@ function renderHead({ title, description, canonical, image = DEFAULT_SOCIAL_IMAG
   <meta name="twitter:description" content="${escapeHtml(description)}">
   <meta name="twitter:image" content="${escapeHtml(image)}">
   <meta name="twitter:image:alt" content="${escapeHtml(imageAlt)}">
+  <script src="/assets/consent.js" defer></script>
   <link rel="icon" type="image/png" href="/assets/brand/symbol-dark.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -198,6 +199,7 @@ function renderHead({ title, description, canonical, image = DEFAULT_SOCIAL_IMAG
   <link rel="stylesheet" href="/assets/experience-tokens.css">
   <link rel="stylesheet" href="/assets/site.css">
   <link rel="stylesheet" href="/assets/footer-family.css">
+  <link rel="stylesheet" href="/assets/consent.css">
   <link rel="stylesheet" href="/assets/blog.css">${jsonLdValue ? `
   <script type="application/ld+json">${jsonLd(jsonLdValue)}</script>` : ""}`;
 }
@@ -212,7 +214,7 @@ function renderHeader() {
 }
 
 function renderFooter() {
-  return `<footer class="footer blog-footer"><div class="wrap"><div class="footer-grid"><img class="footer-logo" src="/assets/brand/logo-light.png" width="720" height="86" alt="Eonarya"><nav class="footer-links" aria-label="Alt bağlantılar"><a href="/blog/">Rehber</a><a href="/yardim.html">Yardım Merkezi</a><a href="/gizlilik.html">Gizlilik</a><a href="/kullanim-sartlari.html">Kullanım Şartları</a><a href="/aydinlatma.html">Aydınlatma Metni</a><a href="/yardim.html#destek">Bize Mesaj Gönder</a></nav></div><p class="copyright">© 2026 Eonarya. Tüm hakları saklıdır.</p></div></footer>`;
+  return `<footer class="footer blog-footer"><div class="wrap"><div class="footer-grid"><img class="footer-logo" src="/assets/brand/logo-light.png" width="720" height="86" alt="Eonarya"><nav class="footer-links" aria-label="Alt bağlantılar"><a href="/blog/">Rehber</a><a href="/yardim.html">Yardım Merkezi</a><a href="/gizlilik.html">Gizlilik</a><a href="/kullanim-sartlari.html">Kullanım Şartları</a><a href="/aydinlatma.html">Aydınlatma Metni</a><a href="/yardim.html#destek">Bize Mesaj Gönder</a><button type="button" data-cookie-settings>Çerez Ayarları</button></nav></div><p class="copyright">© 2026 Eonarya. Tüm hakları saklıdır.</p></div></footer>`;
 }
 
 function renderCard(post) {
@@ -308,6 +310,7 @@ function renderSitemap(posts) {
     ["/kullanim-sartlari.html", "monthly", "0.3"],
     ["/kvkk.html", "monthly", "0.3"],
     ["/aydinlatma.html", "monthly", "0.3"],
+    ["/cerez-politikasi.html", "monthly", "0.3"],
   ];
   const urls = fixed.map(([pathname, changefreq, priority]) => `  <url>\n    <loc>${xml(`${SITE_ORIGIN}${pathname}`)}</loc>\n    <changefreq>${changefreq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`);
   for (const post of posts) {

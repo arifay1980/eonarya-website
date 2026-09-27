@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <script src="/assets/consent.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Çerez Politikası — Eonarya</title>
+  <meta name="description" content="Eonarya çerez politikası — zorunlu teknik depolama, analitik çerezler ve Google Analytics tercihleri hakkında bilgi.">
+  <link rel="canonical" href="https://eonarya.com/cerez-politikasi.html">
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    a{text-decoration:none;color:inherit}
+
+    :root{
+      --lav-300:#B9A4F2;
+      --bg:#FBFAFE;
+      --surface:#FFFFFF;
+      --ink:#16121F;
+      --ink-soft:#534E61;
+      --ink-faint:#938DA6;
+      --line:#ECE6F7;
+      --d-bg:#0A0713;
+      --d-ink:#F4EFFF;
+      --d-ink-soft:#BCB1D8;
+      --d-ink-faint:#8479A6;
+      --d-line:rgba(180,150,255,.16);
+      --accent:#6D4CFF;
+      --font-head:'Manrope';
+      --font-body:'Manrope',-apple-system,system-ui,sans-serif;
+      --wrap:1180px;
+    }
+
+    body{font-family:var(--font-body);background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased}
+    .wrap{max-width:var(--wrap);margin:0 auto;padding:0 40px}
+
+    .nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(251,250,254,.9);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+    .nav-inner{max-width:var(--wrap);margin:0 auto;padding:18px 40px;display:flex;align-items:center;gap:32px}
+    .brand{display:flex;align-items:center;gap:11px}
+    .brand-word{font-family:'Jost',sans-serif;font-weight:400;letter-spacing:.42em;font-size:16px;text-indent:.42em;color:var(--ink)}
+    .nav-links{display:flex;gap:30px;margin-left:auto}
+    .nav-links a{font-size:14.5px;font-weight:500;color:var(--ink-soft);transition:color .25s}
+    .nav-links a:hover{color:var(--ink)}
+
+    .page-hero{padding:130px 40px 56px;background:var(--d-bg);text-align:center}
+    .page-hero-label{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--lav-300);margin-bottom:14px}
+    .page-hero h1{font-family:var(--font-head),sans-serif;font-size:clamp(26px,4vw,40px);font-weight:700;color:var(--d-ink);letter-spacing:-.02em;line-height:1.2}
+    .page-hero-meta{margin-top:14px;font-size:13.5px;color:var(--d-ink-faint)}
+
+    .content{max-width:720px;margin:0 auto;padding:64px 40px 100px}
+    .doc-section{margin-top:44px}
+    .doc-section:first-child{margin-top:0}
+    .doc-section-title{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:18px}
+    .doc-body{font-size:15px;line-height:1.8;color:var(--ink-soft);margin-bottom:10px}
+    .doc-bullets{list-style:none;padding:0;margin-bottom:10px}
+    .doc-bullets li{display:flex;gap:12px;font-size:15px;line-height:1.8;color:var(--ink-soft);margin-bottom:4px}
+    .doc-bullets li::before{content:'';display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--ink-faint);margin-top:13px;flex-shrink:0}
+
+    .footer{background:#070411;color:var(--d-ink);padding:80px 0 40px}
+    .footer-inner{display:flex;justify-content:space-between;align-items:flex-start;gap:40px;flex-wrap:wrap;padding-bottom:48px;border-bottom:1px solid var(--d-line)}
+    .footer-brand .brand-word{color:#fff;font-size:22px;letter-spacing:.46em;text-indent:.46em}
+    .footer-tagline{margin-top:16px;font-family:'Jost',sans-serif;font-weight:300;font-size:15px;letter-spacing:.06em;color:var(--lav-300)}
+    .footer-links{display:flex;flex-wrap:wrap;gap:14px 34px}
+    .footer-links a{font-size:14.5px;color:var(--d-ink-soft);transition:color .25s}
+    .footer-links a:hover{color:#fff}
+    .footer-base{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;padding-top:30px}
+    .footer-mail{font-size:14.5px;color:var(--d-ink-soft);transition:color .25s}
+    .footer-mail:hover{color:var(--lav-300)}
+    .footer-copy{font-size:13.5px;color:var(--d-ink-faint)}
+
+    @media(max-width:700px){
+      .nav-inner{padding:16px 20px}
+      .nav-links{display:none}
+      .page-hero{padding:120px 20px 48px}
+      .content{padding:48px 20px 80px}
+      .wrap{padding:0 20px}
+      .footer-inner{flex-direction:column}
+      .footer-base{flex-direction:column;align-items:flex-start}
+    }
+  </style>
+  <link rel="stylesheet" href="/assets/page-shell.css">
+  <link rel="stylesheet" href="/assets/experience-tokens.css">
+  <link rel="stylesheet" href="/assets/footer-family.css">
+  <link rel="stylesheet" href="/assets/consent.css">
+</head>
+<body data-footer-variant="legal">
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/" aria-label="Eonarya ana sayfa">
+      <img class="brand-logo" src="/assets/brand/logo-dark.png" width="720" height="86" alt="Eonarya">
+    </a>
+    <nav class="nav-links" aria-label="Ana bölümler">
+      <a href="/#urun">Eonarya Nedir</a>
+      <a href="/#nasil">Nasıl Çalışır</a>
+      <a href="/#guven">Güven</a>
+      <a href="/#sss">Sıkça Sorulanlar</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <p class="page-hero-label">Yasal</p>
+  <h1>Eonarya Çerez Politikası</h1>
+  <p class="page-hero-meta">Son güncelleme: 27 Eylül 2026</p>
+</section>
+
+<main class="content">
+  <div class="doc-section">
+    <h2 class="doc-section-title">1. Çerezler ve benzeri teknolojiler nedir?</h2>
+    <p class="doc-body">Çerezler ve benzeri teknolojiler, bir internet sitesinin çalışmasını sağlamak, kullanıcı tercihlerini hatırlamak veya sitenin nasıl kullanıldığını anlamak amacıyla tarayıcı üzerinde bilgi saklanmasına imkân veren teknik yöntemlerdir.</p>
+    <p class="doc-body">Eonarya, kamuya açık eonarya.com web sitesinde yalnız gerekli teknik depolama yöntemlerini ve kullanıcının açık iznine bağlı analitik teknolojilerini kullanır.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">2. Zorunlu teknik depolama</h2>
+    <p class="doc-body">Sitenin temel işlevlerinin çalışması ve çerez tercihinizin hatırlanması için çerezler veya tarayıcınızın yerel depolama alanı gibi teknik yöntemler kullanılabilir.</p>
+    <p class="doc-body">Bu kullanım analitik veya reklam amacı taşımaz.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">3. Analitik çerezler</h2>
+    <p class="doc-body">Analitik çerezler, ziyaretçilerin kamuya açık Eonarya web sitesini genel olarak nasıl kullandığını anlamamıza yardımcı olur.</p>
+    <p class="doc-body">Bu çerezler sitenin temel çalışması için zorunlu değildir ve yalnız kullanıcının açık izniyle kullanılır.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">4. Google Analytics kullanımı</h2>
+    <p class="doc-body">eonarya.com sitesinin kamuya açık sayfalarında, kullanıcının açıkça izin vermesi halinde Google Analytics kullanılabilir.</p>
+    <p class="doc-body">Google Analytics, Google tarafından sağlanan üçüncü taraf bir analiz hizmetidir.</p>
+    <p class="doc-body">Kullanıcı analitik kullanımına izin vermediğinde Google Analytics çalıştırılmaz ve analitik çerezler kullanılmaz.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">5. Analitik kullanım amacı</h2>
+    <p class="doc-body">Google Analytics yalnızca sitenin genel kullanımını anlamak, sayfaların performansını değerlendirmek ve Eonarya web deneyimini geliştirmek amacıyla kullanılır.</p>
+    <p class="doc-body">Analitik yalnız kamuya açık sayfalarda kullanılır. Kişiye özel erişim, mesaj görüntüleme, mesaj onayı veya benzeri hassas işlemlerin gerçekleştirildiği sayfalarda kullanılmaz.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">6. Analitik çerezler isteğe bağlıdır</h2>
+    <p class="doc-body">Analitik çerezlerin kullanılması tamamen isteğe bağlıdır.</p>
+    <p class="doc-body">Analitik çerezleri reddetmeniz, Eonarya web sitesinin temel işlevlerini kullanmanızı engellemez.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">7. Kabul ve reddetme</h2>
+    <p class="doc-body">Siteyi ilk ziyaretinizde analitik kullanımına ilişkin bir tercih yapmanız istenir.</p>
+    <p class="doc-body"><strong>Kabul Et</strong> seçeneğini kullanırsanız Google Analytics etkinleştirilebilir.</p>
+    <p class="doc-body"><strong>Reddet</strong> seçeneğini kullanırsanız Google Analytics çalışmaz ve analitik çerezler kullanılmaz.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">8. Tercihin saklanması</h2>
+    <p class="doc-body">Çerez tercihiniz, aynı tercihin her ziyarette yeniden sorulmaması amacıyla tarayıcınızın yerel depolama alanında saklanır.</p>
+    <p class="doc-body">Bu tercih bilgisi kullanıcı profili veya hesap bilgisi oluşturmak amacıyla kullanılmaz.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">9. Tercihin değiştirilmesi</h2>
+    <p class="doc-body">Çerez tercihinizi daha sonra değiştirebilirsiniz.</p>
+    <p class="doc-body">Bunun için sitenin alt bölümünde yer alan <strong>Çerez Ayarları</strong> bağlantısını kullanabilirsiniz.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">10. Google’ın üçüncü taraf sağlayıcı olması</h2>
+    <p class="doc-body">Google Analytics hizmeti Google tarafından sağlanmaktadır. Google, hizmetin sunulması kapsamında kendi sistemleri, gizlilik uygulamaları ve veri işleme şartlarından sorumludur.</p>
+    <p class="doc-body">Google Analytics yalnız Eonarya tarafından izin verilen kapsamda ve kullanıcının analitik kullanımına açıkça onay vermesi halinde devreye alınır.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">11. Google Analytics’e gönderilmeyen bilgiler</h2>
+    <p class="doc-body">Eonarya, kullanıcıların hizmeti kullanırken girdikleri hassas veya doğrudan kişiye özel içerikleri Google Analytics’e göndermez.</p>
+    <p class="doc-body">Bu kapsamda özellikle aşağıdaki bilgiler Analytics amacıyla aktarılmaz:</p>
+    <ul class="doc-bullets">
+      <li>ad ve soyad,</li>
+      <li>e-posta adresi,</li>
+      <li>telefon numarası,</li>
+      <li>kullanıcı tarafından girilen arama metinleri,</li>
+      <li>destek mesajları,</li>
+      <li>mesaj içerikleri,</li>
+      <li>erişim tokenları,</li>
+      <li>kimlik doğrulama bilgileri.</li>
+    </ul>
+    <p class="doc-body">URL içerisinde bulunabilecek hassas sorgu, bağlantı veya benzeri parametreler de Analytics’e aktarılmaz. Kullanıcı tarafından serbest biçimde girilen form veya metin içerikleri için özel analitik olayları oluşturulmaz.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">12. Politika güncellemeleri</h2>
+    <p class="doc-body">Bu Çerez Politikası, Eonarya’nın web sitesindeki kullanım şeklinin veya ilgili hizmetlerin değişmesi halinde güncellenebilir.</p>
+    <p class="doc-body">Güncel metin her zaman Eonarya web sitesinde yayımlanır.</p>
+  </div>
+
+  <div class="doc-section">
+    <h2 class="doc-section-title">13. İletişim</h2>
+    <p class="doc-body">Bu Çerez Politikası veya Eonarya’nın çerez ve analitik uygulamaları hakkında sorularınız için Eonarya’nın web sitesinde belirtilen iletişim kanallarından bizimle iletişime geçebilirsiniz.</p>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <img class="footer-brand-logo" src="/assets/brand/logo-light.png" width="720" height="86" alt="Eonarya">
+      <p class="footer-tagline">ZAMANIN ÖTESİNE BIRAK</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a href="/gizlilik.html">Gizlilik Politikası</a>
+      <a href="/kullanim-sartlari.html">Kullanım Şartları</a>
+      <a href="/kvkk.html">KVKK</a>
+      <a href="/aydinlatma.html">Aydınlatma Metni</a>
+      <a href="/cerez-politikasi.html" aria-current="page">Çerez Politikası</a>
+      <a href="/yardim.html">Yardım Merkezi</a>
+      <a href="/yardim.html#destek">İletişim</a>
+      <button type="button" data-cookie-settings>Çerez Ayarları</button>
+    </nav>
+  </div>
+  <div class="wrap footer-base">
+    <a href="mailto:destek@eonarya.com" class="footer-mail">destek@eonarya.com</a>
+    <span class="footer-copy">© Eonarya</span>
+  </div>
+</footer>
+
+</body>
+</html>

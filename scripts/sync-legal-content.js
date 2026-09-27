@@ -16,6 +16,11 @@ const contractsPath = path.join(appRoot, 'services', 'contracts.js');
 const manifestPath = path.join(websiteRoot, 'generated', 'legal-parity-manifest.json');
 const checkOnly = process.argv.includes('--check');
 
+function option(name) {
+  const index = process.argv.indexOf(name);
+  return index === -1 ? null : process.argv[index + 1];
+}
+
 const mappings = [
   ['KULLANICI_SOZLESMESI', 'kullanim-sartlari.html'],
   ['GIZLILIK_POLITIKASI', 'gizlilik.html'],
@@ -80,13 +85,18 @@ function renderCanonicalMain(name, text) {
     blocks.push(`    <ul class="doc-bullets">\n${bullets.map((line) => `      <li>${htmlEscape(line)}</li>`).join('\n')}\n    </ul>`);
     bullets = [];
   };
+  const renderInline = (line) => {
+    const escaped = htmlEscape(line);
+    if (name !== 'GIZLILIK_POLITIKASI' || !line.includes('Çerez Politikası incelenebilir.')) return escaped;
+    return escaped.replace('Çerez Politikası', '<a href="/cerez-politikasi.html">Çerez Politikası</a>');
+  };
   for (const line of lines) {
     if (!line) { flushBullets(); continue; }
     if (/^(?:-|•)\s/.test(line)) { bullets.push(line.replace(/^(?:-|•)\s/, '')); continue; }
     flushBullets();
     if (/^\d+\.\s/.test(line)) blocks.push(`  </div>\n\n  <div class="doc-section">\n    <h2 class="doc-section-title">${htmlEscape(line)}</h2>`);
     else if (line.endsWith(':') || line.endsWith(';') || /^(Kimlik bilgileri|İletişim bilgileri|Eonarya içindeki rol ve ilişki bilgileri|Teslimat ve işlem bilgileri|Hayattayım Protokolü kapsamında|Teknik ve güvenlik kayıtları|Mesaj ve içerik alıcısıysanız|Plan veya hatırlatma alıcısıysanız|Güvenilir Kişiyseniz|Onay Grubu üyesiyseniz|Tüm üçüncü kişiler bakımından)$/.test(line)) blocks.push(`    <p class="doc-sub">${htmlEscape(line)}</p>`);
-    else blocks.push(`    <p class="doc-body">${htmlEscape(line)}</p>`);
+    else blocks.push(`    <p class="doc-body">${renderInline(line)}</p>`);
   }
   flushBullets();
   const draft = name === 'UCUNCU_KISI_AYDINLATMA_METNI' && (text.includes('[MEVCUT CANONICAL VERİ SORUMLUSU ADI / TİCARİ UNVANI]') || text.includes('[MEVCUT CANONICAL ADRES]'));
@@ -111,8 +121,15 @@ function assertCanonicalFragments(name, canonical, html) {
 function main() {
   const source = fs.readFileSync(contractsPath, 'utf8');
   const evaluate = contractValues(source);
-  const entries = {};
-  for (const [name, page] of mappings) {
+  const only = option('--only');
+  const selectedMappings = only ? mappings.filter(([name]) => name === only) : mappings;
+  if (only && selectedMappings.length === 0) throw new Error(`Bilinmeyen hukuki belge: ${only}`);
+
+  const currentManifest = fs.existsSync(manifestPath)
+    ? JSON.parse(fs.readFileSync(manifestPath, 'utf8'))
+    : { schemaVersion: 1, source: 'Eonarya/services/contracts.js', entries: {} };
+  const updatedEntries = { ...currentManifest.entries };
+  for (const [name, page] of selectedMappings) {
     const canonical = evaluate(name).trim();
     const pagePath = path.join(websiteRoot, page);
     let html = fs.readFileSync(pagePath, 'utf8');
@@ -128,7 +145,12 @@ function main() {
       html = expectedHtml;
     }
     assertCanonicalFragments(name, canonical, html);
-    entries[name] = { page, canonicalSha256: hash(canonical), pageVisibleTextSha256: hash(normalize(html)) };
+    updatedEntries[name] = { page, canonicalSha256: hash(canonical), pageVisibleTextSha256: hash(normalize(html)) };
+  }
+  const entries = {};
+  for (const [name] of mappings) {
+    if (!updatedEntries[name]) throw new Error(`Hukuki parity manifest kaydı eksik: ${name}`);
+    entries[name] = updatedEntries[name];
   }
   const manifest = `${JSON.stringify({ schemaVersion: 1, source: 'Eonarya/services/contracts.js', entries }, null, 2)}\n`;
   const current = fs.existsSync(manifestPath) ? fs.readFileSync(manifestPath, 'utf8') : null;
@@ -137,7 +159,7 @@ function main() {
     fs.mkdirSync(path.dirname(manifestPath), { recursive: true });
     fs.writeFileSync(manifestPath, manifest, 'utf8');
   }
-  console.log(`✓ Hukuki içerik ${checkOnly ? 'parity içinde' : 'senkronize'} (${mappings.length} belge)`);
+  console.log(`✓ Hukuki içerik ${checkOnly ? 'parity içinde' : 'senkronize'} (${selectedMappings.length} belge)`);
 }
 
 try { main(); } catch (error) {

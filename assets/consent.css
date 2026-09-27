@@ -1,0 +1,104 @@
+.eonarya-consent[hidden] {
+  display: none !important;
+}
+
+.eonarya-consent {
+  position: fixed;
+  z-index: 1200;
+  right: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  left: 16px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
+  width: min(820px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid rgba(181, 167, 210, 0.34);
+  border-radius: 16px;
+  background: rgba(18, 18, 24, 0.98);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.34);
+  color: #f2eee8;
+  font-family: Manrope, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.55;
+}
+
+.eonarya-consent__copy p {
+  margin: 0;
+  color: #c7c0b7;
+  font-size: 14px;
+}
+
+.eonarya-consent__copy a {
+  color: #f2eee8;
+  text-decoration: underline;
+  text-decoration-color: rgba(181, 167, 210, 0.72);
+  text-underline-offset: 3px;
+}
+
+.eonarya-consent__actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(112px, 1fr));
+  gap: 10px;
+}
+
+.eonarya-consent__button {
+  min-height: 48px;
+  padding: 0 18px;
+  border: 1px solid rgba(181, 167, 210, 0.48);
+  border-radius: 12px;
+  background: rgba(181, 167, 210, 0.1);
+  color: #f2eee8;
+  font: 600 14px/1 Manrope, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  cursor: pointer;
+  transition: background-color 0.18s ease, border-color 0.18s ease;
+}
+
+.eonarya-consent__button:hover {
+  border-color: rgba(181, 167, 210, 0.78);
+  background: rgba(181, 167, 210, 0.18);
+}
+
+.eonarya-consent :focus-visible,
+[data-cookie-settings]:focus-visible {
+  outline: 3px solid #b5a7d2;
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+[data-cookie-settings] {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+@media (max-width: 680px) {
+  .eonarya-consent {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    padding: 18px;
+  }
+
+  .eonarya-consent__actions {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 380px) {
+  .eonarya-consent__actions {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eonarya-consent__button {
+    transition: none;
+  }
+}

@@ -8,7 +8,8 @@ const root = path.resolve(__dirname, '..');
 const appRoot = path.resolve(process.env.EONARYA_APP_ROOT || path.join(root, '..', 'Eonarya'));
 const privatePages = ['mesaj.html', 'bilgi.html', 'onay.html', 'onay-hatirlatma.html', 'tercihler.html'];
 const publicPages = ['index.html'];
-const legalPages = ['gizlilik.html', 'kullanim-sartlari.html', 'aydinlatma.html', 'kvkk.html', 'ucuncu-kisi-aydinlatma.html'];
+const legalPages = ['gizlilik.html', 'kullanim-sartlari.html', 'aydinlatma.html', 'kvkk.html', 'ucuncu-kisi-aydinlatma.html', 'cerez-politikasi.html'];
+const analyticsPages = [...publicPages, 'yardim.html', ...legalPages, 'blog/index.html'];
 const edgeFunctions = ['get-message', 'get-approval-intro', 'approval-response', 'message-opt-out', 'recipient-contact-update'];
 
 function read(base, file) {
@@ -59,6 +60,23 @@ for (const page of legalPages) {
   requireMatch(read(root, page), /data-footer-variant="legal"/, `${page}: legal footer varyantı eksik`);
 }
 requireMatch(read(root, 'yardim.html'), /data-footer-variant="support"/, 'yardim.html: support footer varyantı eksik');
+
+for (const page of analyticsPages) {
+  const html = read(root, page);
+  requireMatch(html, /assets\/consent\.js/, `${page}: ortak consent JS eksik`);
+  requireMatch(html, /assets\/consent\.css/, `${page}: ortak consent CSS eksik`);
+  requireMatch(html, /data-cookie-settings/, `${page}: Çerez Ayarları bağlantısı eksik`);
+  if (/googletagmanager\.com\/gtag\/js|gtag\(['"]config['"]/.test(html)) {
+    throw new Error(`${page}: doğrudan veya ikinci GA4 yükleyicisi kaldı`);
+  }
+}
+
+for (const page of privatePages) {
+  const html = read(root, page);
+  if (/assets\/consent\.(?:js|css)|data-cookie-settings|googletagmanager\.com\/gtag\/js/.test(html)) {
+    throw new Error(`${page}: hassas sayfaya consent/Analytics entegrasyonu eklenmiş`);
+  }
+}
 
 const preferences = read(root, 'tercihler.html');
 requireText(preferences, 'data-content-path="DELIVERY_COPY.recipientContactUpdate"', 'tercihler.html: iletişim güncelleme registry bağı eksik');

@@ -109,7 +109,9 @@ test("liste kartlarında tarih gösterir ve sitemap yalnız canlı detay URL'ler
   assert.match(list, /<time datetime="2026-09-20T09:00:00.000Z">/);
   assert.match(sitemap, /https:\/\/eonarya.com\/blog\//);
   assert.match(sitemap, /https:\/\/eonarya.com\/blog\/dijital-miras-nedir\//);
+  assert.match(sitemap, /https:\/\/eonarya.com\/cerez-politikasi\.html/);
   assert.doesNotMatch(sitemap, /draft-only|SADECE-TASLAK/);
+  assert.doesNotMatch(sitemap, /bilgi\.html|mesaj\.html|onay(?:-hatirlatma)?\.html|tercihler\.html/);
 });
 
 test("dış gövde görseli kırık veya görsel olmayan yanıt verirse üretimi durdurur", async (t) => {

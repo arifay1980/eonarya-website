@@ -11,9 +11,12 @@
     "check:help": "node scripts/sync-help-content.js --check",
     "sync:experience": "node scripts/sync-experience.js",
     "sync:legal": "node scripts/sync-legal-content.js",
+    "sync:privacy": "node scripts/sync-legal-content.js --only GIZLILIK_POLITIKASI",
     "check:experience": "node scripts/sync-experience.js --check",
     "check:legal": "node scripts/sync-legal-content.js --check",
-    "test:experience": "npm run check:experience && npm run check:help && npm run check:legal && node scripts/check-experience.js",
+    "check:privacy": "node scripts/sync-legal-content.js --check --only GIZLILIK_POLITIKASI",
+    "test:consent": "node --test tests/consent.test.js",
+    "test:experience": "npm run check:experience && npm run check:help && npm run check:legal && node scripts/check-experience.js && npm run test:consent",
     "sync:all": "npm run sync:help && npm run sync:experience && npm run sync:legal"
   },
   "devDependencies": {
