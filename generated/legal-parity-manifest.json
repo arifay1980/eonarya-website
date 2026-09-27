@@ -9,13 +9,13 @@
     },
     "GIZLILIK_POLITIKASI": {
       "page": "gizlilik.html",
-      "canonicalSha256": "ade4876d54b0f41e4e1ee48b5065ddac9920e6a58b37ade2e55bc649dd2ffa6f",
-      "pageVisibleTextSha256": "f64ff519b8e0c85cb0b875ca513973cac8e2838824dcb18a0bbf88852472beed"
+      "canonicalSha256": "e8b447feb22fc9a422c9d984ed47538500d73bccd1addaf8f996d87241f47dba",
+      "pageVisibleTextSha256": "b32edb25cfdaad08d1a71138bc7dd249bce06664a9109d394361bc93a57bda1f"
     },
     "AYDINLATMA_METNI": {
       "page": "aydinlatma.html",
-      "canonicalSha256": "2f51a35793984952152c017b262667c06fba7082fa1eb9fd8a6b8d745a329cdb",
-      "pageVisibleTextSha256": "a8bf1f6164bae86cc18d321b7bbd6a33d4e353cd87536ac5990eda67b478eae1"
+      "canonicalSha256": "b398f30188e4dbee75f6aeed9b9fb7fe1ad4578dec8424705472c5bb705ea866",
+      "pageVisibleTextSha256": "e53750f9044e11af14cfcb212b05492da7eb7919d40463c89a76fcd02ccfd178"
     },
     "UCUNCU_KISI_AYDINLATMA_METNI": {
       "page": "ucuncu-kisi-aydinlatma.html",
