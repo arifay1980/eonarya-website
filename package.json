@@ -4,6 +4,9 @@
   "version": "1.0.0",
   "description": "eonarya.com — statik site. Yardım Merkezi ve hukuki metinler, kardeş 'Eonarya' uygulama reposundaki tek kaynaklardan senkronize script'lerle üretilir (bkz. scripts/README.md).",
   "scripts": {
+    "build:blog": "node scripts/build-blog.js",
+    "check:blog": "node scripts/build-blog.js --check",
+    "test:blog": "node --test tests/blog-generator.test.js tests/blog-publication.test.js",
     "sync:help": "node scripts/sync-help-content.js",
     "check:help": "node scripts/sync-help-content.js --check",
     "sync:experience": "node scripts/sync-experience.js",

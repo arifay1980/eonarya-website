@@ -88,3 +88,47 @@ ve kullanıcı Aydınlatma Metni için her canonical satırın web çıktısınd
 doğrulanır. `generated/legal-parity-manifest.json` source ve görünür web metni
 hash'lerini kilitler; `npm run check:legal` eksik içerik veya sessiz drift'te fail
 verir. `npm run test:experience` bu kontrolü de çalıştırır.
+
+## Rehber — `npm run build:blog`
+
+`scripts/build-blog.js`, Supabase REST API'sinden yalnız `live_snapshot` bulunan
+`blog_posts` satırlarını alır ve `/blog/`, `/blog/<slug>/` ile `sitemap.xml`
+çıktılarını statik HTML olarak üretir. Sorgu editoryal taslak kolonlarını istemez;
+sayfa gövdesi çalışma zamanında JavaScript'e ihtiyaç duymaz.
+
+Komut yalnız sunucu/CI ortamında çalıştırılır:
+
+```bash
+SUPABASE_URL=https://PROJECT.supabase.co SUPABASE_SECRET_KEY=sb_secret_... npm run build:blog
+```
+
+Yeni secret key bulunmayan eski projelerde `SUPABASE_SERVICE_ROLE_KEY` geçici
+uyumluluk fallback'idir. Bu anahtarların hiçbiri public HTML'e veya tarayıcı
+JavaScript'ine yazılmaz. `npm run check:blog` aynı veri ve dış gövde görseli
+kontrollerini dosya yazmadan yapar; `npm run test:blog` fixture verisiyle taslak
+sızıntısı, SEO, sitemap, tek H1 ve kırık/alt metinsiz görsel senaryolarını sınar.
+
+### Yayın ve yayından kaldırma
+
+`.github/workflows/blog-pages.yml` yalnız `admin-blog-islem` tarafından
+`workflow_dispatch` ile başlatılır. Workflow, kilitlenen içeriğin `updated_at`
+değerini karşılaştırır; mevcut `live_snapshot` kümesinden önceki public artifact'ı,
+kilitli taslaktan da aday artifact'ı üretir. Aday GitHub Pages'e çıktıktan sonra
+canlı `/blog/` HTML'leri ve sitemap yerel dosyalarla birebir karşılaştırılır.
+
+Doğrulama ve Supabase sonlandırması başarılı olmadan `live_snapshot` değişmez.
+Aday deploy edildikten sonraki bir adım başarısız olursa önceki artifact yeniden
+deploy edilir; veritabanı durumu `error` olur ve eski snapshot korunur. Ayrı release
+manifest, job/deployment tablosu veya ikinci publish endpoint'i yoktur.
+
+Workflow secret'ları:
+
+- `SUPABASE_URL`
+- `SUPABASE_SECRET_KEY` (legacy fallback: `SUPABASE_SERVICE_ROLE_KEY`)
+
+Admin Edge Function secret'ı `BLOG_GITHUB_TOKEN` yalnız website reposunda Actions
+write yetkisine sahip dar kapsamlı bir token olmalıdır. Opsiyonel
+`BLOG_GITHUB_OWNER`, `BLOG_GITHUB_REPO`, `BLOG_GITHUB_WORKFLOW` ve
+`BLOG_GITHUB_REF` değerlerinin varsayılanları sırasıyla `arifay1980`,
+`eonarya-website`, `blog-pages.yml` ve `main`'dir. Admin arayüzüne bu teknik
+ayrıntıların hiçbiri gönderilmez.

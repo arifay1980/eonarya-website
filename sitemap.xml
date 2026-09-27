@@ -11,6 +11,11 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://eonarya.com/blog/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://eonarya.com/gizlilik.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>

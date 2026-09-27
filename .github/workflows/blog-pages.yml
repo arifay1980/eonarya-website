@@ -1,0 +1,133 @@
+name: Rehber Yayını
+
+on:
+  workflow_dispatch:
+    inputs:
+      post_id:
+        description: İçerik kimliği
+        required: true
+        type: string
+      operation:
+        description: Yayın işlemi
+        required: true
+        type: choice
+        options:
+          - publish
+          - unpublish
+      lock_updated_at:
+        description: Mevcut yayın kilidi
+        required: true
+        type: string
+      actor_user_id:
+        description: İşlemi başlatan admin
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: eonarya-blog-publication
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.candidate-deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/configure-pages@v5
+
+      - name: Aday ve önceki public çıktıyı hazırla
+        run: >-
+          node scripts/prepare-blog-publication.js
+          --post-id "$BLOG_POST_ID"
+          --operation "$BLOG_OPERATION"
+          --lock-updated-at "$BLOG_LOCK_UPDATED_AT"
+          --candidate "${{ runner.temp }}/site-candidate"
+          --previous "${{ runner.temp }}/site-previous"
+          --state "${{ runner.temp }}/blog-publication.json"
+        env:
+          BLOG_POST_ID: ${{ inputs.post_id }}
+          BLOG_OPERATION: ${{ inputs.operation }}
+          BLOG_LOCK_UPDATED_AT: ${{ inputs.lock_updated_at }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+
+      - name: Aday Pages artifact'ını yükle
+        uses: actions/upload-pages-artifact@v3
+        with:
+          name: github-pages-candidate
+          path: ${{ runner.temp }}/site-candidate
+
+      - name: Önceki başarılı Pages artifact'ını yükle
+        uses: actions/upload-pages-artifact@v3
+        with:
+          name: github-pages-previous
+          path: ${{ runner.temp }}/site-previous
+
+      - name: Adayı GitHub Pages'e yayınla
+        id: candidate-deploy
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages-candidate
+
+      - name: Canlı public çıktıyı doğrula
+        run: >-
+          node scripts/verify-blog-deployment.js
+          --site "${{ runner.temp }}/site-candidate"
+          --origin "${{ vars.BLOG_PUBLIC_ORIGIN || 'https://eonarya.com' }}"
+          --state "${{ runner.temp }}/blog-publication.json"
+
+      - name: Başarılı sonucu kesinleştir
+        run: >-
+          node scripts/finalize-blog-publication.js
+          --result success
+          --state "${{ runner.temp }}/blog-publication.json"
+          --actor-user-id "$BLOG_ACTOR_USER_ID"
+        env:
+          BLOG_ACTOR_USER_ID: ${{ inputs.actor_user_id }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+
+      - name: Başarısız adaydan önceki public sürüme dön
+        if: ${{ failure() && steps.candidate-deploy.outcome != 'skipped' }}
+        id: rollback-deploy
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages-previous
+
+      - name: Geri alınan public sürümü doğrula
+        if: ${{ failure() && steps.rollback-deploy.outcome == 'success' }}
+        run: >-
+          node scripts/verify-blog-deployment.js
+          --site "${{ runner.temp }}/site-previous"
+          --origin "${{ vars.BLOG_PUBLIC_ORIGIN || 'https://eonarya.com' }}"
+
+      - name: Başarısız sonucu kaydet
+        if: ${{ failure() }}
+        run: >-
+          node scripts/finalize-blog-publication.js
+          --result failure
+          --state "${{ runner.temp }}/blog-publication.json"
+          --post-id "$BLOG_POST_ID"
+          --operation "$BLOG_OPERATION"
+          --lock-updated-at "$BLOG_LOCK_UPDATED_AT"
+          --actor-user-id "$BLOG_ACTOR_USER_ID"
+        env:
+          BLOG_POST_ID: ${{ inputs.post_id }}
+          BLOG_OPERATION: ${{ inputs.operation }}
+          BLOG_LOCK_UPDATED_AT: ${{ inputs.lock_updated_at }}
+          BLOG_ACTOR_USER_ID: ${{ inputs.actor_user_id }}
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
