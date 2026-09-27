@@ -104,7 +104,7 @@
 <section class="page-hero">
   <p class="page-hero-label">Yasal</p>
   <h1>Aydınlatma Metni</h1>
-  <p class="page-hero-meta">Kişisel Verilerin İşlenmesine İlişkin · 4 Eylül 2026</p>
+  <p class="page-hero-meta">Kişisel Verilerin İşlenmesine İlişkin · 27 Eylül 2026</p>
 </section>
 
 <main class="content" data-legal-canonical="AYDINLATMA_METNI">
@@ -131,13 +131,14 @@
     </ul>
     <p class="doc-sub">Kimlik Doğrulama Verileri (NFC Kimlik Eşleşmesi):</p>
     <ul class="doc-bullets">
-      <li>Ad, soyad ve doğum tarihi (T.C. Kimlik Kartı'nın NFC çipinden okunur)</li>
+      <li>Ad, soyad ve doğum tarihi (doğrulanmış DG1 içeriğinden elde edilir)</li>
+      <li>DG1 ve EF.SOD (kartın kriptografik güvenlik kontrolleri için yalnız işlem süresince geçici olarak işlenir; kalıcı olarak saklanmaz)</li>
     </ul>
     <p class="doc-sub">NFC Kart Erişim Bilgileri:</p>
     <ul class="doc-bullets">
       <li>Belge numarası, doğum tarihi ve son geçerlilik tarihi (yalnızca kart çipine erişim sağlamak amacıyla kullanılır, kimlik eşleşmesi kaydının parçası olarak kalıcı şekilde saklanmaz)</li>
     </ul>
-    <p class="doc-body">Bu özellik, kimlik kartından okunan ad, soyad ve doğum tarihi bilgilerinin hesap bilgileriyle eşleştirilmesi amacıyla kullanılır. T.C. kimlik numarası ayrı bir veri alanı olarak çıkarılmaz, eşleştirme işlemi sırasında sunucuya gönderilmez ve veritabanına kaydedilmez. Kimlik kartının fotoğrafı dahil ham çip verisi kalıcı olarak saklanmaz; kimlik eşleşmesi kaydında yalnızca eşleşme sonucuna ve karşılaştırılan alan adlarına ilişkin kayıt tutulur.</p>
+    <p class="doc-body">Strong NFC Kimlik Eşleşmesi sırasında DG1 ve EF.SOD; SOD imzasının, DSC→CSCA güven zincirinin ve DG1 veri bütünlüğünün kontrol edilmesi ile karttaki ad, soyad ve doğum tarihi bilgilerinin Eonarya hesabıyla eşleştirilmesi amacıyla Eonarya sunucusunda geçici olarak işlenir. T.C. kimlik numarası kalıcı kimlik kanıtı olarak tutulmaz. DG1, EF.SOD, ham MRZ/NFC içeriği ve kart görüntüsü kalıcı olarak saklanmaz veya loglanmaz; başarılı işlem sonunda yalnız doğrulamanın gerçekleştiğini gösteren sınırlı teknik kanıt ve gerekli teknik metadata saklanır.</p>
     <p class="doc-sub">İletişim Bilgileri:</p>
     <ul class="doc-bullets">
       <li>E-posta adresi</li>
@@ -170,6 +171,8 @@
     <ul class="doc-bullets">
       <li>Kullanıcı hesabının oluşturulması ve yönetilmesi</li>
       <li>Kimlik doğrulama süreçlerinin yürütülmesi (NFC Kimlik Eşleşmesi)</li>
+      <li>Kimlik kartının kriptografik güvenlik ve veri bütünlüğü kontrollerinin yürütülmesi</li>
+      <li>Yanlış veya yetkisiz üçüncü kişi teslimatı riskinin azaltılması</li>
       <li>Uygulamanın çalışmasının sağlanması</li>
       <li>Kullanıcı tarafından oluşturulan mesaj ve notların saklanması</li>
       <li>Kullanıcı tarafından belirlenen kişilere mesaj gönderiminin sağlanması</li>
@@ -192,7 +195,7 @@
       <li>hukuken yetkili kamu kurum ve kuruluşlarına</li>
     </ul>
     <p class="doc-body">aktarılabilir.</p>
-    <p class="doc-body">NFC Kimlik Eşleşmesi kapsamında işlenen ad, soyad ve doğum tarihi bilgileri, yalnız kimlik eşleşmesinin ve ilgili güvenlik işlemlerinin yürütülmesi için gerekli olduğu ölçüde Eonarya'nın altyapı ve veri barındırma hizmeti sağlayıcısı aracılığıyla işlenebilir; bunun dışında ayrı bir üçüncü taraf kimlik doğrulama hizmetine aktarılmaz. T.C. kimlik numarası, kartın ham çip verisi veya MRZ erişim bilgileri hiçbir alıcıya aktarılmaz.</p>
+    <p class="doc-body">Strong NFC sırasında DG1 ve EF.SOD, yalnız kimlik eşleşmesi ve kriptografik güvenlik kontrollerinin yürütülmesi için gerekli olduğu ölçüde Eonarya'nın sunucu, bulut altyapısı ve veri barındırma hizmeti sağlayıcısı üzerinden geçici olarak iletilerek işlenebilir; bunun dışında ayrı bir üçüncü taraf kimlik doğrulama hizmeti kullanılmaz. DG1 ve EF.SOD kalıcı olarak saklanmaz; T.C. kimlik numarası kalıcı kimlik kanıtı olarak tutulmaz.</p>
     <p class="doc-body">Hizmetin teknik altyapısı bugün itibarıyla yurt dışında yerleşik bir bulut barındırma sağlayıcısı üzerinde çalıştığından, kişisel verileriniz KVKK'nın 9. maddesi kapsamında yurt dışına aktarılmaktadır. Hizmet Sağlayıcı bu aktarımı KVKK'nın öngördüğü uygun güvence mekanizmalarına (Kurul tarafından ilan edilen standart sözleşme dahil) uygun hâle getirmek üzere gerekli idari ve teknik çalışmaları yürütmektedir; bu çalışmaların tamamlanma durumu ilgili idari süreçlerin sonuçlanmasına bağlıdır.</p>
     <p class="doc-body">Bu durumlar dışında kişisel veriler üçüncü kişilere aktarılmaz.</p>
   </div>
@@ -202,13 +205,13 @@
     <p class="doc-sub">Kişisel veriler aşağıdaki yollarla elektronik ortamda toplanmaktadır:</p>
     <ul class="doc-bullets">
       <li>Mobil uygulama üzerinden kullanıcı tarafından girilen bilgiler</li>
-      <li>Kullanıcının kendi isteğiyle başlattığı NFC Kimlik Eşleşmesi sırasında T.C. Kimlik Kartının çipinden okunan ad, soyad ve doğum tarihi</li>
+      <li>Kullanıcının kendi isteğiyle başlattığı Strong NFC Kimlik Eşleşmesi sırasında T.C. Kimlik Kartından okunan DG1 ve EF.SOD ile doğrulanmış DG1 içeriğinden elde edilen ad, soyad ve doğum tarihi</li>
       <li>NFC ile kart çipine erişim amacıyla kullanıcı tarafından girilen belge numarası, doğum tarihi ve son geçerlilik tarihi</li>
       <li>Uygulama kullanımı sırasında oluşan teknik veriler</li>
       <li>Kullanıcı ayarları ve tercihler</li>
     </ul>
     <p class="doc-body">Hesap açılışı, mesajların saklanması ve kullanıcının belirlediği teslimat süreçlerinin yürütülmesi kapsamındaki kişisel veriler, sözleşmenin kurulması ve ifasıyla doğrudan doğruya ilgili olması (KVKK m.5/2-c) ile kanunlarda açıkça öngörülme veya hukuki yükümlülüğün yerine getirilmesi (KVKK m.5/2-a, m.5/2-ç) hukuki sebeplerine dayanılarak işlenir.</p>
-    <p class="doc-body">NFC Kimlik Eşleşmesi kapsamında işlenen ad, soyad ve doğum tarihi; hesap güvenliğinin artırılması, kimlik kötüye kullanımının ve sahteciliğin azaltılması ile kritik işlemlerin güvenilirliğinin güçlendirilmesi amaçlarıyla, veri sorumlusunun meşru menfaati hukuki sebebine (KVKK m.5/2-f) dayanılarak işlenir. NFC Kimlik Eşleşmesi kullanıcının kendi iradesiyle başlattığı bir işlemdir; ancak bu işlem KVKK açık rızası niteliğinde değildir ve NFC verilerinin işlenmesi açık rızaya dayanmaz.</p>
+    <p class="doc-body">Strong NFC kapsamında DG1 ve EF.SOD'un geçici işlenmesi ile doğrulanmış DG1 içeriğinden elde edilen ad, soyad ve doğum tarihinin eşleştirilmesi; kartın kriptografik güvenlik ve veri bütünlüğü kontrollerinin yürütülmesi, hesap ve teslimat güvenliğinin artırılması, kimlik kötüye kullanımının azaltılması ve yanlış veya yetkisiz üçüncü kişi teslimatı riskinin önlenmesi amaçlarıyla, veri sorumlusunun meşru menfaati hukuki sebebine (KVKK m.5/2-f) dayanılarak yürütülür. Strong NFC kullanıcının kendi iradesiyle başlattığı bir işlemdir; ancak bu işlem KVKK açık rızası niteliğinde değildir ve NFC verilerinin işlenmesi açık rızaya dayanmaz.</p>
   </div>
 
   <div class="doc-section">
