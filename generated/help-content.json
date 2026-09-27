@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-13T10:16:05.764Z",
+  "generatedAt": "2026-09-27T03:12:44.083Z",
   "sourceNote": "GENERATED — DO NOT EDIT. Kaynak: Eonarya/shared/content/helpContent.data.js (npm run sync:help ile üretildi).",
   "categories": [
     {
@@ -302,67 +302,67 @@
         {
           "id": "hd-neden-dogrulama",
           "question": "Hesabımı neden doğrulamam gerekiyor?",
-          "answer": "Eonarya yalnızca kendi hesabında veri sakladığın bir uygulama değildir; belirlediğin koşullarda senin adına başka insanlara mesaj ulaştırabilir. Bu yüzden üçüncü kişilere yapılan teslimatlarda hesabının gerçekten senin tarafından kontrol edildiğine dair ek güven gerekir — doğrulama yöntemlerin kullanabileceğin teslimat kanallarını belirler. Hiç doğrulama yapmazsan Eonarya'yı kullanmaya devam edebilir ve kendine yönelik içerikler oluşturabilirsin; ancak başka bir kişiyi alıcı seçemez, üçüncü kişilere teslimat yapamaz ve Hayattayım Ek Protokolünü açamazsın."
+          "answer": "Eonarya yalnızca kendi hesabında veri sakladığın bir uygulama değildir; belirlediğin koşullarda senin adına başka insanlara mesaj ulaştırabilir. Bu yüzden başka kişilere yapılan teslimatlarda hesabının gerçekten sana ait olduğuna dair güçlü bir güven gerekir: T.C. Kimlik Kartını hesabınla eşleştirmen istenir. Eşleştirme yapmazsan Eonarya'yı kullanmaya devam edebilir, kendine yönelik içerikler ve mesaj/plan taslakları oluşturabilirsin; ancak başka kişilere e-posta, SMS veya WhatsApp ile teslimat gerçekleşmez ve Hayattayım Ek Protokolünü açamazsın."
         },
         {
           "id": "hd-eposta-dogrulama",
           "question": "E-posta doğrulaması ne anlama gelir?",
-          "answer": "E-posta doğrulaması, kayıtlı e-posta adresine erişebildiğini doğrular. Tek başına gerçek kişi kimliğini kanıtlamaz ve üçüncü kişilere teslimat yetkisi sağlayan Apple, Google veya T.C. Kimlik Kartı doğrulamalarının yerine geçmez."
+          "answer": "E-posta doğrulaması, kayıtlı e-posta adresine erişebildiğini doğrular. Tek başına gerçek kişi kimliğini kanıtlamaz ve başka kişilere teslimat yetkisi sağlamaz; bu yetki T.C. Kimlik Kartı eşleşmesiyle açılır."
         },
         {
           "id": "hd-apple",
-          "question": "Apple ile doğrulama neyi sağlar?",
-          "answer": "Apple hesabını Eonarya hesabınla eşleştirerek hesabın için güçlü bir sahiplik sinyali oluşturursun. Apple doğrulaması, başka kişilere e-posta yoluyla mesaj gönderebilmeni sağlar ve Android'de de geçerliliğini korur."
+          "question": "Apple hesabımı bağlamak neyi sağlar?",
+          "answer": "Apple hesabını bağlamak, Eonarya hesabına Apple ile giriş yapabilmeni sağlar. Bu bir giriş yöntemidir; kimliğini doğrulamaz ve başka kişilere teslimat yetkisi vermez."
         },
         {
           "id": "hd-google",
-          "question": "Google ile doğrulama neyi sağlar?",
-          "answer": "Google hesabını Eonarya hesabınla eşleştirmek, başka bir kişiye e-posta yoluyla mesaj gönderebilmeni sağlar. Android'de Google doğrulaması tek başına yeterlidir. iOS'ta ise Apple veya T.C. Kimlik Kartı doğrulaması da gerekir."
+          "question": "Google hesabımı bağlamak neyi sağlar?",
+          "answer": "Google hesabını bağlamak, Eonarya hesabına Google ile giriş yapabilmeni sağlar. Bu bir giriş yöntemidir; kimliğini doğrulamaz ve başka kişilere teslimat yetkisi vermez."
         },
         {
           "id": "hd-nfc",
           "question": "T.C. Kimlik Kartı + NFC ile doğrulama neyi sağlar?",
-          "answer": "Kimlik kartını NFC ile eşleştirmek, Eonarya'daki en yüksek güven seviyesini sağlayan doğrulama yöntemidir. Başka bir kişiye SMS veya WhatsApp yoluyla mesaj gönderebilmen için gereklidir; tamamlandığında e-posta dahil desteklenen tüm iletişim kanalları kullanılabilir hale gelir. Kimlik kartından okunan bilgiler saklanmaz — yalnızca doğrulama sırasında hesabındaki bilgilerle karşılaştırılır, tamamlandığında ise yalnızca başarı bilgisi hesabına işlenir."
+          "answer": "Kimlik kartını NFC ile eşleştirmek, başka kişilere e-posta, SMS ve WhatsApp ile teslimat yapabilmen için gereken yöntemdir ve Eonarya'daki en yüksek güven seviyesini sağlar. Kartın çipindeki bilgiler doğrulama sırasında sunucuda kontrol edilir ve hesabındaki bilgilerle karşılaştırılır; tamamlandığında hesabına yalnızca eşleşmenin başarıyla tamamlandığı bilgisi işlenir."
         },
         {
           "id": "hd-nfc-hangi-bilgiler",
           "question": "Kimlik kartımdan hangi bilgiler okunuyor?",
-          "answer": "NFC Kimlik Eşleşmesi sırasında kimlik kartından yalnızca ad, soyad ve doğum tarihi okunur. Bu bilgiler yalnızca Eonarya hesabındaki bilgilerinle eşleştirme amacıyla kullanılır."
+          "answer": "NFC Kimlik Eşleşmesi sırasında kartın kimlik bilgileri sayfası (ad, soyad, doğum tarihi ve belge bilgileri) ile kartın imza dosyası okunur. Bunlar yalnızca kartın gerçekliğini kontrol etmek ve ad, soyad ve doğum tarihini hesabındaki bilgilerle eşleştirmek amacıyla doğrulama sırasında sunucuya gönderilir."
         },
         {
           "id": "hd-nfc-saklama",
           "question": "T.C. kimlik numaram veya kartımın kopyası saklanıyor mu?",
-          "answer": "Hayır. T.C. kimlik numaran, kartın ham NFC verisi, kart okuması için girdiğin bilgiler (belge no, doğum tarihi, son geçerlilik tarihi) ve kimlik kartının herhangi bir kopyası kalıcı olarak saklanmaz."
+          "answer": "Hayır. T.C. kimlik numaran, kartın ham verileri, kart okuması için girdiğin bilgiler (belge no, doğum tarihi, son geçerlilik tarihi) ve kimlik kartının herhangi bir kopyası kalıcı olarak saklanmaz; doğrulama sırasında yalnızca geçici olarak işlenir."
         },
         {
           "id": "hd-nfc-sonra-ne-oluyor",
           "question": "Okunan kimlik bilgileri daha sonra ne oluyor?",
-          "answer": "Kimlik kartından okunan ad, soyad ve doğum tarihi yalnızca doğrulama anında hesabındaki bilgilerle karşılaştırılır. Kartın kendisinden okunan veriler saklanmaz; hesabına yalnızca kimlik eşleşmesinin başarıyla tamamlandığını gösteren bir doğrulama kaydı işlenir."
+          "answer": "Kimlik kartından okunan bilgiler yalnızca doğrulama anında sunucuda kontrol edilir ve hesabındaki bilgilerle karşılaştırılır. Kartın kendisinden okunan veriler saklanmaz; hesabına yalnızca kimlik eşleşmesinin başarıyla tamamlandığını gösteren bir doğrulama kaydı işlenir."
         },
         {
           "id": "hd-nfc-zorunlu-mu",
           "question": "NFC ile kimlik eşleştirmek zorunlu mu?",
-          "answer": "Hayır. Eonarya'yı kullanmak veya kendine yönelik içerik oluşturmak için NFC Kimlik Eşleşmesi şart değildir. Gereklilik, kullanmak istediğin özelliğe ve teslimat kanalına göre değişir — bugünkü kurala göre SMS ve WhatsApp gibi bazı üçüncü kişi iletişim kanallarını kullanabilmek için NFC Kimlik Eşleşmesi gerekir. Diğer doğrulama seçenekleri için \"Apple ile doğrulama neyi sağlar?\" ve \"Google ile doğrulama neyi sağlar?\" sorularına bakabilirsin."
+          "answer": "Hayır. Eonarya'yı kullanmak veya kendine yönelik içerik oluşturmak için NFC Kimlik Eşleşmesi şart değildir. Başka kişilere e-posta, SMS veya WhatsApp ile teslimat yapabilmek için ise gereklidir. Apple ve Google bağlantıları bu gerekliliği karşılamaz."
         },
         {
           "id": "hd-birden-fazla-yontem",
-          "question": "Birden fazla doğrulama yöntemi kullanabilir miyim?",
-          "answer": "Evet. Desteklenen yöntemlerden birden fazlasını hesabına ekleyebilirsin — örneğin Apple ile doğrulandıktan sonra ayrıca Google hesabını veya T.C. Kimlik Kartını da doğrulayabilirsin. Kullanabileceğin teslimat seçenekleri, hesabındaki doğrulamalara göre otomatik olarak belirlenir."
+          "question": "Birden fazla giriş yöntemi ekleyebilir miyim?",
+          "answer": "Evet. Hesabına e-posta, telefon, Apple ve Google gibi birden fazla giriş yöntemi ekleyebilirsin. Bunlar hesabına erişim yöntemidir; başka kişilere teslimat yetkisi yalnızca T.C. Kimlik Kartı eşleşmesiyle açılır."
         },
         {
           "id": "hd-cihaz-degisimi",
           "question": "Cihazımı değiştirirsem ne olur?",
-          "answer": "T.C. Kimlik Kartı + NFC doğrulaman varsa Android/iOS geçişinde sorun olmaz. Apple doğrulaman varsa Android'e geçtiğinde de yeterli olmaya devam eder. Yalnızca Google doğrulaman varsa Android'de gerekli minimumu karşılarsın; iOS'a geçtiğinde ise Apple veya T.C. Kimlik Kartı ile doğrulama yapman gerekir."
+          "answer": "T.C. Kimlik Kartı eşleşmen hesabına bağlıdır; cihazını değiştirdiğinde yeniden eşleştirmen gerekmez. Yeni cihazda aynı hesapla giriş yapman yeterlidir."
         },
         {
           "id": "hd-dogrulama-kaldirma",
-          "question": "Bir doğrulamayı kaldırırsam ne olur?",
-          "answer": "Bir doğrulama yöntemini hesabından kaldırman, o yöntemin sağladığı yetkilerin yeniden değerlendirilmesine yol açar. Hesabında kalan doğrulamalar gerekli güven seviyesini karşılamıyorsa üçüncü kişilere yeni mesaj oluşturamazsın ve ilgili teslimatlar durdurulabilir."
+          "question": "Kimlik eşleşmem iptal olursa ne olur?",
+          "answer": "Hesabındaki doğum tarihi gibi kimlik bilgileri değişirse ya da güvenlik nedeniyle eşleşme iptal edilirse başka kişilere teslimat yetkin sona erer. Bu durumda zamanı gelen teslimatlar gönderilmez; kartını yeniden eşleştirdiğinde yetki yeniden açılır."
         },
         {
           "id": "hd-aliciya-gosterim",
           "question": "Doğrulamalar mesajımı alan kişiye gösterilir mi?",
-          "answer": "Evet. Üçüncü kişilere yapılan teslimatlarda, hesabını doğrulayan en yüksek yöntem alıcıya gösterilir (örneğin Apple hesabıyla doğrulandığın veya T.C. Kimlik Kartının eşleştirildiği bilgisi). Bu bilgi her teslimatta gösterilir ve kapatılamaz. Kendine yaptığın teslimatlarda bu bilgi gösterilmez."
+          "answer": "Evet. Başka kişilere yapılan teslimatlarda alıcıya, gönderenin T.C. Kimlik Kartının Eonarya hesabındaki bilgilerle eşleştirildiği bilgisi gösterilir. Bu bilgi her teslimatta gösterilir ve kapatılamaz. Kendine yaptığın teslimatlarda bu bilgi gösterilmez."
         }
       ]
     }
