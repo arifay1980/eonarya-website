@@ -1,6 +1,9 @@
 name: Rehber Yayını
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
     inputs:
       post_id:
@@ -29,11 +32,54 @@ permissions:
   id-token: write
 
 concurrency:
-  group: eonarya-blog-publication
+  group: eonarya-pages
   cancel-in-progress: false
 
 jobs:
+  deploy-site:
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.site-deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/configure-pages@v5
+
+      - name: Güncel siteyi ve canlı Rehber snapshot'larını hazırla
+        run: |
+          node -e "const path=require('node:path'); const {copyStaticSite}=require('./scripts/blog-publication'); (async()=>{await copyStaticSite(process.cwd(), path.join(process.env.RUNNER_TEMP,'site'));})().catch((e)=>{console.error(e);process.exit(1);});"
+          node scripts/build-blog.js --output "${{ runner.temp }}/site"
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SECRET_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+
+      - name: Site Pages artifact'ını yükle
+        uses: actions/upload-pages-artifact@v3
+        with:
+          name: github-pages-site
+          path: ${{ runner.temp }}/site
+
+      - name: Siteyi GitHub Pages'e yayınla
+        id: site-deploy
+        uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages-site
+
+      - name: Canlı siteyi doğrula
+        run: |
+          node scripts/verify-blog-deployment.js --site "${{ runner.temp }}/site" --origin "${{ vars.BLOG_PUBLIC_ORIGIN || 'https://eonarya.com' }}"
+          node -e "const fs=require('node:fs/promises'); (async()=>{const expected=await fs.readFile(process.env.SITE_INDEX,'utf8'); const url=process.env.SITE_ORIGIN.replace(/\/$/,'')+'/?site_check='+Date.now(); const r=await fetch(url,{headers:{'Cache-Control':'no-cache'}}); const actual=await r.text(); if(!r.ok||actual!==expected) throw new Error('Canlı ana sayfa beklenen index.html ile eşleşmedi.'); console.log('Canlı ana sayfa doğrulandı.');})().catch((e)=>{console.error(e);process.exit(1);});"
+        env:
+          SITE_INDEX: ${{ runner.temp }}/site/index.html
+          SITE_ORIGIN: ${{ vars.BLOG_PUBLIC_ORIGIN || 'https://eonarya.com' }}
+
   publish:
+    if: ${{ github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest
     environment:
       name: github-pages
