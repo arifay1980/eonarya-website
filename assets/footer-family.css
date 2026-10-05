@@ -30,3 +30,11 @@ body[data-footer-variant] .footer-logo {
     align-items: flex-start;
   }
 }
+
+
+body[data-footer-variant] .footer-links > a,
+body[data-footer-variant] .footer-links > [data-cookie-settings] {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+}
