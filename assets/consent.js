@@ -225,7 +225,10 @@
   function ready() {
     panel = buildPanel();
     document.querySelectorAll('[data-cookie-settings]').forEach((trigger) => {
-      trigger.addEventListener('click', () => showPanel(trigger));
+      trigger.addEventListener('click', (event) => {
+        event.preventDefault();
+        showPanel(trigger);
+      });
     });
     if (!preference) showPanel();
   }
