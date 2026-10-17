@@ -111,7 +111,7 @@
 
     .info {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 10px;
       margin: 0 0 32px;
       text-align: left;
@@ -216,7 +216,7 @@
 
     .meta-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 12px;
     }
 
@@ -377,10 +377,6 @@
           <div class="info-value" id="infoSender"></div>
         </div>
         <div class="info-item">
-          <div class="info-label">Teslimat Türü</div>
-          <div class="info-value" id="infoType"></div>
-        </div>
-        <div class="info-item">
           <div class="info-label">Teslimat Tarihi</div>
           <div class="info-value" id="infoDate"></div>
         </div>
@@ -416,10 +412,6 @@
           <div>
             <div class="meta-label">Gönderen</div>
             <div class="meta-value" id="metaSender"></div>
-          </div>
-          <div>
-            <div class="meta-label">Teslimat Türü</div>
-            <div class="meta-value" id="metaType"></div>
           </div>
           <div>
             <div class="meta-label">Teslimat Tarihi</div>
@@ -488,7 +480,6 @@
     ok: true,
     sender_name:    'Arif Ay',
     delivery_badge: 'Planlanmış Mesaj',
-    delivery_type:  'Planlanmış Mesaj',
     delivery_date:  '9 Haziran 2026',
   };
 
@@ -518,7 +509,6 @@
 
   function dolduRBilgi(prefix, data) {
     document.getElementById(prefix + 'Sender').textContent = data.sender_name || 'Eonarya';
-    document.getElementById(prefix + 'Type').textContent   = data.delivery_type || '';
     document.getElementById(prefix + 'Date').textContent   = data.delivery_date || '';
   }
 

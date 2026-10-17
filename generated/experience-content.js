@@ -27,15 +27,15 @@ window.EONARYA_EXPERIENCE = Object.freeze({
       "onboarding": "Tekrarlayan ödemeleri, alacakları, aidatları, kiraları, taksitleri veya düzenli işleri takip edebilirsin. Bir şey geciktiğinde Eonarya senin yerine ilgili kişiye hatırlatma mesajı oluşturabilir. Ne takip edileceği senin yaşam akışına bağlıdır."
     },
     "Hayattayim": {
-      "canonical": "Hayattayım Protokolü, belirlediğin üç farklı zaman aralığında Eonarya’ya girmeni bekler. Eonarya’ya yaptığın her giriş bu süreleri yeniden başlatır. Belirlenen sürelerde senden yanıt alınamazsa, Benden Sonra olarak hazırladığın mesajların teslim süreci başlatılır. Dilersen Güvenilir Kişiler ekleyerek belirlediğin kişilerin de sürece dahil olmasını sağlayabilir ve teslimatları ek bir güvenlik adımıyla koruyabilirsin.",
-      "onboarding": "Belirlediğin aralıklarla seninle iletişime geçer. Yanıt alınamazsa son bildirimden sonra Benden Sonra mesajlarının teslim süreci başlar. Dilersen ek güvenlik için Güvenilir Kişiler ekleyerek, bu süreci daha sağlam bir doğrulama katmanına bağlayabilirsin."
+      "canonical": "Hayattayım Protokolü, belirlediğin üç farklı zaman aralığında Eonarya’ya girmeni bekler. Eonarya’ya yaptığın her giriş bu süreleri yeniden başlatır. Belirlenen sürelerde senden yanıt alınamazsa, Benden Sonra olarak hazırladığın mesajların gönderim süreci başlatılır. Dilersen Güvenilir Kişiler ekleyerek belirlediğin kişilerin de sürece dahil olmasını sağlayabilir ve teslimatları ek bir güvenlik adımıyla koruyabilirsin.",
+      "onboarding": "Belirlediğin aralıklarla senden haber alıp almadığını kontrol eder. Senden haber alamazsa Benden Sonra mesajlarının gönderim sürecini başlatır."
     },
     "BendenSonra": {
-      "canonical": "Benden Sonra; Hayattayım Protokolü ve tercih ettiğin ek güvenlik adımları tamamlandıktan, yani artık sana ulaşılamadığı doğrulandıktan sonra hazırladığın mesajların ve emanetlerin belirlediğin kişilere ulaştırılmasını sağlayan teslimat koşuludur.",
-      "onboarding": "Söyleyemediğin bir teşekkür, gecikmiş bir özür, sevdiklerine bırakmak istediğin bir mesaj ya da önemli bir emanet… Hayattayım Protokolü sana ulaşılamadığını doğruladığında, hazırladığın mesajlar belirlediğin kişilere güvenle teslim edilir.",
+      "canonical": "Benden Sonra; Hayattayım Protokolü kapsamında belirlenen koşullar sağlandığında, hazırladığın mesajların ve emanetlerin gönderim sürecini başlatan teslimat koşuludur.",
+      "onboarding": "Söyleyemediğin bir teşekkür, gecikmiş bir özür, sevdiklerine bırakmak istediğin bir mesaj ya da önemli bir emanet… Hayattayım Protokolü kapsamında belirlenen koşullar sağlandığında Benden Sonra mesajlarının gönderim süreci başlatılır.",
       "web": {
         "title": "Senden sonra da ulaşması gereken şeyler olabilir.",
-        "body": "Söyleyemediğin bir teşekkür, gecikmiş bir özür, sevdiklerine bırakmak istediğin bir mesaj ya da önemli bir emanet… Hayattayım Protokolü sana ulaşılamadığını doğruladığında, hazırladığın mesajlar belirlediğin kişilere güvenle teslim edilir."
+        "body": "Söyleyemediğin bir teşekkür, gecikmiş bir özür, sevdiklerine bırakmak istediğin bir mesaj ya da önemli bir emanet… Hayattayım Protokolü kapsamında belirlenen koşullar sağlandığında Benden Sonra mesajlarının gönderim süreci başlatılır."
       }
     },
     "GuvenilirKisiler": {
@@ -94,7 +94,7 @@ window.EONARYA_EXPERIENCE = Object.freeze({
   },
   "RELEASE_STATE": {
     "platforms": "iOS ve Android için hazırlanıyor.",
-    "thirdPartyChannel": "Bugün üçüncü kişiye teslimat kanalı e-postadır. Ek kanallar hazırlık aşamasındadır."
+    "thirdPartyChannel": "Şu anda mesajlar e-posta yoluyla gönderilir. SMS ve WhatsApp henüz etkin değil."
   },
   "LEGAL_LINKS": {
     "messagePreferences": {
