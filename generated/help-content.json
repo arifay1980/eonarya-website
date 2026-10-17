@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-17T10:38:50.461Z",
+  "generatedAt": "2026-10-17T12:02:39.901Z",
   "sourceNote": "GENERATED — DO NOT EDIT. Kaynak: Eonarya/shared/content/helpContent.data.js (npm run sync:help ile üretildi).",
   "categories": [
     {
@@ -9,7 +9,7 @@
         {
           "id": "mesaj-nedir",
           "question": "Mesaj nedir?",
-          "answer": "Mesajlar; bugün, gelecekte ya da senden sonra belirlediğin zamanda veya koşullar gerçekleştiğinde, seçtiğin kişilere ulaştırılmak üzere oluşturduğun içeriklerdir."
+          "answer": "Mesajlar; bugün, gelecekte ya da senden sonra, belirlediğin zamanda veya koşulda seçtiğin kişilere ulaşmasını istediğin sözler ve bilgilerdir."
         },
         {
           "id": "mesaj-turleri",
@@ -39,7 +39,7 @@
         {
           "id": "mesaj-on-okuma",
           "question": "Mesaj teslim edilmeden önce okunabilir mi?",
-          "answer": "Hayır. Mesaj içeriği, belirlediğin zaman veya koşul gerçekleşmeden kimse tarafından açılamaz — erişim bağlantısı ancak teslimat anında oluşturulur."
+          "answer": "Hayır. Alıcılar mesajını, belirlediğin zaman veya koşul gerçekleşmeden göremez; erişim bağlantısı gönderim anında oluşturulur."
         }
       ]
     },

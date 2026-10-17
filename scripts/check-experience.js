@@ -39,7 +39,8 @@ for (const page of privatePages) {
   requireMatch(html, /assets\/private-shell\.js/, `${page}: private shell JS eksik`);
   requireMatch(html, /generated\/experience-content\.js/, `${page}: content registry eksik`);
   requireMatch(html, /captureSensitiveParams\(\['token', 'ot', 'confirm'\]\)/, `${page}: güvenli query yakalama eksik`);
-  requireMatch(html, /data-content-path="PRODUCT_COPY\.Eonarya\.short"/, `${page}: private footer ürün metni bağı eksik`);
+  requireMatch(html, /data-content-path="PRODUCT_COPY\.Eonarya\.recipient"/, `${page}: alıcı sayfası ürün metni bağı eksik`);
+  if (html.includes('data-content-path="PRODUCT_COPY.Eonarya.short"')) throw new Error(`${page}: alıcı sayfası "sen" dilindeki tanımı kullanmamalı`);
   requireMatch(html, /data-support-link="help"/, `${page}: Yardım Merkezi bağı eksik`);
   requireMatch(html, /data-support-link="message"/, `${page}: destek mesajı bağı eksik`);
   if (page !== 'tercihler.html') {
@@ -124,7 +125,21 @@ requireText(processorSource, 'third_party_notice_presented: basarili', 'delivery
 const home = read(root, 'index.html');
 const hero = content.PRODUCT_COPY.Eonarya.web.title;
 requireText(home, `aria-label="${hero}"`, 'Ana sayfa hero metni canonical kaynaktan saptı');
-requireText(home, `<em>Senden Sonra</em>`, 'Ana sayfa hero vurgusu eksik');
+// Y-09 Karar 3: bağlamsal "senden sonra" modül adı gibi vurgulanmaz; resmî ad "Benden Sonra".
+requireText(home, `>${hero}</h1>`, 'Ana sayfa hero görünür metni canonical kaynaktan saptı');
+if (/<em>\s*senden sonra\s*<\/em>/i.test(home)) throw new Error('Ana sayfa hero: "senden sonra" ürün adı gibi vurgulanmamalı');
+// Y-09 MD-121: ana sayfadaki her içerik bağlı statik metin canonical kaynakla birebir aynı olmalı.
+for (const [, yol, metin] of home.matchAll(/data-content-path="([^"]+)"[^>]*>([^<]*)</g)) {
+  const deger = yol.split('.').reduce((cur, k) => cur && cur[k], content);
+  if (typeof deger !== 'string') throw new Error(`Ana sayfa: ${yol} canonical içerikte yok`);
+  if (metin.trim() && metin !== deger) throw new Error(`Ana sayfa: ${yol} statik kopyası canonical kaynaktan saptı`);
+}
+// Y-09 Karar 2: tek destekleyici marka cümlesi SEO başlığı ve kapanışta kullanılır.
+const DESTEK_VAADI = 'Bazı sözler doğru zamanı bekler';
+requireText(home, `<title>Eonarya — ${DESTEK_VAADI}</title>`, 'SEO başlığı destekleyici marka cümlesinden saptı');
+requireText(home, `<meta property="og:title" content="Eonarya — ${DESTEK_VAADI}">`, 'Open Graph başlığı destekleyici marka cümlesinden saptı');
+requireText(home, `<meta name="twitter:title" content="Eonarya — ${DESTEK_VAADI}">`, 'Twitter başlığı destekleyici marka cümlesinden saptı');
+requireText(home, '<h2 id="kapanis-baslik">Bazı sözler<br>doğru zamanı bekler.</h2>', 'Kapanış başlığı destekleyici marka cümlesinden saptı');
 requireText(home, `content="${hero}"`, 'OG/Twitter açıklaması kilitli hero metninden saptı');
 requireText(home, `"description":"${content.PRODUCT_COPY.Eonarya.short}"`, 'Schema açıklaması Eonarya.short kaynağından saptı');
 requireText(home, content.PRODUCT_COPY.BendenSonra.web.body, 'Ana sayfa Benden Sonra web metni canonical kaynaktan saptı');
@@ -150,6 +165,15 @@ for (const deprecated of [
   'Bu değişiklik, bu göndericiden gelecekte yapılacak uygun teslimatlarda kullanılacak iletişim adresinizi günceller.',
   'ölüm sonrası mesaj',
   'Önem verdiğin şeyler, zamanı geldiğinde doğru kişiye ulaşsın.',
+  'Zamanı geldiğinde ulaşsın',
+  'Zamanı gelince ulaşsın',
+  'ya da Senden Sonra',
+  'Hayattayım yoklamaları',
+  'İçeriği hazırla',
+  'devamlılık',
+  'DEVAMLILIK',
+  'Kanalları sırayla kullanır',
+  'İçeriğimi daha sonra',
   'Mesajını bugünden hazırla; kime ulaşacağını ve teslimat sırasını sen belirle.',
   'ilgili kişi olarak liste',
   'hayatta olmadığın doğrulandı',

@@ -4,31 +4,36 @@ window.EONARYA_EXPERIENCE = Object.freeze({
     "Eonarya": {
       "standard": "Eonarya; bugün, gelecekte ya da senden sonra senin için önemli olan anılarını, emanetlerini ve mesajlarını belirlediğin zaman ve koşullarda belirlediğin kişilere ulaştıran; planlarını ve periyodik işlerini takip ederek gerektiğinde ilgili kişilere hatırlatan kişisel bir dijital süreklilik sistemidir.",
       "short": "Eonarya; bugün, gelecekte ya da senden sonra önemli olan mesajlarını ve emanetlerini doğru zamanda doğru kişilere ulaştıran, planlarını takip eden kişisel bir dijital süreklilik sistemidir.",
+      "recipient": "Eonarya, insanların önemli mesajlarını belirledikleri zamanda veya koşullar gerçekleştiğinde seçtikleri kişilere ulaştırmak için tasarlanmış kişisel bir dijital süreklilik sistemidir.",
       "onboarding": "Mesajlarını, anılarını, planlarını ve dijital emanetlerini güvenle saklar; doğru zamanda, doğru kişilere ulaşması için çalışır. Bugüne, geleceğe ve senden sonraya uzanan kişisel bir dijital süreklilik sistemidir.",
       "web": {
-        "title": "Önem verdiğin şeyler, zamanı geldiğinde ya da Senden Sonra doğru kişiye ulaşsın.",
+        "title": "Önem verdiğin şeyler, zamanı geldiğinde ya da senden sonra doğru kişiye ulaşsın.",
         "body": "Mesajlarını, anılarını ve planlarını bugünden hazırla. Zamanı, koşulu ve kişiyi sen belirle; Eonarya zamanı gelene kadar süreci senin için takip etsin."
       },
       "howItWorks": {
-        "webTitle": "İçeriği hazırla. Zamanını ve kişiyi belirle.",
-        "webBody": "Eonarya, senin yerine karar vermez. Belirlediğin koşulu takip eder ve zamanı geldiğinde teslimat sürecini başlatır."
+        "webTitle": "Mesajını hazırla. Zamanını ve alıcısını belirle.",
+        "webBody": "Eonarya, senin yerine karar vermez. Belirlediğin koşulu takip eder ve zamanı geldiğinde gönderim sürecini başlatır."
       }
     },
     "Mesajlar": {
-      "canonical": "Mesajlar; bugün, gelecekte ya da senden sonra belirlediğin zamanda veya koşullar gerçekleştiğinde, seçtiğin kişilere ulaştırılmak üzere oluşturduğun içeriklerdir.",
+      "canonical": "Mesajlar; bugün, gelecekte ya da senden sonra, belirlediğin zamanda veya koşulda seçtiğin kişilere ulaşmasını istediğin sözler ve bilgilerdir.",
       "web": {
         "title": "Doğru anı sen seç.",
         "body": "Senaryonu seç, mesajını hazırla; tarih, koşul ve alıcı kararlarını gerçek ürün akışında adım adım tamamla.",
-        "note": "Gönderilmemiş içeriklerini teslimattan önce yönetebilirsin."
+        "note": "Gönderilmemiş mesajlarını yönetebilirsin."
       }
     },
     "Planlar": {
       "canonical": "Planlar; ödemelerini, alacaklarını, aidatlarını, kiralarını, taksitlerini ve diğer periyodik işlerini takip etmeni; gerektiğinde ilgili kişilere hatırlatma yapmanı sağlayan yapılardır.",
+      "web": {
+        "title": "Takip etmen gerekenler dağılmasın.",
+        "body": "Bir sorumluluğu, ödemeyi veya tekrar eden planı kişiler ve tarihlerle ilişkilendir. Eonarya, planın zaman içindeki durumunu görünür tutar."
+      },
       "onboarding": "Tekrarlayan ödemeleri, alacakları, aidatları, kiraları, taksitleri veya düzenli işleri takip edebilirsin. Bir şey geciktiğinde Eonarya senin yerine ilgili kişiye hatırlatma mesajı oluşturabilir. Ne takip edileceği senin yaşam akışına bağlıdır."
     },
     "Hayattayim": {
       "canonical": "Hayattayım Protokolü, belirlediğin üç farklı zaman aralığında Eonarya’ya girmeni bekler. Eonarya’ya yaptığın her giriş bu süreleri yeniden başlatır. Belirlenen sürelerde senden yanıt alınamazsa, Benden Sonra olarak hazırladığın mesajların gönderim süreci başlatılır. Dilersen Güvenilir Kişiler ekleyerek belirlediğin kişilerin de sürece dahil olmasını sağlayabilir ve teslimatları ek bir güvenlik adımıyla koruyabilirsin.",
-      "onboarding": "Belirlediğin aralıklarla senden haber alıp almadığını kontrol eder. Senden haber alamazsa Benden Sonra mesajlarının gönderim sürecini başlatır."
+      "onboarding": "Belirlediğin aralıklarla senden haber bekler. Hayattayım Protokolü kapsamında belirlenen koşullar sağlandığında Benden Sonra mesajlarının gönderim süreci başlatılır."
     },
     "BendenSonra": {
       "canonical": "Benden Sonra; Hayattayım Protokolü kapsamında belirlenen koşullar sağlandığında, hazırladığın mesajların ve emanetlerin gönderim sürecini başlatan teslimat koşuludur.",
@@ -42,11 +47,11 @@ window.EONARYA_EXPERIENCE = Object.freeze({
       "canonical": "Güvenilir Kişiler; sana ulaşılamadığı durumlarda sürecin doğrulanmasına yardımcı olmak için önceden belirlediğin kişilerdir. Bu kişilerden istediğin doğrulama katmanı, Benden Sonra teslimatlarının başlamasından önce ek bir güvenlik adımı sağlar."
     },
     "ZamanKapsulu": {
-      "canonical": "Kızına gelecekte söylemek istediğin bir söz, unutulmasın dediğin bir düşünce, özel bir gün için sakladığın bir anı… Eonarya bunları senin yerine takip eder ve belirlediğin zamanda doğru kişiye ulaştırır."
+      "canonical": "Birine gelecekte söylemek istediğin bir söz, unutulmasın dediğin bir düşünce, özel bir gün için sakladığın bir anı… Eonarya, belirlediğin zamanı takip eder ve bunların doğru zamanda doğru kişiye ulaşması için gönderim sürecini başlatır."
     },
     "OnemliGunler": {
-      "canonical": "Bayramlar, kandiller ve senin için anlam taşıyan özel günler için mesajlarını bugünden hazırlayabilirsin. İster yalnızca ilkinde, ister her yıl; zamanı geldiğinde Eonarya senin adına teslim eder.",
-      "onboarding": "Bayramlar, kandiller ve senin için anlam taşıyan özel günler için mesajlarını bugünden hazırlayabilirsin. İster yalnızca ilkinde, ister her yıl; zamanı geldiğinde Eonarya senin adına teslim eder."
+      "canonical": "Bayramlar, kandiller ve senin için anlam taşıyan özel günler için mesajlarını bugünden hazırlayabilirsin. İster yalnızca ilkinde, ister her yıl; zamanı geldiğinde mesajının gönderim süreci başlatılır. Önemli Günler, Eonarya Plus ile kullanılır.",
+      "onboarding": "Bayramlar, kandiller ve senin için anlam taşıyan özel günler için mesajlarını bugünden hazırlayabilirsin. İster yalnızca ilkinde, ister her yıl; zamanı geldiğinde mesajının gönderim süreci başlatılır. Önemli Günler, Eonarya Plus ile kullanılır."
     },
     "Trust": {
       "canonical": "Eonarya, kullanıcılar tarafından oluşturulan mesajların veya verilen yanıtların doğruluğunu değerlendirmez; yalnızca teslimat ve doğrulama sürecinin işletilmesini sağlar.",

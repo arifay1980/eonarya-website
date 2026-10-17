@@ -214,7 +214,7 @@ function renderHeader() {
 }
 
 function renderFooter() {
-  return `<footer class="footer blog-footer"><div class="wrap"><div class="footer-grid"><img class="footer-logo" src="/assets/brand/logo-light.png" width="720" height="86" alt="Eonarya"><nav class="footer-links" aria-label="Alt bağlantılar"><a href="/blog/">Rehber</a><a href="/yardim.html">Yardım Merkezi</a><a href="/gizlilik.html">Gizlilik</a><a href="/kullanim-sartlari.html">Kullanım Şartları</a><a href="/aydinlatma.html">Aydınlatma Metni</a><a href="/yardim.html#destek">Bize Mesaj Gönder</a><button type="button" data-cookie-settings>Çerez Ayarları</button></nav></div><p class="copyright">© 2026 Eonarya. Tüm hakları saklıdır.</p></div></footer>`;
+  return `<footer class="footer blog-footer"><div class="wrap"><div class="footer-grid"><img class="footer-logo" src="/assets/brand/logo-light.png" width="720" height="86" alt="Eonarya"><nav class="footer-links" aria-label="Alt bağlantılar"><a href="/blog/">Rehber</a><a href="/yardim.html">Yardım Merkezi</a><a href="/gizlilik.html">Gizlilik</a><a href="/kullanim-sartlari.html">Kullanım Şartları</a><a href="/aydinlatma.html">Aydınlatma Metni</a><a href="/yardim.html#destek">Bize Mesaj Gönder</a><button type="button" data-cookie-settings>Çerez Ayarları</button></nav></div><p class="kicker footer-tagline">ZAMANIN ÖTESİNE BIRAK</p><p class="copyright">© 2026 Eonarya. Tüm hakları saklıdır.</p></div></footer>`;
 }
 
 function renderCard(post) {
