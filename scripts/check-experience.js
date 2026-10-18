@@ -256,14 +256,33 @@ for (const name of ['night', 'paper', 'ink', 'soft', 'line', 'accent', 'accentDa
 // UI çalışmasının kritik backend semantiğini sessizce değiştirmediğini doğrulayan
 // davranış sözleşmeleri. Bunlar yalnız dosya varlığı değil, kullanıcıya dönen
 // hata/erişim ve tek-kullanım kurallarının birlikte korunmasını sınar.
+// Süre get-message içinde sabitlenmez: tek kaynak ortak erişim modülü,
+// yeni teslimatlarda değişmez snapshot ve eski teslimatlarda fallback korunur.
+const messageViewAccess = read(appRoot, 'shared/messageViewAccess.js');
+for (const contract of [
+  /export const MESAJ_ERISIM_FREE_GUN\s*=\s*7\b/,
+  /export const MESAJ_ERISIM_PLUS_GUN\s*=\s*30\b/,
+  /export function mesajErisimGunSayisi\(/,
+  /export function snapshotErisimGununuCoz\(/,
+  /export function mesajErisimSuresiDolduMu\(/,
+]) requireMatch(messageViewAccess, contract, `ortak mesaj erişim süresi sözleşmesi eksik: ${contract}`);
+
 const getMessage = read(appRoot, 'supabase/functions/get-message/index.ts');
 for (const contract of [
-  /SURE_GUN_FREE\s*=\s*7/,
-  /SURE_GUN_PLUS\s*=\s*30/,
+  /from ['"]\.\.\/\.\.\/\.\.\/shared\/messageViewAccess\.js['"]/,
+  /snapshotErisimGununuCoz\(snapshot\?\.view_access_days\)/,
+  /sureGunu\s*=\s*mesajErisimGunSayisi\(gonderenProfil\?\.is_plus === true\)/,
+  /mesajErisimSuresiDolduMu\(data\.attempted_at as string,\s*sureGunu\)/,
   /hata: 'erisim_suresi_doldu'/,
   /ac \? 'MESSAGE_OPENED' : 'PAGE_OPENED'/,
   /if \(ac\) \{[\s\S]*response\.message_body/,
 ]) requireMatch(getMessage, contract, `get-message davranış sözleşmesi eksik: ${contract}`);
+
+const processDeliveries = read(appRoot, 'supabase/functions/process-deliveries/index.ts');
+for (const contract of [
+  /view_access_days:\s*snapshotErisimGununuCoz\(vars\.__view_access_days\)\s*\?\?\s*MESAJ_ERISIM_FREE_GUN/,
+  /base\.__view_access_days\s*=\s*String\(mesajErisimGunSayisi\(profilRec\?\.is_plus === true\)\)/,
+]) requireMatch(processDeliveries, contract, `teslimat anı erişim snapshot sözleşmesi eksik: ${contract}`);
 
 const approval = read(appRoot, 'supabase/functions/approval-response/index.ts');
 for (const contract of [
