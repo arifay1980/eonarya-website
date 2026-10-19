@@ -81,13 +81,23 @@ commit'lenmelidir. Aksi halde web sitesindeki Yardım Merkezi uygulamadan geride
 
 ## Hukuki metinler — `npm run sync:legal`
 
-Kaynak `Eonarya/services/contracts.js` dosyasıdır. Üçüncü kişi aydınlatma sayfasının
-gövdesi canonical metinden deterministik üretilir; veri sorumlusu unvanı/adresi
-eksikken taslak uyarısı otomatik korunur. Kullanıcı Sözleşmesi, Gizlilik Politikası
-ve kullanıcı Aydınlatma Metni için her canonical satırın web çıktısında bulunduğu
-doğrulanır. `generated/legal-parity-manifest.json` source ve görünür web metni
-hash'lerini kilitler; `npm run check:legal` eksik içerik veya sessiz drift'te fail
-verir. `npm run test:experience` bu kontrolü de çalıştırır.
+Tek düzenleme kaynağı `Eonarya/services/contracts.js` dosyasıdır; hangi sayfanın
+hangi belgeden üretileceği ve her belgenin onaylı sürümleri
+`Eonarya/shared/content/hukukiSurumDefteri.json` defterindedir. Üretimden önce
+uygulama reposundaki ortak doğrulayıcı (`Eonarya/scripts/hukuki-surum-dogrulama.cjs`)
+metnin SHA-256 değerini defterdeki güncel onaylı kayıtla karşılaştırır: sürüm sabiti
+olmayan eski dal, onaysız/taslak sürüm, eski onaylı sürüm veya aynı sürüm numarasıyla
+değişmiş metin web'e yazılamaz. `generated/legal-parity-manifest.json` her sayfanın
+yayımlı sürümünü, onaylı metin hash'ini ve görünür web metni hash'ini kilitler; web'in
+yayımladığı sürümden geriye düşülemez. Hata durumunda hiçbir dosya yazılmaz.
+Üçüncü kişi aydınlatma sayfasında veri sorumlusu unvanı/adresi eksikken taslak uyarısı
+otomatik korunur. `kvkk.html` web'e özel bilgilendirme sayfasıdır: NFC bölümü
+`GENERATED:KVKK-NFC` işaretleri arasında aynı senkronla üretilir ve yalnız Aydınlatma
+Metni ile Gizlilik Politikası'na doğrulanmış güncel sürüm numaralarıyla yönlendirir;
+blok elle düzenlenmez ve blok dışında bağımsız NFC açıklaması bulunursa üretim durur. `npm run check:legal` drift'te, `npm run test:legal` negatif
+senaryolarda fail verir; `npm run test:experience` ikisini de çalıştırır. Uygulama
+reposunda yayımlanmamış taslaklar (`services/hukukiMetinTaslaklari.js`) web üretimine
+hiç girmez.
 
 ## Rehber — `npm run build:blog`
 

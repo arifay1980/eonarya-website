@@ -1,26 +1,31 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "source": "Eonarya/services/contracts.js",
+  "ledger": "Eonarya/shared/content/hukukiSurumDefteri.json",
   "entries": {
     "KULLANICI_SOZLESMESI": {
       "page": "kullanim-sartlari.html",
+      "version": "1.1",
       "canonicalSha256": "894837ab6d60a95b12f886c69d242e11dbee924508ed9cabd2e4d0cb1a5285f2",
-      "pageVisibleTextSha256": "a1f49e53b11abd6ca995fbe2e2ef76ebd6ddf8ced233f7fed919def9df0fb4db"
+      "pageVisibleTextSha256": "48461146cf5b5f0dfbac61f688106b2aa13d1a317b02a4fb58d53eed3be2cfee"
     },
     "GIZLILIK_POLITIKASI": {
       "page": "gizlilik.html",
+      "version": "1.3",
       "canonicalSha256": "e8b447feb22fc9a422c9d984ed47538500d73bccd1addaf8f996d87241f47dba",
       "pageVisibleTextSha256": "b32edb25cfdaad08d1a71138bc7dd249bce06664a9109d394361bc93a57bda1f"
     },
     "AYDINLATMA_METNI": {
       "page": "aydinlatma.html",
+      "version": "1.3",
       "canonicalSha256": "b398f30188e4dbee75f6aeed9b9fb7fe1ad4578dec8424705472c5bb705ea866",
       "pageVisibleTextSha256": "e53750f9044e11af14cfcb212b05492da7eb7919d40463c89a76fcd02ccfd178"
     },
     "UCUNCU_KISI_AYDINLATMA_METNI": {
       "page": "ucuncu-kisi-aydinlatma.html",
+      "version": "2026-09-13.1",
       "canonicalSha256": "764672386149f204fe5564d86d0e5144eda30815530afc3a3a28861ed7c7ff9e",
-      "pageVisibleTextSha256": "aba5d11999e974899b77a0800fe521caef885158c878fcacbe69add866311dfc"
+      "pageVisibleTextSha256": "dbef646f66dd7e22de45e06b3e398c51a014d0f1c87ca6036cd2bbf099655ab6"
     }
   }
 }
