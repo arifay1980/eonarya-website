@@ -5,7 +5,7 @@
   --muted: var(--eon-color-soft);
   --soft: var(--eon-color-muted);
   --border: var(--eon-color-line);
-  --purple: var(--eon-color-orbit);
+  --purple: var(--eon-color-accent-dark);
   --purple2: var(--eon-color-focus);
   --font-body: var(--eon-font-family);
 }
@@ -114,3 +114,6 @@ body[data-private-page] .footer-links a {
   body[data-private-page] .card { border-radius: var(--eon-radius-xl); }
   body[data-private-page] .footer-links { flex-direction: column; gap: 8px; }
 }
+
+/* Uzun mesaj maddelerinde satır sonlarını koru. */
+body[data-private-page="mesaj"] .madde-metin { white-space: pre-wrap; overflow-wrap: anywhere; }

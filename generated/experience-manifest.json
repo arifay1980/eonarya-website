@@ -3,7 +3,7 @@
   "designVersion": 1,
   "contentVersion": 4,
   "sources": {
-    "designTokensSha256": "784befc2c6331b84a1bd37e686ab104726fe314033fbcb5d8946d1be4e204dbc",
+    "designTokensSha256": "65dd5a6c989c1948f5333628951a854d9fea8e69bcdd792cb0e2baea0cad9699",
     "contentSha256": "6d8fecdeeb3d1bf64f6f288958f3df93a15ff268ad7f25662e3a57f1853ee5a3"
   },
   "outputs": {
@@ -12,7 +12,7 @@
     "assets/brand/symbol-dark.png": "498b997c4fdc2f608933fa3c5c16964cb4b30deda3cc1a857c033058f9c59e60",
     "assets/email/footer-logo.png": "e5f315b0e45861cfa93984d315a79ccf15a2cb129edd6c85fb1a4474caeb76cb",
     "assets/email/header-logo.png": "8828c7ff93d4996f9dd7aed73c8c0b8b9edccbc9b4b6a8e7263270013921408d",
-    "assets/experience-tokens.css": "1e2a78e86adf3fd18b687d824f5222619214a2c8843357ba99391ca5216c5c05",
+    "assets/experience-tokens.css": "ab46ab12f1f0a53961d2cb22da1e4f1f1eb72dc13e1ecb86570fab8932b1986e",
     "generated/experience-content.js": "383d7061722bded140f8e04b05eb99a9f0a1210b14e9868a496f03bfb2f58d1a"
   }
 }
