@@ -1,3 +1,3 @@
-# Eonarya çalışma kuralları
+# Eonarya — Ajan çalışma girişi
 
-**K63 — Tek çalışma yeri:** Bu iş için açık kullanıcı talimatı olmadan yeni branch/worktree/clone açmak veya işi başka dal/klasöre taşımak yasaktır. Ana proje klasörü ve doğrulanmış aktif dal kullanılır. İzolasyon/alt ajan istisna değildir; eşzamanlı işler korunur, mevcut dal/klasörler izinsiz silinmez.
+Önce [CLAUDE.md](CLAUDE.md) ve onun yönlendirdiği ortak kuralları oku. K9 Git yetkisi, K63 çalışma yeri ve K68 temizlik bütün ajanlar için geçerlidir. Bu depoya özgü aşağıdaki talimatlar ortak yetkiyi genişletmez.
