@@ -106,7 +106,7 @@
 <section class="page-hero">
   <p class="page-hero-label">Yasal</p>
   <h1>Gizlilik Politikası</h1>
-  <p class="page-hero-meta">Son güncelleme: 27 Eylül 2026</p>
+  <p class="page-hero-meta">Son güncelleme: 9 Kasım 2026</p>
 </section>
 
 <main class="content" data-legal-canonical="GIZLILIK_POLITIKASI">
@@ -141,14 +141,15 @@
     </ul>
     <p class="doc-sub">Kimlik Doğrulama Verileri (NFC Kimlik Eşleşmesi):</p>
     <ul class="doc-bullets">
-      <li>Ad, soyad ve doğum tarihi (doğrulanmış DG1 içeriğinden elde edilir)</li>
-      <li>DG1 ve EF.SOD (kartın kriptografik güvenlik kontrolleri için yalnız işlem süresince geçici olarak işlenir; kalıcı olarak saklanmaz)</li>
+      <li>Ad, soyad ve doğum tarihi (T.C. Kimlik Kartının NFC çipinden cihazınızda okunur ve eşleştirme için Eonarya sunucusuna gönderilir)</li>
     </ul>
     <p class="doc-sub">NFC Kart Erişim Bilgileri:</p>
     <ul class="doc-bullets">
-      <li>Belge numarası, doğum tarihi ve son geçerlilik tarihi (yalnızca kart çipine erişim sağlamak amacıyla kullanılır, kimlik eşleşmesi kaydının parçası olarak kalıcı şekilde saklanmaz)</li>
+      <li>Belge numarası, doğum tarihi ve son geçerlilik tarihi (yalnızca cihazınızın kart çipine erişebilmesi için cihazda kullanılır; standart NFC Kimlik Eşleşmesinde sunucuya gönderilmez ve kimlik eşleşmesi kaydının parçası olarak kalıcı şekilde saklanmaz)</li>
     </ul>
-    <p class="doc-body">Strong NFC Kimlik Eşleşmesi sırasında DG1 ve EF.SOD; SOD imzasının, DSC→CSCA güven zincirinin ve DG1 veri bütünlüğünün kontrol edilmesi ile karttaki ad, soyad ve doğum tarihi bilgilerinin Eonarya hesabıyla eşleştirilmesi amacıyla Eonarya sunucusunda geçici olarak işlenir. T.C. kimlik numarası kalıcı kimlik kanıtı olarak tutulmaz. DG1, EF.SOD, ham MRZ/NFC içeriği ve kart görüntüsü kalıcı olarak saklanmaz veya loglanmaz; başarılı işlem sonunda yalnız doğrulamanın gerçekleştiğini gösteren sınırlı teknik kanıt ve gerekli teknik metadata saklanır.</p>
+    <p class="doc-body">Standart NFC Kimlik Eşleşmesinde uygulama, kartın çipinden okunan bilgilerden yalnız ad, soyad ve doğum tarihini Eonarya sunucusuna gönderir; eşleşme kararı sunucuda hesabınızdaki bilgilerle karşılaştırılarak verilir. Bu işlemde DG1 ve EF.SOD dahil ham çip verisi, T.C. kimlik numarası, kart erişim bilgileri ve kart görüntüsü sunucuya gönderilmez. Başarılı eşleşmede yalnız eşleşmenin gerçekleştiğini gösteren sınırlı kayıt (eşleşme yöntemi ve sürümü, kimlik beyanının sürümü ve kabul zamanı) saklanır; başarısız denemelerde yalnız uyuşmayan alanların adları güvenlik kaydı olarak tutulabilir, alanların değerleri tutulmaz.</p>
+    <p class="doc-body">Aktif bir NFC Kimlik Eşleşmesi, Eonarya'nın kullanıcının belirlediği üçüncü kişilere e-posta veya SMS gibi kanallarla teslimat yapabilmesi için aranan güvenlik koşuludur. Bu koşulun amacı, yanlış veya yetkisiz üçüncü kişi teslimatı riskini azaltmaktır.</p>
+    <p class="doc-body">Kimlik Bilgileri Güncelleme özelliği şu anda kullanıma kapalıdır. Bu özellik kapsamında kartın ham DG1 ve EF.SOD içeriğini sunucuda okuyan veya işleyen bir ad-soyad güncelleme süreci yürütülmez. Kullanıma açık standart NFC Kimlik Eşleşmesi, yukarıda açıklanan sınırlı bilgilerle ayrı olarak çalışır.</p>
     <p class="doc-sub">İletişim Bilgileri:</p>
     <ul class="doc-bullets">
       <li>E-posta adresi</li>
@@ -215,7 +216,7 @@
       <li>Mevzuattan doğan yükümlülüklerin yerine getirilmesi</li>
       <li>Hukuki uyuşmazlıklarda ispat yükümlülüklerinin yerine getirilmesi</li>
     </ul>
-    <p class="doc-body">NFC Kimlik Eşleşmesi kapsamında ad, soyad ve doğum tarihi ile DG1 ve EF.SOD'un geçici işlenmesi; kartın kriptografik güvenlik ve veri bütünlüğü kontrollerinin yürütülmesi, hesap güvenliğinin artırılması, kimlik kötüye kullanımının azaltılması ve yanlış veya yetkisiz üçüncü kişi teslimatı riskinin azaltılması amaçlarıyla, veri sorumlusunun meşru menfaati hukuki sebebine (KVKK m.5/2-f) dayanılarak yürütülür; bu işlem KVKK açık rızası niteliğinde değildir. Diğer kişisel veriler, hizmetin sunulması için sözleşmenin kurulması/ifası ve mevzuattan doğan yükümlülüklerin yerine getirilmesi hukuki sebeplerine dayanılarak işlenir. Hukuki sebeplerin ayrıntılı açıklaması Aydınlatma Metni'nde yer alır.</p>
+    <p class="doc-body">NFC Kimlik Eşleşmesinde karttan cihazda okunan ad, soyad ve doğum tarihinin sunucuda hesap bilgileriyle eşleştirilmesi; hesap güvenliğinin artırılması, kimlik kötüye kullanımının azaltılması ve yanlış veya yetkisiz üçüncü kişi teslimatı riskinin azaltılması amaçlarıyla, veri sorumlusunun meşru menfaati hukuki sebebine (KVKK m.5/2-f) dayanılarak yürütülür; bu işlem KVKK açık rızası niteliğinde değildir. Diğer kişisel veriler, hizmetin sunulması için sözleşmenin kurulması/ifası ve mevzuattan doğan yükümlülüklerin yerine getirilmesi hukuki sebeplerine dayanılarak işlenir. Hukuki sebeplerin ayrıntılı açıklaması Aydınlatma Metni'nde yer alır.</p>
     <p class="doc-body">Kişisel veriler, bu amaçlarla bağlantılı olmayan işlemlerde kullanılmaz.</p>
   </div>
 
@@ -321,13 +322,14 @@
       <li>hukuken yetkili kamu kurum ve kuruluşları</li>
     </ul>
     <p class="doc-body">ile paylaşılabilir.</p>
-    <p class="doc-body">Kişisel veriler ticari amaçlarla üçüncü kişilere satılmaz veya pazarlama amacıyla paylaşılmaz.</p>
+    <p class="doc-body">Kişisel veriler üçüncü kişilere satılmaz. iOS uygulamasındaki reklam teknolojilerinin veri işleme faaliyetleri ve bunların kapsamı aşağıdaki 11. ve 12. bölümlerde ayrıca açıklanır.</p>
   </div>
 
   <div class="doc-section">
     <h2 class="doc-section-title">11. Üçüncü Taraf Hizmetler</h2>
     <p class="doc-body">Uygulamanın çalıştırılması kapsamında teknik altyapı sağlayıcıları, veri barındırma hizmeti sağlayıcıları, iletişim hizmeti sağlayıcıları ve benzeri üçüncü taraf hizmet sağlayıcılarından yararlanılabilir.</p>
-    <p class="doc-body">NFC Kimlik Eşleşmesi için ayrı bir üçüncü taraf kimlik doğrulama hizmeti kullanılmaz; eşleşme Eonarya'nın kendi uygulama ve sunucu akışı içinde yürütülür. Strong NFC sırasında DG1 ve EF.SOD, doğrulama işlemi süresince Eonarya'nın altyapı ve veri barındırma hizmeti sağlayıcısı üzerinden geçici olarak işlenebilir ve kalıcı olarak saklanmaz.</p>
+    <p class="doc-body">iOS uygulamasında reklam sunumu için Google Mobile Ads (AdMob) SDK'sı, Google hesabıyla giriş tercih edildiğinde ise Google Sign-In kullanılır. Bu SDK'ların veri işleme kapsamı, reklam veya hesap erişimi işlevine ve ilgili sağlayıcıların teknik uygulamalarına bağlıdır.</p>
+    <p class="doc-body">Standart NFC Kimlik Eşleşmesi için ayrı bir üçüncü taraf kimlik doğrulama hizmeti kullanılmaz; eşleşme Eonarya'nın kendi uygulaması ve sunucu akışı içinde yürütülür. Bu işlemde sunucuya iletilen ad, soyad ve doğum tarihi altyapı ve veri barındırma hizmetleri üzerinden işlenebilir; kartın ham DG1 ve EF.SOD içeriği standart eşleşme kapsamında sunucuya gönderilmez.</p>
     <p class="doc-body">Bu hizmet sağlayıcılar yurt içinde veya yurt dışında bulunabilir. Hizmetin teknik altyapısı bugün itibarıyla yurt dışında yerleşik bir bulut barındırma sağlayıcısı üzerinde çalışmaktadır; bu nedenle kişisel verileriniz KVKK'nın 9. maddesi kapsamında yurt dışına aktarılmaktadır.</p>
     <p class="doc-body">Kişisel veriler, yalnızca hizmetin sunulması için gerekli olduğu ölçüde ve yürürlükteki kişisel veri mevzuatına uygun şekilde bu hizmet sağlayıcıları tarafından işlenebilir veya aktarılabilir.</p>
     <p class="doc-body">Hizmet Sağlayıcı, bu aktarımı KVKK'nın öngördüğü uygun güvence mekanizmalarına uygun hâle getirmek üzere gerekli idari ve teknik çalışmaları yürütmektedir.</p>
@@ -336,8 +338,8 @@
 
   <div class="doc-section">
     <h2 class="doc-section-title">12. Çerez ve Takip Teknolojileri</h2>
-    <p class="doc-body">Eonarya mobil uygulamasında üçüncü taraf analiz veya izleme teknolojileri kullanılmamaktadır.</p>
-    <p class="doc-body">Uygulama yalnızca oturum bilginizi cihazınızda güvenli şekilde tutmak amacıyla yerel depolama (local storage) kullanır. Bu bilgiler üçüncü taraflarla paylaşılmaz, reklam veya profilleme amacıyla kullanılmaz.</p>
+    <p class="doc-body">Eonarya iOS uygulamasında reklam gösterimi için Google Mobile Ads (AdMob) SDK'sı bulunmaktadır. Reklam istekleri başlangıçta kişiselleştirilmemiş reklam seçeneğiyle yapılır. Bu tercih, reklam sağlayıcısının hiçbir veri işlemediği anlamına gelmez. SDK, uygulama ve reklam etkileşimleri, cihaz veya uygulama tanımlayıcıları, IP adresinden türetilebilen yaklaşık konum ile performans ve tanılama bilgileri gibi verileri, kullanılan işlev ve teknik koşullara göre işleyebilir. Üçüncü taraf SDK'ların veri toplama ve kullanıcılar arasında takip davranışı, yalnızca kişiselleştirilmemiş reklam tercihinden hareketle dışlanamaz.</p>
+    <p class="doc-body">Uygulama, oturum bilgilerinin güvenli şekilde saklanması amacıyla cihazda yerel ve güvenli depolama kullanır. Oturum saklama verileriyle reklam sağlayıcısının kendi SDK'sı üzerinden işleyebileceği veriler ayrı işleme faaliyetleridir. Kullanıcının mesaj içeriği ve oturum anahtarları, reklam isteğine bilerek eklenmez.</p>
     <p class="doc-body">Bununla birlikte, kamuya açık eonarya.com web sitesinde, yalnızca kullanıcının açıkça izin vermesi halinde Google Analytics kullanılabilir. Bu kullanım mobil uygulamadan ayrıdır ve yalnız kamuya açık web sayfalarının genel kullanımını ve performansını anlamaya yöneliktir. Kişiye özel erişim, mesaj görüntüleme veya onay gibi hassas alanlarda Google Analytics kullanılmaz.</p>
     <p class="doc-body">Web sitesindeki analitik çerezlerin kullanımı, kullanıcı tercihleri ve Google Analytics’e aktarılmayan bilgiler hakkında ayrıntılı bilgi için <a href="/cerez-politikasi.html">Çerez Politikası</a> incelenebilir.</p>
   </div>
