@@ -16,6 +16,11 @@ const contractsKaynagi = fs.readFileSync(path.join(appRoot, 'services', 'contrac
 const dogrulama = require(path.join(appRoot, 'scripts', 'hukuki-surum-dogrulama.cjs'));
 const defter = dogrulama.defteriOku(appRoot);
 const SAYFALAR = [...Object.values(defter.belgeler).map((k) => k.webSayfasi).filter(Boolean), 'kvkk.html'];
+// Güncel ve bir önceki onaylı sürüm defterden okunur; testler belirli bir sürüm numarasına bağlanmaz.
+const sonSurum = (ad) => defter.belgeler[ad].onayliSurumler.at(-1).surum;
+const oncekiSurum = (ad) => defter.belgeler[ad].onayliSurumler.at(-2).surum;
+const sonrakiSurum = (ad) => { const [a, b] = sonSurum(ad).split('.').map(Number); return `${a}.${b + 1}`; };
+const kacis = (v) => v.replace(/\./g, '\\.');
 
 function geciciSite() {
   const kok = fs.mkdtempSync(path.join(os.tmpdir(), 'eonarya-legal-'));
@@ -71,11 +76,12 @@ test('2 — defter daha yeni onaylı sürüm biliyorsa eski sürümlü kaynak we
   const kok = geciciSite();
   const sahteDefter = JSON.parse(JSON.stringify(defter));
   const kayitlar = sahteDefter.belgeler.AYDINLATMA_METNI.onayliSurumler;
-  kayitlar.push({ surum: '1.4', sha256: 'f'.repeat(64) });
-  manifestDuzenle(kok, (m) => { m.entries.AYDINLATMA_METNI.version = '1.4'; });
-  // Kaynak 1.3'ü onaylı son sürüm sanan eski defterle değil, 1.4'ü bilen defterle çalışır:
-  // kaynak 1.3 taşıdığı için önce kaynak doğrulaması durdurur.
-  assert.throws(() => senkronize({ websiteRoot: kok, appRoot, defter: sahteDefter }), /eski onaylı sürüm 1\.3 taşıyor; güncel onaylı sürüm 1\.4/);
+  const guncel = sonSurum('AYDINLATMA_METNI'), yeni = sonrakiSurum('AYDINLATMA_METNI');
+  kayitlar.push({ surum: yeni, sha256: 'f'.repeat(64) });
+  manifestDuzenle(kok, (m) => { m.entries.AYDINLATMA_METNI.version = yeni; });
+  // Kaynak güncel sürümü onaylı son sürüm sanan eski defterle değil, bir sonrakini bilen defterle çalışır:
+  // kaynak eski sürüm taşıdığı için önce kaynak doğrulaması durdurur.
+  assert.throws(() => senkronize({ websiteRoot: kok, appRoot, defter: sahteDefter }), new RegExp(`eski onaylı sürüm ${kacis(guncel)} taşıyor; güncel onaylı sürüm ${kacis(yeni)}`));
 });
 
 test('2 — uygulama ile web farklı sürüm gösterirse --check başarısız', () => {
@@ -87,7 +93,7 @@ test('2 — uygulama ile web farklı sürüm gösterirse --check başarısız', 
 test('3 — aynı sürüm numarası web\'de farklı içerikle kayıtlıysa üretim durur', () => {
   const kok = geciciSite();
   manifestDuzenle(kok, (m) => { m.entries.AYDINLATMA_METNI.canonicalSha256 = '0'.repeat(64); });
-  assert.throws(() => senkronize({ websiteRoot: kok, appRoot }), /AYDINLATMA_METNI: 1\.3 sürümü web'de farklı içerikle kayıtlı/);
+  assert.throws(() => senkronize({ websiteRoot: kok, appRoot }), new RegExp(`AYDINLATMA_METNI: ${kacis(sonSurum('AYDINLATMA_METNI'))} sürümü web'de farklı içerikle kayıtlı`));
 });
 
 test('5 — sayfadan hukuki paragraf eksilirse --check başarısız', () => {
@@ -155,10 +161,12 @@ test("6 — kvkk.html'de blok dışında bağımsız eski NFC açıklaması kal�
 
 test('7 — kvkk.html bloğundaki sürüm merkezden ayrışırsa --check başarısız, yeniden üretim onarır', () => {
   const kok = geciciSite();
-  kvkkYaz(kok, kvkkOku(kok).replace(/Aydınlatma Metni 1\.3,/, 'Aydınlatma Metni 1.2,'));
+  const guncel = `Aydınlatma Metni ${sonSurum('AYDINLATMA_METNI')},`;
+  assert.ok(kvkkOku(kok).includes(guncel));
+  kvkkYaz(kok, kvkkOku(kok).replace(guncel, `Aydınlatma Metni ${oncekiSurum('AYDINLATMA_METNI')},`));
   assert.throws(() => senkronize({ websiteRoot: kok, appRoot, checkOnly: true }), /kvkk\.html merkezi NFC bloğu güncel onaylı sürümlerden saptı/);
   senkronize({ websiteRoot: kok, appRoot });
-  assert.ok(kvkkOku(kok).includes('Aydınlatma Metni 1.3,'));
+  assert.ok(kvkkOku(kok).includes(guncel));
   senkronize({ websiteRoot: kok, appRoot, checkOnly: true });
 });
 
@@ -168,18 +176,19 @@ test('kvkk.html bloğu elle silinir veya işaret bozulursa üretim durur', () =>
   assert.throws(() => senkronize({ websiteRoot: kok, appRoot, checkOnly: true }), /merkezi NFC bloğu işaretleri eksik/);
 });
 
-test("v1.4 taslağı hiçbir web sayfasında görünmez ve web'i etkinleştiremez", () => {
-  const TASLAK_CUMLESI = 'Standart NFC Kimlik Eşleşmesinde uygulama';
-  const taslakKaynagi = fs.readFileSync(path.join(appRoot, 'services', 'hukukiMetinTaslaklari.js'), 'utf8');
-  assert.ok(taslakKaynagi.includes(TASLAK_CUMLESI), 'taslağın ayırt edici cümlesi bulunamadı');
+test("defterde olmayan sonraki sürüm hiçbir web sayfasında görünmez ve web'i etkinleştiremez", () => {
+  const yeniA = sonrakiSurum('AYDINLATMA_METNI'), yeniG = sonrakiSurum('GIZLILIK_POLITIKASI');
   for (const sayfa of fs.readdirSync(websiteRoot).filter((d) => d.endsWith('.html'))) {
     const html = fs.readFileSync(path.join(websiteRoot, sayfa), 'utf8');
-    assert.ok(!html.includes(TASLAK_CUMLESI), sayfa);
-    assert.ok(!/Aydınlatma Metni 1\.4|Gizlilik Politikası 1\.4/.test(html), sayfa);
+    assert.ok(!html.includes(`Aydınlatma Metni ${yeniA}`) && !html.includes(`Gizlilik Politikası ${yeniG}`), sayfa);
   }
   const kok = geciciSite();
-  const taslakSurumlu = contractsKaynagi.replace("AYDINLATMA_METNI_VERSIYON = '1.3'", "AYDINLATMA_METNI_VERSIYON = '1.4'");
-  assert.throws(() => senkronize({ websiteRoot: kok, appRoot, kaynakMetni: taslakSurumlu }), /1\.4 onaylı sürüm defterinde yok/);
+  const once = durum(kok);
+  const guncel = `AYDINLATMA_METNI_VERSIYON = '${sonSurum('AYDINLATMA_METNI')}'`;
+  assert.ok(contractsKaynagi.includes(guncel), 'kaynak güncel defter sürümünü taşımıyor');
+  const ileriSurumlu = contractsKaynagi.replace(guncel, `AYDINLATMA_METNI_VERSIYON = '${yeniA}'`);
+  assert.throws(() => senkronize({ websiteRoot: kok, appRoot, kaynakMetni: ileriSurumlu }), new RegExp(`${kacis(yeniA)} onaylı sürüm defterinde yok`));
+  assert.deepEqual(durum(kok), once, 'reddedilen üretim hiçbir dosyaya yazmamalı');
 });
 
 test('Windows CRLF checkout\'u yalnız satır sonu yüzünden sahte FAIL vermez; CRLF dosyada içerik değişikliği yine yakalanır', () => {
