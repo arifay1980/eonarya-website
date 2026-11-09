@@ -11,15 +11,15 @@
     },
     "GIZLILIK_POLITIKASI": {
       "page": "gizlilik.html",
-      "version": "1.3",
-      "canonicalSha256": "e8b447feb22fc9a422c9d984ed47538500d73bccd1addaf8f996d87241f47dba",
-      "pageVisibleTextSha256": "b32edb25cfdaad08d1a71138bc7dd249bce06664a9109d394361bc93a57bda1f"
+      "version": "1.4",
+      "canonicalSha256": "1c08d6beafbf33ad3166c6247d80d611e13d0c196be63948bff4801c51b8e902",
+      "pageVisibleTextSha256": "6586adb0791f606691f362ffd1c90d6b08e277c888a4d722681583bc0daec268"
     },
     "AYDINLATMA_METNI": {
       "page": "aydinlatma.html",
-      "version": "1.3",
-      "canonicalSha256": "b398f30188e4dbee75f6aeed9b9fb7fe1ad4578dec8424705472c5bb705ea866",
-      "pageVisibleTextSha256": "e53750f9044e11af14cfcb212b05492da7eb7919d40463c89a76fcd02ccfd178"
+      "version": "1.4",
+      "canonicalSha256": "ada0ff26b2327cd5a4b453d9cb9a4d9e8ededc730f2420fd368e56308cf01eba",
+      "pageVisibleTextSha256": "be9cc72a7e3af773c159f6eda5f64086a737e0041bc755294a218ac858ef9b65"
     },
     "UCUNCU_KISI_AYDINLATMA_METNI": {
       "page": "ucuncu-kisi-aydinlatma.html",
